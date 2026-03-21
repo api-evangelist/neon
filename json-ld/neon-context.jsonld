@@ -1,0 +1,230 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "neon": "https://neon.com/schemas/neon/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Project": {
+      "@id": "neon:Project",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "region_id": "neon:regionId",
+        "pg_version": {
+          "@id": "schema:softwareVersion",
+          "@type": "xsd:integer"
+        },
+        "org_id": "neon:organizationId",
+        "store_passwords": {
+          "@id": "neon:storePasswords",
+          "@type": "xsd:boolean"
+        },
+        "active_time": {
+          "@id": "neon:activeTime",
+          "@type": "xsd:integer"
+        },
+        "cpu_used_sec": {
+          "@id": "neon:cpuUsedSeconds",
+          "@type": "xsd:integer"
+        },
+        "creation_source": "neon:creationSource",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Branch": {
+      "@id": "neon:Branch",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "project_id": {
+          "@id": "neon:projectId",
+          "@type": "@id"
+        },
+        "parent_id": {
+          "@id": "neon:parentBranchId",
+          "@type": "@id"
+        },
+        "parent_lsn": "neon:parentLsn",
+        "parent_timestamp": {
+          "@id": "neon:parentTimestamp",
+          "@type": "xsd:dateTime"
+        },
+        "current_state": "neon:currentState",
+        "logical_size": {
+          "@id": "neon:logicalSize",
+          "@type": "xsd:integer"
+        },
+        "primary": {
+          "@id": "neon:isPrimary",
+          "@type": "xsd:boolean"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Database": {
+      "@id": "neon:Database",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "branch_id": {
+          "@id": "neon:branchId",
+          "@type": "@id"
+        },
+        "owner_name": "neon:ownerName",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Role": {
+      "@id": "neon:Role",
+      "@context": {
+        "name": "schema:name",
+        "branch_id": {
+          "@id": "neon:branchId",
+          "@type": "@id"
+        },
+        "protected": {
+          "@id": "neon:isProtected",
+          "@type": "xsd:boolean"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Endpoint": {
+      "@id": "neon:Endpoint",
+      "@context": {
+        "id": "schema:identifier",
+        "host": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "project_id": {
+          "@id": "neon:projectId",
+          "@type": "@id"
+        },
+        "branch_id": {
+          "@id": "neon:branchId",
+          "@type": "@id"
+        },
+        "region_id": "neon:regionId",
+        "type": "neon:endpointType",
+        "current_state": "neon:currentState",
+        "autoscaling_limit_min_cu": {
+          "@id": "neon:autoscalingMinCu",
+          "@type": "xsd:decimal"
+        },
+        "autoscaling_limit_max_cu": {
+          "@id": "neon:autoscalingMaxCu",
+          "@type": "xsd:decimal"
+        },
+        "suspend_timeout_seconds": {
+          "@id": "neon:suspendTimeoutSeconds",
+          "@type": "xsd:integer"
+        },
+        "disabled": {
+          "@id": "neon:isDisabled",
+          "@type": "xsd:boolean"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Operation": {
+      "@id": "neon:Operation",
+      "@context": {
+        "id": "schema:identifier",
+        "project_id": {
+          "@id": "neon:projectId",
+          "@type": "@id"
+        },
+        "branch_id": {
+          "@id": "neon:branchId",
+          "@type": "@id"
+        },
+        "endpoint_id": {
+          "@id": "neon:endpointId",
+          "@type": "@id"
+        },
+        "action": "neon:operationAction",
+        "status": "neon:operationStatus",
+        "failures_count": {
+          "@id": "neon:failuresCount",
+          "@type": "xsd:integer"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "neon:AuthUser",
+      "@context": {
+        "id": "schema:identifier",
+        "email": "schema:email",
+        "name": "schema:name",
+        "image": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "email_verified": {
+          "@id": "neon:emailVerified",
+          "@type": "xsd:boolean"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neon.com/schemas/neon/operation.json",
+  "title": "Neon Operation",
+  "description": "A Neon operation tracks the progress of an action performed on a project resource such as creating a branch, starting a compute endpoint, or applying configuration changes.",
+  "type": "object",
+  "required": ["id", "project_id", "action", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique operation identifier"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID this operation belongs to"
+    },
+    "branch_id": {
+      "type": "string",
+      "description": "The branch ID associated with this operation, if applicable"
+    },
+    "endpoint_id": {
+      "type": "string",
+      "description": "The endpoint ID associated with this operation, if applicable"
+    },
+    "action": {
+      "type": "string",
+      "description": "The type of action being performed by this operation",
+      "enum": [
+        "create_compute",
+        "create_timeline",
+        "start_compute",
+        "suspend_compute",
+        "apply_config",
+        "check_availability",
+        "delete_timeline",
+        "create_branch",
+        "tenant_ignore",
+        "tenant_attach",
+        "tenant_detach",
+        "replace_safekeeper"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the operation",
+      "enum": [
+        "scheduling",
+        "running",
+        "finished",
+        "failed",
+        "cancelling",
+        "cancelled",
+        "skipped"
+      ]
+    },
+    "failures_count": {
+      "type": "integer",
+      "description": "Number of times the operation has failed and been retried",
+      "minimum": 0
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if the operation failed"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the operation was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the operation status was last updated"
+    }
+  }
+}

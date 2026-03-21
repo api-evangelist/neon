@@ -1,0 +1,2345 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API
+  description: >-
+    The Neon Management API is a RESTful interface for programmatically managing
+    Neon serverless Postgres resources. It allows developers to create and manage
+    projects, branches, databases, roles, compute endpoints, and operations. The
+    API supports everything available through the Neon Console, enabling
+    automation of database infrastructure workflows. An OpenAPI 3.0 specification
+    is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference
+servers:
+  - url: https://console.neon.tech/api/v2
+    description: Neon Production API
+tags:
+  - name: Projects
+    description: >-
+      Manage Neon projects. A project is the top-level object in the Neon
+      hierarchy containing branches, databases, roles, and compute endpoints.
+  - name: Branches
+    description: >-
+      Manage branches within a project. Branches are copies of your data
+      created using copy-on-write technology for development, testing, and
+      preview environments.
+  - name: Databases
+    description: >-
+      Manage databases within a branch. A branch can contain multiple databases.
+  - name: Roles
+    description: >-
+      Manage Postgres roles within a branch. Roles control database access
+      and permissions.
+  - name: Endpoints
+    description: >-
+      Manage compute endpoints for branches. Compute endpoints provide the
+      processing resources for database queries. A branch can have one
+      read-write and multiple read-only endpoints.
+  - name: Operations
+    description: >-
+      View and manage operations for a project. Operations track the progress
+      and status of actions performed on project resources.
+  - name: Consumption
+    description: >-
+      Query consumption metrics for projects and accounts. Available for
+      Scale, Business, and Enterprise plan accounts.
+  - name: API Keys
+    description: >-
+      Manage API keys for authentication. API keys are used to authenticate
+      requests to the Neon API via Bearer token.
+  - name: Organizations
+    description: >-
+      Manage organization settings, members, and permissions.
+  - name: Data API
+    description: >-
+      Manage Data API configuration for branches, including enabling and
+      disabling the PostgREST-compatible HTTP interface.
+  - name: Auth
+    description: >-
+      Manage Neon Auth configuration for branches, including OAuth providers,
+      webhooks, and authentication settings.
+security:
+  - bearerAuth: []
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      summary: List projects
+      description: >-
+        Retrieves a list of projects for the authenticated user or organization.
+        Returns project metadata including ID, name, region, creation time, and
+        current status.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/orgIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of projects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      operationId: createProject
+      summary: Create a project
+      description: >-
+        Creates a new Neon project within an organization. You can specify a
+        region and Postgres version in the request body. Neon currently supports
+        PostgreSQL 14, 15, 16, and 17.
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateRequest'
+      responses:
+        '201':
+          description: Project created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+                  connection_uris:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConnectionUri'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /projects/{project_id}:
+    get:
+      operationId: getProject
+      summary: Retrieve project details
+      description: >-
+        Retrieves information about the specified project including its name,
+        region, Postgres version, creation time, and current settings.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved project details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+    patch:
+      operationId: updateProject
+      summary: Update a project
+      description: >-
+        Updates the specified project. You can update the project name and
+        other configurable settings.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdateRequest'
+      responses:
+        '200':
+          description: Project updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+    delete:
+      operationId: deleteProject
+      summary: Delete a project
+      description: >-
+        Deletes the specified project and all its associated resources including
+        branches, databases, roles, and compute endpoints.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      responses:
+        '200':
+          description: Project deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/branches:
+    get:
+      operationId: listProjectBranches
+      summary: List branches
+      description: >-
+        Retrieves a list of branches for the specified project. Returns branch
+        metadata including ID, name, parent branch, creation time, and current
+        state.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of branches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Branch'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+    post:
+      operationId: createProjectBranch
+      summary: Create a branch
+      description: >-
+        Creates a branch in the specified project. You can specify a parent
+        branch, endpoints, and other configuration. Branches use copy-on-write
+        technology for instant creation.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchCreateRequest'
+      responses:
+        '201':
+          description: Branch created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  endpoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+                  connection_uris:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConnectionUri'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/branches/{branch_id}:
+    get:
+      operationId: getProjectBranch
+      summary: Retrieve branch details
+      description: >-
+        Retrieves information about the specified branch including its name,
+        parent branch, creation time, and current state.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved branch details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    patch:
+      operationId: updateProjectBranch
+      summary: Update a branch
+      description: >-
+        Updates the specified branch. You can update the branch name and
+        other configurable settings.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchUpdateRequest'
+      responses:
+        '200':
+          description: Branch updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    delete:
+      operationId: deleteProjectBranch
+      summary: Delete a branch
+      description: >-
+        Deletes the specified branch and all its associated databases, roles,
+        and compute endpoints.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Branch deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/restore:
+    post:
+      operationId: restoreProjectBranch
+      summary: Restore a branch
+      description: >-
+        Restores a branch to a specified point in time or to another branch.
+        This operation can be used for point-in-time recovery.
+      tags:
+        - Branches
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source_branch_id:
+                  type: string
+                  description: >-
+                    The ID of the source branch to restore from.
+                source_timestamp:
+                  type: string
+                  format: date-time
+                  description: >-
+                    The point in time to restore the branch to.
+                preserve_under_name:
+                  type: string
+                  description: >-
+                    Name to preserve the current branch state under before
+                    restoring.
+      responses:
+        '200':
+          description: Branch restore initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/databases:
+    get:
+      operationId: listProjectBranchDatabases
+      summary: List databases
+      description: >-
+        Retrieves a list of databases for the specified branch. A branch can
+        contain multiple databases.
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of databases
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  databases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Database'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    post:
+      operationId: createProjectBranchDatabase
+      summary: Create a database
+      description: >-
+        Creates a database in the specified branch. You must specify a database
+        name and owner role.
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseCreateRequest'
+      responses:
+        '201':
+          description: Database created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/databases/{database_name}:
+    get:
+      operationId: getProjectBranchDatabase
+      summary: Retrieve database details
+      description: >-
+        Retrieves information about the specified database including its name,
+        owner role, and creation time.
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/databaseNameParam'
+      responses:
+        '200':
+          description: Successfully retrieved database details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+    patch:
+      operationId: updateProjectBranchDatabase
+      summary: Update a database
+      description: >-
+        Updates the specified database. You can update the database name and
+        owner role.
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/databaseNameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseUpdateRequest'
+      responses:
+        '200':
+          description: Database updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+    delete:
+      operationId: deleteProjectBranchDatabase
+      summary: Delete a database
+      description: >-
+        Deletes the specified database from the branch.
+      tags:
+        - Databases
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/databaseNameParam'
+      responses:
+        '200':
+          description: Database deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+  /projects/{project_id}/branches/{branch_id}/roles:
+    get:
+      operationId: listProjectBranchRoles
+      summary: List roles
+      description: >-
+        Retrieves a list of Postgres roles for the specified branch.
+      tags:
+        - Roles
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    post:
+      operationId: createProjectBranchRole
+      summary: Create a role
+      description: >-
+        Creates a Postgres role in the specified branch. You must specify a
+        role name.
+      tags:
+        - Roles
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCreateRequest'
+      responses:
+        '201':
+          description: Role created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/roles/{role_name}:
+    get:
+      operationId: getProjectBranchRole
+      summary: Retrieve role details
+      description: >-
+        Retrieves information about the specified Postgres role.
+      tags:
+        - Roles
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Successfully retrieved role details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+    delete:
+      operationId: deleteProjectBranchRole
+      summary: Delete a role
+      description: >-
+        Deletes the specified Postgres role from the branch.
+      tags:
+        - Roles
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Role deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+  /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password:
+    post:
+      operationId: resetProjectBranchRolePassword
+      summary: Reset role password
+      description: >-
+        Resets the password for the specified Postgres role. Returns the new
+        password in the response.
+      tags:
+        - Roles
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Password reset successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+  /projects/{project_id}/endpoints:
+    get:
+      operationId: listProjectEndpoints
+      summary: List compute endpoints
+      description: >-
+        Retrieves a list of compute endpoints for the specified project.
+        Returns endpoint metadata including ID, branch, type, host, and
+        current state.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Endpoint'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+    post:
+      operationId: createProjectEndpoint
+      summary: Create a compute endpoint
+      description: >-
+        Creates a compute endpoint for the specified branch. There is a maximum
+        of one read-write compute endpoint per branch, while a branch can have
+        multiple read-only compute endpoints.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndpointCreateRequest'
+      responses:
+        '201':
+          description: Endpoint created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/endpoints/{endpoint_id}:
+    get:
+      operationId: getProjectEndpoint
+      summary: Retrieve compute endpoint details
+      description: >-
+        Retrieves information about the specified compute endpoint including
+        its host, type, branch, autoscaling configuration, and current state.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved endpoint details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+    patch:
+      operationId: updateProjectEndpoint
+      summary: Update a compute endpoint
+      description: >-
+        Updates the specified compute endpoint. You can update autoscaling
+        settings, suspend timeout, and other configuration.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndpointUpdateRequest'
+      responses:
+        '200':
+          description: Endpoint updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+    delete:
+      operationId: deleteProjectEndpoint
+      summary: Delete a compute endpoint
+      description: >-
+        Deletes the specified compute endpoint.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      responses:
+        '200':
+          description: Endpoint deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+  /projects/{project_id}/endpoints/{endpoint_id}/start:
+    post:
+      operationId: startProjectEndpoint
+      summary: Start a compute endpoint
+      description: >-
+        Starts the specified compute endpoint. This operation resumes a
+        suspended endpoint.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      responses:
+        '200':
+          description: Endpoint started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+  /projects/{project_id}/endpoints/{endpoint_id}/suspend:
+    post:
+      operationId: suspendProjectEndpoint
+      summary: Suspend a compute endpoint
+      description: >-
+        Suspends the specified compute endpoint. A suspended endpoint does not
+        consume compute resources.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      responses:
+        '200':
+          description: Endpoint suspended successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+  /projects/{project_id}/endpoints/{endpoint_id}/restart:
+    post:
+      operationId: restartProjectEndpoint
+      summary: Restart a compute endpoint
+      description: >-
+        Restarts the specified compute endpoint.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/endpointIdParam'
+      responses:
+        '200':
+          description: Endpoint restarted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Endpoint not found
+  /projects/{project_id}/branches/{branch_id}/endpoints:
+    get:
+      operationId: listProjectBranchEndpoints
+      summary: List branch endpoints
+      description: >-
+        Retrieves a list of compute endpoints for the specified branch.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of branch endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Endpoint'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/operations:
+    get:
+      operationId: listProjectOperations
+      summary: List project operations
+      description: >-
+        Retrieves a list of operations for the specified project. Operations
+        track the progress and status of actions such as branch creation,
+        endpoint start, and database updates.
+      tags:
+        - Operations
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/operations/{operation_id}:
+    get:
+      operationId: getProjectOperation
+      summary: Retrieve operation details
+      description: >-
+        Retrieves information about the specified operation including its
+        action, status, and timing.
+      tags:
+        - Operations
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - name: operation_id
+          in: path
+          required: true
+          description: The operation ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved operation details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operation:
+                    $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Operation not found
+  /consumption_history/account:
+    get:
+      operationId: getConsumptionHistoryPerAccount
+      summary: Get account consumption metrics
+      description: >-
+        Retrieves total consumption metrics across all projects in your
+        account. Available for Scale, Business, and Enterprise plan accounts.
+      tags:
+        - Consumption
+      parameters:
+        - name: from
+          in: query
+          required: true
+          description: Start date for the consumption period
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          required: true
+          description: End date for the consumption period
+          schema:
+            type: string
+            format: date-time
+        - $ref: '#/components/parameters/orgIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved account consumption metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionHistoryPerAccount'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - plan does not support consumption metrics
+  /consumption_history/projects:
+    get:
+      operationId: getConsumptionHistoryPerProject
+      summary: Get project consumption metrics
+      description: >-
+        Retrieves consumption metrics for projects. Available for Scale,
+        Business, and Enterprise plan projects.
+      tags:
+        - Consumption
+      parameters:
+        - name: from
+          in: query
+          required: true
+          description: Start date for the consumption period
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          required: true
+          description: End date for the consumption period
+          schema:
+            type: string
+            format: date-time
+        - $ref: '#/components/parameters/cursorParam'
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/orgIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved project consumption metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionHistoryPerProject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - plan does not support consumption metrics
+  /api_keys:
+    get:
+      operationId: listApiKeys
+      summary: List API keys
+      description: >-
+        Retrieves a list of API keys for the authenticated user.
+      tags:
+        - API Keys
+      responses:
+        '200':
+          description: Successfully retrieved list of API keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createApiKey
+      summary: Create an API key
+      description: >-
+        Creates a new API key for the authenticated user. The full key value
+        is only returned in this response and cannot be retrieved again.
+      tags:
+        - API Keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyCreateRequest'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyCreateResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api_keys/{key_id}:
+    delete:
+      operationId: revokeApiKey
+      summary: Revoke an API key
+      description: >-
+        Revokes the specified API key. A revoked key can no longer be used
+        to authenticate API requests.
+      tags:
+        - API Keys
+      parameters:
+        - name: key_id
+          in: path
+          required: true
+          description: The API key ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: API key revoked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+        '404':
+          description: API key not found
+  /projects/{project_id}/branches/{branch_id}/data-api:
+    get:
+      operationId: getProjectBranchDataApi
+      summary: Get Data API configuration
+      description: >-
+        Retrieves the Data API configuration for the specified branch, including
+        whether it is enabled, the target database, exposed schemas, and
+        authentication provider settings.
+      tags:
+        - Data API
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved Data API configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data_api:
+                    $ref: '#/components/schemas/DataApiConfig'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    put:
+      operationId: updateProjectBranchDataApi
+      summary: Update Data API configuration
+      description: >-
+        Updates the Data API configuration for the specified branch, including
+        enabling or disabling the API, configuring exposed schemas, setting
+        response limits, and configuring authentication providers.
+      tags:
+        - Data API
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataApiConfigUpdate'
+      responses:
+        '200':
+          description: Data API configuration updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data_api:
+                    $ref: '#/components/schemas/DataApiConfig'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/auth:
+    get:
+      operationId: getProjectBranchAuth
+      summary: Get Auth configuration
+      description: >-
+        Retrieves the Neon Auth configuration for the specified branch,
+        including whether Auth is enabled, the Auth URL, and OAuth provider
+        settings.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved Auth configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth:
+                    $ref: '#/components/schemas/AuthConfig'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    put:
+      operationId: updateProjectBranchAuth
+      summary: Update Auth configuration
+      description: >-
+        Updates the Neon Auth configuration for the specified branch, including
+        enabling or disabling Auth and configuring settings.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthConfigUpdate'
+      responses:
+        '200':
+          description: Auth configuration updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth:
+                    $ref: '#/components/schemas/AuthConfig'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/auth/providers:
+    get:
+      operationId: listNeonAuthOAuthProviders
+      summary: List OAuth providers
+      description: >-
+        Retrieves a list of configured OAuth providers for Neon Auth on the
+        specified branch.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of OAuth providers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OAuthProvider'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    post:
+      operationId: createNeonAuthOAuthProvider
+      summary: Create an OAuth provider
+      description: >-
+        Configures a new OAuth provider for Neon Auth on the specified branch.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthProviderCreateRequest'
+      responses:
+        '201':
+          description: OAuth provider created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provider:
+                    $ref: '#/components/schemas/OAuthProvider'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/auth/providers/{provider_id}:
+    patch:
+      operationId: updateNeonAuthOAuthProvider
+      summary: Update an OAuth provider
+      description: >-
+        Updates the configuration for the specified OAuth provider.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - name: provider_id
+          in: path
+          required: true
+          description: The OAuth provider ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthProviderUpdateRequest'
+      responses:
+        '200':
+          description: OAuth provider updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  provider:
+                    $ref: '#/components/schemas/OAuthProvider'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: OAuth provider not found
+    delete:
+      operationId: deleteNeonAuthOAuthProvider
+      summary: Delete an OAuth provider
+      description: >-
+        Removes the specified OAuth provider from Neon Auth configuration.
+      tags:
+        - Auth
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - $ref: '#/components/parameters/branchIdParam'
+        - name: provider_id
+          in: path
+          required: true
+          description: The OAuth provider ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OAuth provider deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: OAuth provider not found
+  /projects/{project_id}/connection_uri:
+    get:
+      operationId: getConnectionUri
+      summary: Retrieve connection URI
+      description: >-
+        Retrieves the connection URI for the specified project. The connection
+        URI includes the host, database, role, and password needed to connect.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/projectIdParam'
+        - name: branch_id
+          in: query
+          description: The branch ID
+          schema:
+            type: string
+        - name: endpoint_id
+          in: query
+          description: The endpoint ID
+          schema:
+            type: string
+        - name: database_name
+          in: query
+          required: true
+          description: The database name
+          schema:
+            type: string
+        - name: role_name
+          in: query
+          required: true
+          description: The role name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved connection URI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionUri'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Resource not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: >-
+        Neon API keys are used to authenticate requests. Include the API key
+        in the Authorization header as a Bearer token.
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    endpointIdParam:
+      name: endpoint_id
+      in: path
+      required: true
+      description: The compute endpoint ID
+      schema:
+        type: string
+    databaseNameParam:
+      name: database_name
+      in: path
+      required: true
+      description: The database name
+      schema:
+        type: string
+    roleNameParam:
+      name: role_name
+      in: path
+      required: true
+      description: The Postgres role name
+      schema:
+        type: string
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
+  schemas:
+    Project:
+      type: object
+      description: >-
+        A Neon project is the top-level object in the Neon hierarchy. It
+        contains branches, databases, roles, and compute endpoints.
+      properties:
+        id:
+          type: string
+          description: The project ID
+        platform_id:
+          type: string
+          description: The cloud platform ID
+        region_id:
+          type: string
+          description: The region where the project is deployed
+        name:
+          type: string
+          description: The project name
+        provisioner:
+          type: string
+          enum:
+            - k8s-pod
+            - k8s-neonvm
+          description: The provisioner type
+        default_endpoint_settings:
+          type: object
+          description: Default settings for compute endpoints
+          properties:
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Seconds of inactivity before suspending the endpoint
+        pg_version:
+          type: integer
+          description: The Postgres version (14, 15, 16, or 17)
+          enum:
+            - 14
+            - 15
+            - 16
+            - 17
+        store_passwords:
+          type: boolean
+          description: Whether connection passwords are stored
+        active_time:
+          type: integer
+          description: Total active time in seconds
+        cpu_used_sec:
+          type: integer
+          description: Total CPU seconds used
+        maintenance_starts_at:
+          type: string
+          format: date-time
+          description: Scheduled maintenance start time
+        creation_source:
+          type: string
+          description: Source of project creation
+        created_at:
+          type: string
+          format: date-time
+          description: Project creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        org_id:
+          type: string
+          description: The organization ID this project belongs to
+    ProjectCreateRequest:
+      type: object
+      description: Request body for creating a new project
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The project name
+              maxLength: 64
+            region_id:
+              type: string
+              description: >-
+                The region for the project. Available regions include
+                aws-us-east-1, aws-us-east-2, aws-us-west-2,
+                aws-eu-central-1, aws-ap-southeast-1.
+            pg_version:
+              type: integer
+              description: The Postgres version
+              enum:
+                - 14
+                - 15
+                - 16
+                - 17
+            store_passwords:
+              type: boolean
+              description: Whether to store connection passwords
+            default_endpoint_settings:
+              type: object
+              properties:
+                autoscaling_limit_min_cu:
+                  type: number
+                  description: Minimum compute units
+                autoscaling_limit_max_cu:
+                  type: number
+                  description: Maximum compute units
+                suspend_timeout_seconds:
+                  type: integer
+                  description: Inactivity timeout in seconds
+            org_id:
+              type: string
+              description: Organization ID for the project
+    ProjectUpdateRequest:
+      type: object
+      description: Request body for updating a project
+      properties:
+        project:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The project name
+              maxLength: 64
+            default_endpoint_settings:
+              type: object
+              properties:
+                autoscaling_limit_min_cu:
+                  type: number
+                  description: Minimum compute units
+                autoscaling_limit_max_cu:
+                  type: number
+                  description: Maximum compute units
+                suspend_timeout_seconds:
+                  type: integer
+                  description: Inactivity timeout in seconds
+    Branch:
+      type: object
+      description: >-
+        A branch is a copy-on-write clone of your data that can be used for
+        development, testing, or preview environments.
+      properties:
+        id:
+          type: string
+          description: The branch ID
+        project_id:
+          type: string
+          description: The parent project ID
+        parent_id:
+          type: string
+          description: The parent branch ID
+        parent_lsn:
+          type: string
+          description: The Log Sequence Number of the parent branch point
+        parent_timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the parent branch point
+        name:
+          type: string
+          description: The branch name
+        current_state:
+          type: string
+          enum:
+            - init
+            - ready
+          description: The current state of the branch
+        logical_size:
+          type: integer
+          format: int64
+          description: The logical size of the branch data in bytes
+        created_at:
+          type: string
+          format: date-time
+          description: Branch creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        primary:
+          type: boolean
+          description: Whether this is the primary branch
+    BranchCreateRequest:
+      type: object
+      description: Request body for creating a new branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
+            parent_id:
+              type: string
+              description: The parent branch ID to branch from
+            parent_lsn:
+              type: string
+              description: The Log Sequence Number to branch from
+            parent_timestamp:
+              type: string
+              format: date-time
+              description: The timestamp to branch from
+        endpoints:
+          type: array
+          description: Compute endpoints to create for the branch
+          items:
+            $ref: '#/components/schemas/EndpointCreateRequest'
+    BranchUpdateRequest:
+      type: object
+      description: Request body for updating a branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
+    Database:
+      type: object
+      description: A Postgres database within a branch
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The database ID
+        branch_id:
+          type: string
+          description: The branch ID this database belongs to
+        name:
+          type: string
+          description: The database name
+        owner_name:
+          type: string
+          description: The name of the role that owns this database
+        created_at:
+          type: string
+          format: date-time
+          description: Database creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    DatabaseCreateRequest:
+      type: object
+      description: Request body for creating a new database
+      required:
+        - database
+      properties:
+        database:
+          type: object
+          required:
+            - name
+            - owner_name
+          properties:
+            name:
+              type: string
+              description: The database name
+            owner_name:
+              type: string
+              description: The name of the role that will own this database
+    DatabaseUpdateRequest:
+      type: object
+      description: Request body for updating a database
+      properties:
+        database:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The new database name
+            owner_name:
+              type: string
+              description: The new owner role name
+    Role:
+      type: object
+      description: A Postgres role within a branch
+      properties:
+        branch_id:
+          type: string
+          description: The branch ID this role belongs to
+        name:
+          type: string
+          description: The role name
+        password:
+          type: string
+          description: >-
+            The role password. Only returned when creating a role or resetting
+            a password.
+        protected:
+          type: boolean
+          description: Whether this is a protected system role
+        created_at:
+          type: string
+          format: date-time
+          description: Role creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    RoleCreateRequest:
+      type: object
+      description: Request body for creating a new role
+      required:
+        - role
+      properties:
+        role:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: The role name
+    Endpoint:
+      type: object
+      description: >-
+        A compute endpoint provides processing resources for database queries.
+        Each branch can have one read-write and multiple read-only endpoints.
+      properties:
+        id:
+          type: string
+          description: The endpoint ID
+        host:
+          type: string
+          description: The endpoint hostname
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID
+        region_id:
+          type: string
+          description: The region where the endpoint is deployed
+        autoscaling_limit_min_cu:
+          type: number
+          description: Minimum compute units for autoscaling
+        autoscaling_limit_max_cu:
+          type: number
+          description: Maximum compute units for autoscaling
+        type:
+          type: string
+          enum:
+            - read_write
+            - read_only
+          description: The endpoint type
+        current_state:
+          type: string
+          enum:
+            - init
+            - active
+            - idle
+          description: The current state of the endpoint
+        suspend_timeout_seconds:
+          type: integer
+          description: Seconds of inactivity before the endpoint is suspended
+        provisioner:
+          type: string
+          description: The provisioner type
+        created_at:
+          type: string
+          format: date-time
+          description: Endpoint creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        disabled:
+          type: boolean
+          description: Whether the endpoint is disabled
+    EndpointCreateRequest:
+      type: object
+      description: Request body for creating a new compute endpoint
+      properties:
+        endpoint:
+          type: object
+          required:
+            - branch_id
+            - type
+          properties:
+            branch_id:
+              type: string
+              description: The branch ID to attach the endpoint to
+            type:
+              type: string
+              enum:
+                - read_write
+                - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+    EndpointUpdateRequest:
+      type: object
+      description: Request body for updating a compute endpoint
+      properties:
+        endpoint:
+          type: object
+          properties:
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+    Operation:
+      type: object
+      description: >-
+        An operation tracks the progress of an action performed on a project
+        resource such as creating a branch, starting an endpoint, or updating
+        a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+            - create_compute
+            - create_timeline
+            - start_compute
+            - suspend_compute
+            - apply_config
+            - check_availability
+            - delete_timeline
+            - create_branch
+            - tenant_ignore
+            - tenant_attach
+            - tenant_detach
+            - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+            - scheduling
+            - running
+            - finished
+            - failed
+            - cancelling
+            - cancelled
+            - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
+    ConnectionUri:
+      type: object
+      description: A database connection URI
+      properties:
+        connection_uri:
+          type: string
+          description: >-
+            The full connection URI including host, database, role, and
+            password
+        connection_parameters:
+          type: object
+          description: Individual connection parameters
+          properties:
+            database:
+              type: string
+              description: The database name
+            host:
+              type: string
+              description: The hostname
+            password:
+              type: string
+              description: The password
+            role:
+              type: string
+              description: The role name
+    ConsumptionHistoryPerAccount:
+      type: object
+      description: Account-level consumption metrics
+      properties:
+        periods:
+          type: array
+          items:
+            type: object
+            properties:
+              period_id:
+                type: string
+                description: The period identifier
+              consumption:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumptionMetric'
+    ConsumptionHistoryPerProject:
+      type: object
+      description: Project-level consumption metrics
+      properties:
+        projects:
+          type: array
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+                description: The project ID
+              periods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    period_id:
+                      type: string
+                      description: The period identifier
+                    consumption:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ConsumptionMetric'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ConsumptionMetric:
+      type: object
+      description: A consumption metric data point
+      properties:
+        timeframe_start:
+          type: string
+          format: date-time
+          description: Start of the measurement timeframe
+        timeframe_end:
+          type: string
+          format: date-time
+          description: End of the measurement timeframe
+        active_time_seconds:
+          type: integer
+          description: >-
+            Number of seconds the compute endpoints have been active
+        compute_time_seconds:
+          type: integer
+          description: >-
+            Number of CPU seconds used by compute endpoints
+        written_data_bytes:
+          type: integer
+          format: int64
+          description: Total bytes of data written
+        data_storage_bytes_hour:
+          type: integer
+          format: int64
+          description: Storage consumption in byte-hours
+    ApiKey:
+      type: object
+      description: An API key used to authenticate requests to the Neon API
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The API key ID
+        name:
+          type: string
+          description: The API key name
+        created_at:
+          type: string
+          format: date-time
+          description: API key creation timestamp
+        last_used_at:
+          type: string
+          format: date-time
+          description: Timestamp of last use
+        last_used_from_addr:
+          type: string
+          description: IP address from which the key was last used
+    ApiKeyCreateRequest:
+      type: object
+      description: Request body for creating a new API key
+      required:
+        - key_name
+      properties:
+        key_name:
+          type: string
+          description: The name for the new API key
+    ApiKeyCreateResponse:
+      type: object
+      description: Response containing the newly created API key
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The API key ID
+        key:
+          type: string
+          description: >-
+            The full API key value. This is only returned once at creation
+            and cannot be retrieved again.
+    DataApiConfig:
+      type: object
+      description: >-
+        Configuration for the Neon Data API on a branch, providing a
+        PostgREST-compatible HTTP interface to the database.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the Data API is enabled for this branch
+        database_name:
+          type: string
+          description: The target database for the Data API
+        exposed_schemas:
+          type: array
+          items:
+            type: string
+          description: List of database schemas exposed through the Data API
+        max_rows:
+          type: integer
+          description: >-
+            Maximum number of rows returned in a single API response
+        auth_provider:
+          type: string
+          description: >-
+            The authentication provider that validates JWT tokens for
+            Data API requests
+    DataApiConfigUpdate:
+      type: object
+      description: Request body for updating Data API configuration
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable the Data API
+        database_name:
+          type: string
+          description: The target database
+        exposed_schemas:
+          type: array
+          items:
+            type: string
+          description: Schemas to expose
+        max_rows:
+          type: integer
+          description: Maximum rows per response
+        auth_provider:
+          type: string
+          description: Authentication provider for JWT validation
+    AuthConfig:
+      type: object
+      description: >-
+        Neon Auth configuration for a branch, providing managed authentication
+        built on Better Auth.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Neon Auth is enabled for this branch
+        auth_url:
+          type: string
+          format: uri
+          description: The URL for the Neon Auth service
+        jwks_url:
+          type: string
+          format: uri
+          description: The JWKS URL for JWT validation
+        schema:
+          type: string
+          description: The database schema used by Neon Auth (typically neon_auth)
+    AuthConfigUpdate:
+      type: object
+      description: Request body for updating Auth configuration
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable Neon Auth
+    OAuthProvider:
+      type: object
+      description: An OAuth provider configuration for Neon Auth
+      properties:
+        id:
+          type: string
+          description: The OAuth provider ID
+        provider:
+          type: string
+          description: >-
+            The OAuth provider type (e.g., google, github, discord)
+        client_id:
+          type: string
+          description: The OAuth client ID
+        enabled:
+          type: boolean
+          description: Whether this provider is enabled
+        created_at:
+          type: string
+          format: date-time
+          description: Provider creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    OAuthProviderCreateRequest:
+      type: object
+      description: Request body for creating a new OAuth provider
+      required:
+        - provider
+        - client_id
+        - client_secret
+      properties:
+        provider:
+          type: string
+          description: The OAuth provider type
+        client_id:
+          type: string
+          description: The OAuth client ID
+        client_secret:
+          type: string
+          description: The OAuth client secret
+        enabled:
+          type: boolean
+          description: Whether to enable this provider
+          default: true
+    OAuthProviderUpdateRequest:
+      type: object
+      description: Request body for updating an OAuth provider
+      properties:
+        client_id:
+          type: string
+          description: The OAuth client ID
+        client_secret:
+          type: string
+          description: The OAuth client secret
+        enabled:
+          type: boolean
+          description: Whether this provider is enabled
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+            - asc
+            - desc
+          description: Sort direction

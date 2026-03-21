@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neon.com/schemas/neon/endpoint.json",
+  "title": "Neon Compute Endpoint",
+  "description": "A Neon compute endpoint provides the processing resources for executing database queries against a branch. Each branch supports one read-write endpoint and multiple read-only endpoints with configurable autoscaling.",
+  "type": "object",
+  "required": ["id", "project_id", "branch_id", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique endpoint identifier"
+    },
+    "host": {
+      "type": "string",
+      "description": "The hostname for connecting to this endpoint"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID this endpoint belongs to"
+    },
+    "branch_id": {
+      "type": "string",
+      "description": "The branch ID this endpoint is attached to"
+    },
+    "region_id": {
+      "type": "string",
+      "description": "The cloud region where this endpoint is deployed"
+    },
+    "autoscaling_limit_min_cu": {
+      "type": "number",
+      "description": "Minimum compute units for autoscaling",
+      "minimum": 0.25
+    },
+    "autoscaling_limit_max_cu": {
+      "type": "number",
+      "description": "Maximum compute units for autoscaling",
+      "minimum": 0.25
+    },
+    "type": {
+      "type": "string",
+      "description": "The endpoint type determining read/write access",
+      "enum": ["read_write", "read_only"]
+    },
+    "current_state": {
+      "type": "string",
+      "description": "The current operational state of the endpoint",
+      "enum": ["init", "active", "idle"]
+    },
+    "suspend_timeout_seconds": {
+      "type": "integer",
+      "description": "Seconds of inactivity before the endpoint is automatically suspended to save resources",
+      "minimum": 0
+    },
+    "provisioner": {
+      "type": "string",
+      "description": "The provisioner type used for this endpoint"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the endpoint is disabled"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the endpoint was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the endpoint was last updated"
+    }
+  }
+}

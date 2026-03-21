@@ -1,0 +1,210 @@
+asyncapi: 2.6.0
+info:
+  title: Neon Auth Webhook Events
+  description: >-
+    Neon Auth webhooks deliver HTTP POST requests when authentication events
+    occur, including OTP delivery, magic link delivery, and user creation.
+    Webhooks can be used to replace built-in email delivery with custom
+    channels (SMS, custom email, WhatsApp), validate signups before they
+    complete, or sync new users to CRMs and analytics systems.
+  version: '1.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  license:
+    name: Proprietary
+    url: https://neon.com/terms-of-service
+servers:
+  webhookReceiver:
+    url: '{webhookUrl}'
+    protocol: https
+    description: >-
+      Your webhook receiver endpoint configured in Neon Auth settings.
+      Neon sends HTTP POST requests to this URL when authentication
+      events occur.
+    variables:
+      webhookUrl:
+        description: The URL of your webhook endpoint
+    security:
+      - signatureVerification: []
+channels:
+  /webhook:
+    description: >-
+      Neon Auth sends webhook events to your configured endpoint as HTTP POST
+      requests with JSON payloads. Each event includes a type field identifying
+      the event and relevant data. Your endpoint should respond with a 2xx
+      status code to acknowledge receipt.
+    publish:
+      operationId: receiveAuthWebhookEvent
+      summary: Receive authentication webhook events
+      description: >-
+        Receives webhook events from Neon Auth when authentication-related
+        actions occur. Events include OTP code delivery, magic link delivery,
+        and user creation. Your server must respond with a 2xx status code
+        within a reasonable timeframe. Failed deliveries will be retried.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/OtpDeliveryEvent'
+          - $ref: '#/components/messages/MagicLinkDeliveryEvent'
+          - $ref: '#/components/messages/UserCreatedEvent'
+components:
+  securitySchemes:
+    signatureVerification:
+      type: httpApiKey
+      name: x-webhook-signature
+      in: header
+      description: >-
+        Webhook signature for verifying the authenticity of webhook payloads.
+        Verify this signature against the payload using your webhook secret
+        to ensure the request originated from Neon Auth.
+  messages:
+    OtpDeliveryEvent:
+      name: otpDelivery
+      title: OTP Delivery Event
+      summary: >-
+        Sent when an OTP code needs to be delivered to a user for email
+        verification or two-factor authentication.
+      description: >-
+        This event fires when Neon Auth generates a one-time password that
+        needs to be delivered to a user. Use this webhook to send the OTP
+        via your own delivery channel such as SMS, custom email template,
+        or WhatsApp instead of the default built-in email.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/OtpDeliveryPayload'
+    MagicLinkDeliveryEvent:
+      name: magicLinkDelivery
+      title: Magic Link Delivery Event
+      summary: >-
+        Sent when a magic link needs to be delivered to a user for
+        passwordless authentication.
+      description: >-
+        This event fires when Neon Auth generates a magic link for
+        passwordless sign-in. Use this webhook to deliver the magic link
+        via your own email service or messaging channel instead of the
+        default built-in delivery.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MagicLinkDeliveryPayload'
+    UserCreatedEvent:
+      name: userCreated
+      title: User Created Event
+      summary: >-
+        Sent when a new user account is created through Neon Auth.
+      description: >-
+        This event fires after a new user successfully registers through
+        Neon Auth. Use this webhook to sync the new user to your CRM,
+        analytics platform, or other downstream systems, or to perform
+        additional onboarding tasks.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/UserCreatedPayload'
+  schemas:
+    OtpDeliveryPayload:
+      type: object
+      description: >-
+        Payload for OTP delivery webhook events containing the OTP code
+        and recipient information.
+      required:
+        - type
+        - email
+        - otp
+      properties:
+        type:
+          type: string
+          const: otp_delivery
+          description: The event type identifier
+        email:
+          type: string
+          format: email
+          description: The email address of the user receiving the OTP
+        otp:
+          type: string
+          description: >-
+            The one-time password code to be delivered to the user
+        expires_at:
+          type: string
+          format: date-time
+          description: The expiration time for the OTP code
+        user_id:
+          type: string
+          description: The ID of the user associated with this OTP request
+    MagicLinkDeliveryPayload:
+      type: object
+      description: >-
+        Payload for magic link delivery webhook events containing the
+        magic link URL and recipient information.
+      required:
+        - type
+        - email
+        - url
+      properties:
+        type:
+          type: string
+          const: magic_link_delivery
+          description: The event type identifier
+        email:
+          type: string
+          format: email
+          description: The email address of the user receiving the magic link
+        url:
+          type: string
+          format: uri
+          description: >-
+            The magic link URL that the user should click to authenticate
+        token:
+          type: string
+          description: The magic link token
+        expires_at:
+          type: string
+          format: date-time
+          description: The expiration time for the magic link
+        user_id:
+          type: string
+          description: The ID of the user associated with this magic link request
+    UserCreatedPayload:
+      type: object
+      description: >-
+        Payload for user created webhook events containing the new user
+        information.
+      required:
+        - type
+        - user
+      properties:
+        type:
+          type: string
+          const: user_created
+          description: The event type identifier
+        user:
+          type: object
+          description: The newly created user object
+          properties:
+            id:
+              type: string
+              description: The unique user ID
+            email:
+              type: string
+              format: email
+              description: The user email address
+            name:
+              type: string
+              description: The user display name
+            image:
+              type: string
+              format: uri
+              description: The user avatar image URL
+            email_verified:
+              type: boolean
+              description: Whether the email has been verified
+            created_at:
+              type: string
+              format: date-time
+              description: User creation timestamp
+            updated_at:
+              type: string
+              format: date-time
+              description: Last update timestamp
+        timestamp:
+          type: string
+          format: date-time
+          description: The time the event occurred

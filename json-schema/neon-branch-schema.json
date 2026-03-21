@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neon.com/schemas/neon/branch.json",
+  "title": "Neon Branch",
+  "description": "A Neon branch is a copy-on-write clone of database data used for development, testing, or preview environments. Branches are created instantly and share storage with their parent until data diverges.",
+  "type": "object",
+  "required": ["id", "project_id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique branch identifier"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The project ID this branch belongs to"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "The parent branch ID this branch was created from"
+    },
+    "parent_lsn": {
+      "type": "string",
+      "description": "The Postgres Log Sequence Number of the point the branch was created from"
+    },
+    "parent_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of the point in time the branch was created from"
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable branch name"
+    },
+    "current_state": {
+      "type": "string",
+      "description": "The current state of the branch",
+      "enum": ["init", "ready"]
+    },
+    "logical_size": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The logical size of the branch data in bytes",
+      "minimum": 0
+    },
+    "primary": {
+      "type": "boolean",
+      "description": "Whether this is the primary (default) branch of the project"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the branch was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the branch was last updated"
+    }
+  }
+}

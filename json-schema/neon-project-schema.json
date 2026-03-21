@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neon.com/schemas/neon/project.json",
+  "title": "Neon Project",
+  "description": "A Neon project is the top-level object in the Neon hierarchy containing branches, databases, roles, and compute endpoints for a serverless Postgres deployment.",
+  "type": "object",
+  "required": ["id", "name", "region_id", "pg_version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique project identifier assigned by Neon"
+    },
+    "platform_id": {
+      "type": "string",
+      "description": "The cloud platform identifier"
+    },
+    "region_id": {
+      "type": "string",
+      "description": "The cloud region where the project is deployed (e.g., aws-us-east-1, aws-eu-central-1)",
+      "enum": [
+        "aws-us-east-1",
+        "aws-us-east-2",
+        "aws-us-west-2",
+        "aws-eu-central-1",
+        "aws-ap-southeast-1",
+        "aws-ap-southeast-2"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable project name",
+      "maxLength": 64
+    },
+    "provisioner": {
+      "type": "string",
+      "description": "The provisioner type used for compute resources",
+      "enum": ["k8s-pod", "k8s-neonvm"]
+    },
+    "default_endpoint_settings": {
+      "$ref": "#/$defs/EndpointSettings"
+    },
+    "pg_version": {
+      "type": "integer",
+      "description": "The Postgres major version number",
+      "enum": [14, 15, 16, 17]
+    },
+    "store_passwords": {
+      "type": "boolean",
+      "description": "Whether connection passwords are stored and retrievable"
+    },
+    "active_time": {
+      "type": "integer",
+      "description": "Total active time of compute endpoints in seconds",
+      "minimum": 0
+    },
+    "cpu_used_sec": {
+      "type": "integer",
+      "description": "Total CPU seconds consumed by compute endpoints",
+      "minimum": 0
+    },
+    "maintenance_starts_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled maintenance window start time"
+    },
+    "creation_source": {
+      "type": "string",
+      "description": "The source that created this project (e.g., console, api)"
+    },
+    "org_id": {
+      "type": "string",
+      "description": "The organization ID this project belongs to"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the project was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the project was last updated"
+    }
+  },
+  "$defs": {
+    "EndpointSettings": {
+      "type": "object",
+      "description": "Default settings applied to new compute endpoints in this project",
+      "properties": {
+        "autoscaling_limit_min_cu": {
+          "type": "number",
+          "description": "Minimum compute units for autoscaling",
+          "minimum": 0.25
+        },
+        "autoscaling_limit_max_cu": {
+          "type": "number",
+          "description": "Maximum compute units for autoscaling",
+          "minimum": 0.25
+        },
+        "suspend_timeout_seconds": {
+          "type": "integer",
+          "description": "Seconds of inactivity before the endpoint is automatically suspended",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}
