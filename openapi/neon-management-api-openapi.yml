@@ -20,22 +20,30 @@ servers:
   - url: https://console.neon.tech/api/v2
     description: Neon Production API
 tags:
-  - name: Projects
+  - name: API Keys
     description: >-
-      Manage Neon projects. A project is the top-level object in the Neon
-      hierarchy containing branches, databases, roles, and compute endpoints.
+      Manage API keys for authentication. API keys are used to authenticate
+      requests to the Neon API via Bearer token.
+  - name: Auth
+    description: >-
+      Manage Neon Auth configuration for branches, including OAuth providers,
+      webhooks, and authentication settings.
   - name: Branches
     description: >-
       Manage branches within a project. Branches are copies of your data
       created using copy-on-write technology for development, testing, and
       preview environments.
+  - name: Consumption
+    description: >-
+      Query consumption metrics for projects and accounts. Available for
+      Scale, Business, and Enterprise plan accounts.
+  - name: Data API
+    description: >-
+      Manage Data API configuration for branches, including enabling and
+      disabling the PostgREST-compatible HTTP interface.
   - name: Databases
     description: >-
       Manage databases within a branch. A branch can contain multiple databases.
-  - name: Roles
-    description: >-
-      Manage Postgres roles within a branch. Roles control database access
-      and permissions.
   - name: Endpoints
     description: >-
       Manage compute endpoints for branches. Compute endpoints provide the
@@ -45,25 +53,14 @@ tags:
     description: >-
       View and manage operations for a project. Operations track the progress
       and status of actions performed on project resources.
-  - name: Consumption
+  - name: Projects
     description: >-
-      Query consumption metrics for projects and accounts. Available for
-      Scale, Business, and Enterprise plan accounts.
-  - name: API Keys
+      Manage Neon projects. A project is the top-level object in the Neon
+      hierarchy containing branches, databases, roles, and compute endpoints.
+  - name: Roles
     description: >-
-      Manage API keys for authentication. API keys are used to authenticate
-      requests to the Neon API via Bearer token.
-  - name: Organizations
-    description: >-
-      Manage organization settings, members, and permissions.
-  - name: Data API
-    description: >-
-      Manage Data API configuration for branches, including enabling and
-      disabling the PostgREST-compatible HTTP interface.
-  - name: Auth
-    description: >-
-      Manage Neon Auth configuration for branches, including OAuth providers,
-      webhooks, and authentication settings.
+      Manage Postgres roles within a branch. Roles control database access
+      and permissions.
 security:
   - bearerAuth: []
 paths:
