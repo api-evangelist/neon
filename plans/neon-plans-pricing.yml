@@ -1,0 +1,159 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Neon
+providerId: neon
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Database
+  - Postgres
+  - Serverless
+description: 'Neon serverless Postgres tiers: Free / Launch / Scale.'
+sources:
+  - https://neon.com/pricing
+plans:
+  - id: neon-free
+    name: Free
+    type: freemium
+    description: 100 CU-hours/project, 0.5 GB storage.
+    entries:
+      - label: CU-hours/project
+        name: cu_hours
+        type: quota
+        metric: CU-hour
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Storage/project
+        name: storage
+        type: quota
+        metric: GB
+        limit: 0.5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: MAU
+        name: mau
+        type: quota
+        metric: MAU
+        limit: 60000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Egress
+        name: egress
+        type: quota
+        metric: GB
+        limit: 5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Up to 2 CU autoscaling
+      - name: 1 manual snapshot
+      - name: 6-hour restore window (1 GB)
+  - id: neon-launch
+    name: Launch
+    type: paid
+    description: 'Pay-as-you-go: $0.106/CU-hour, $0.35/GB-month storage.'
+    entries:
+      - label: Per CU-hour
+        name: cu
+        type: metered
+        metric: CU-hour
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.106'
+        userMultiplied: false
+      - label: Per GB-month storage
+        name: storage
+        type: metered
+        metric: GB-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.35'
+        userMultiplied: false
+      - label: Egress included
+        name: egress
+        type: quota
+        metric: GB
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Instant restore per GB-month
+        name: restore
+        type: metered
+        metric: GB-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.20'
+        userMultiplied: false
+    elements:
+      - name: Up to 16 CU autoscaling
+      - name: Up to 1M MAU
+      - name: 10 manual + scheduled snapshots
+      - name: 7-day restore window
+      - name: Spending limits + protected branches
+  - id: neon-scale
+    name: Scale
+    type: paid
+    description: 'Pay-as-you-go: $0.222/CU-hour, $0.35/GB-month storage.'
+    entries:
+      - label: Per CU-hour
+        name: cu
+        type: metered
+        metric: CU-hour
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.222'
+        userMultiplied: false
+      - label: Per GB-month storage
+        name: storage
+        type: metered
+        metric: GB-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.35'
+        userMultiplied: false
+      - label: Private networking per GB
+        name: private
+        type: metered
+        metric: GB
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.01'
+        userMultiplied: false
+    elements:
+      - name: Up to 56 CU fixed or 16 CU autoscaling
+      - name: Up to 1M MAU
+      - name: 30-day restore window
+      - name: IP allow rules
+      - name: Private networking
+      - name: HIPAA/SOC 2 available
+      - name: Uptime SLA

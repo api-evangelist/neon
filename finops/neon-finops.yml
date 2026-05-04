@@ -1,0 +1,64 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Neon
+providerId: neon
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Serverless Postgres
+description: FOCUS-aligned FinOps for Neon.
+sources:
+  - https://neon.com/pricing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Neon
+serviceCategory: Serverless Postgres
+billingModel:
+  pricingCategory: Pay-As-You-Go Per Compute Hour + Storage
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: Neon
+  ServiceCategory: Serverless Postgres
+  ProviderName: Neon
+  PublisherName: Neon
+  BillingCurrency: USD
+meters:
+  - name: compute_hours
+    unit: CU-hour
+    aggregation: sum
+    dimensions:
+      - project
+      - branch
+  - name: storage
+    unit: GB-month
+    aggregation: max
+  - name: egress
+    unit: GB
+    aggregation: sum
+  - name: monthly_active_users
+    unit: MAU
+    aggregation: max
+  - name: instant_restore
+    unit: GB-month
+    aggregation: max
+  - name: private_networking
+    unit: GB
+    aggregation: sum
+principles:
+  - name: Visibility
+    description: Track Neon consumption monthly.
+  - name: Allocation
+    description: Tag usage to teams/cost centers.
+  - name: Optimization
+    description: Right-size; reclaim unused entitlements.
+  - name: Accountability
+    description: Set spend alerts; quarterly review.

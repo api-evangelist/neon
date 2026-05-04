@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Neon
+providerId: neon
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Database
+description: Neon API rate limits per organization; Postgres connections per project.
+sources:
+  - https://neon.com/pricing
+  - https://neon.com/docs/reference/api-reference
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Management API
+    scope: org
+    metric: requests_per_hour
+    limit: 700
+    timeFrame: hour
+  - name: Postgres connections
+    scope: endpoint
+    metric: concurrent
+    limit: scales with CU
+  - name: Neon Auth
+    scope: project
+    metric: requests_per_second
+    limit: 100
+    timeFrame: second
