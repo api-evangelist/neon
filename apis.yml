@@ -4,7 +4,7 @@ description: Neon is a serverless Postgres platform that provides fully managed,
   optimized for modern cloud and edge application development. Their developer platform offers management
   APIs, data APIs, authentication services, and serverless drivers for building and automating database-driven
   workflows.
-type: Contract
+kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Databases
@@ -118,11 +118,11 @@ common:
     url: https://neon.com/pricing
   - type: Login
     url: https://console.neon.tech
-  - type: Sign Up
+  - type: SignUp
     url: https://console.neon.tech/signup
   - type: Support
     url: https://neon.com/docs/introduction/support
-  - type: Status
+  - type: StatusPage
     url: https://neonstatus.com
   - type: TermsOfService
     url: https://neon.com/terms-of-service
