@@ -1,0 +1,194 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Neon Management API — Roles
+  description: 'Neon Management API — Roles. 5 operations. Lead operation: List roles. Self-contained Naftiko capability covering
+    one Neon business surface.'
+  tags:
+  - Neon
+  - Roles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NEON_API_KEY: NEON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-roles
+    baseUri: https://console.neon.tech/api/v2
+    description: Neon Management API — Roles business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-project_id-branches-branch_id-roles
+      path: /projects/{project_id}/branches/{branch_id}/roles
+      operations:
+      - name: listprojectbranchroles
+        method: GET
+        description: List roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprojectbranchrole
+        method: POST
+        description: Create a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-project_id-branches-branch_id-roles-role_name
+      path: /projects/{project_id}/branches/{branch_id}/roles/{role_name}
+      operations:
+      - name: getprojectbranchrole
+        method: GET
+        description: Retrieve role details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteprojectbranchrole
+        method: DELETE
+        description: Delete a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-branches-branch_id-roles-role_name-reset_password
+      path: /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password
+      operations:
+      - name: resetprojectbranchrolepassword
+        method: POST
+        description: Reset role password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NEON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-roles-rest
+    port: 8080
+    description: REST adapter for Neon Management API — Roles. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/projects/{project-id}/branches/{branch-id}/roles
+      name: projects-project-id-branches-branch-id-roles
+      description: REST surface for projects-project_id-branches-branch_id-roles.
+      operations:
+      - method: GET
+        name: listprojectbranchroles
+        description: List roles
+        call: management-roles.listprojectbranchroles
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectbranchrole
+        description: Create a role
+        call: management-roles.createprojectbranchrole
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/branches/{branch-id}/roles/{role-name}
+      name: projects-project-id-branches-branch-id-roles-role-name
+      description: REST surface for projects-project_id-branches-branch_id-roles-role_name.
+      operations:
+      - method: GET
+        name: getprojectbranchrole
+        description: Retrieve role details
+        call: management-roles.getprojectbranchrole
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprojectbranchrole
+        description: Delete a role
+        call: management-roles.deleteprojectbranchrole
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/branches/{branch-id}/roles/{role-name}/reset-password
+      name: projects-project-id-branches-branch-id-roles-role-name-reset-password
+      description: REST surface for projects-project_id-branches-branch_id-roles-role_name-reset_password.
+      operations:
+      - method: POST
+        name: resetprojectbranchrolepassword
+        description: Reset role password
+        call: management-roles.resetprojectbranchrolepassword
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-roles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Neon Management API — Roles. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-roles
+      description: List roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-roles.listprojectbranchroles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-role
+      description: Create a role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-roles.createprojectbranchrole
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-role-details
+      description: Retrieve role details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-roles.getprojectbranchrole
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-role
+      description: Delete a role
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-roles.deleteprojectbranchrole
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-role-password
+      description: Reset role password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-roles.resetprojectbranchrolepassword
+      outputParameters:
+      - type: object
+        mapping: $.

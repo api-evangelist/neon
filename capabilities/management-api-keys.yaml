@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Neon Management API — API Keys
+  description: 'Neon Management API — API Keys. 3 operations. Lead operation: List API keys. Self-contained Naftiko capability
+    covering one Neon business surface.'
+  tags:
+  - Neon
+  - API Keys
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NEON_API_KEY: NEON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-api-keys
+    baseUri: https://console.neon.tech/api/v2
+    description: Neon Management API — API Keys business capability. Self-contained, no shared references.
+    resources:
+    - name: api_keys
+      path: /api_keys
+      operations:
+      - name: listapikeys
+        method: GET
+        description: List API keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createapikey
+        method: POST
+        description: Create an API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api_keys-key_id
+      path: /api_keys/{key_id}
+      operations:
+      - name: revokeapikey
+        method: DELETE
+        description: Revoke an API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key_id
+          in: path
+          type: integer
+          description: The API key ID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NEON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-api-keys-rest
+    port: 8080
+    description: REST adapter for Neon Management API — API Keys. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api-keys
+      name: api-keys
+      description: REST surface for api_keys.
+      operations:
+      - method: GET
+        name: listapikeys
+        description: List API keys
+        call: management-api-keys.listapikeys
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapikey
+        description: Create an API key
+        call: management-api-keys.createapikey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api-keys/{key-id}
+      name: api-keys-key-id
+      description: REST surface for api_keys-key_id.
+      operations:
+      - method: DELETE
+        name: revokeapikey
+        description: Revoke an API key
+        call: management-api-keys.revokeapikey
+        with:
+          key_id: rest.key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-api-keys-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Neon Management API — API Keys. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-api-keys
+      description: List API keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-api-keys.listapikeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-key
+      description: Create an API key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-api-keys.createapikey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoke-api-key
+      description: Revoke an API key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-api-keys.revokeapikey
+      with:
+        key_id: tools.key_id
+      outputParameters:
+      - type: object
+        mapping: $.

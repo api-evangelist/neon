@@ -1,0 +1,325 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Neon Management API — Endpoints
+  description: 'Neon Management API — Endpoints. 9 operations. Lead operation: List branch endpoints. Self-contained Naftiko
+    capability covering one Neon business surface.'
+  tags:
+  - Neon
+  - Endpoints
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NEON_API_KEY: NEON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-endpoints
+    baseUri: https://console.neon.tech/api/v2
+    description: Neon Management API — Endpoints business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-project_id-branches-branch_id-endpoints
+      path: /projects/{project_id}/branches/{branch_id}/endpoints
+      operations:
+      - name: listprojectbranchendpoints
+        method: GET
+        description: List branch endpoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-endpoints
+      path: /projects/{project_id}/endpoints
+      operations:
+      - name: listprojectendpoints
+        method: GET
+        description: List compute endpoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprojectendpoint
+        method: POST
+        description: Create a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-project_id-endpoints-endpoint_id
+      path: /projects/{project_id}/endpoints/{endpoint_id}
+      operations:
+      - name: getprojectendpoint
+        method: GET
+        description: Retrieve compute endpoint details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprojectendpoint
+        method: PATCH
+        description: Update a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprojectendpoint
+        method: DELETE
+        description: Delete a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-endpoints-endpoint_id-restart
+      path: /projects/{project_id}/endpoints/{endpoint_id}/restart
+      operations:
+      - name: restartprojectendpoint
+        method: POST
+        description: Restart a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-endpoints-endpoint_id-start
+      path: /projects/{project_id}/endpoints/{endpoint_id}/start
+      operations:
+      - name: startprojectendpoint
+        method: POST
+        description: Start a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-endpoints-endpoint_id-suspend
+      path: /projects/{project_id}/endpoints/{endpoint_id}/suspend
+      operations:
+      - name: suspendprojectendpoint
+        method: POST
+        description: Suspend a compute endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NEON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-endpoints-rest
+    port: 8080
+    description: REST adapter for Neon Management API — Endpoints. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/{project-id}/branches/{branch-id}/endpoints
+      name: projects-project-id-branches-branch-id-endpoints
+      description: REST surface for projects-project_id-branches-branch_id-endpoints.
+      operations:
+      - method: GET
+        name: listprojectbranchendpoints
+        description: List branch endpoints
+        call: management-endpoints.listprojectbranchendpoints
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/endpoints
+      name: projects-project-id-endpoints
+      description: REST surface for projects-project_id-endpoints.
+      operations:
+      - method: GET
+        name: listprojectendpoints
+        description: List compute endpoints
+        call: management-endpoints.listprojectendpoints
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectendpoint
+        description: Create a compute endpoint
+        call: management-endpoints.createprojectendpoint
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/endpoints/{endpoint-id}
+      name: projects-project-id-endpoints-endpoint-id
+      description: REST surface for projects-project_id-endpoints-endpoint_id.
+      operations:
+      - method: GET
+        name: getprojectendpoint
+        description: Retrieve compute endpoint details
+        call: management-endpoints.getprojectendpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateprojectendpoint
+        description: Update a compute endpoint
+        call: management-endpoints.updateprojectendpoint
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprojectendpoint
+        description: Delete a compute endpoint
+        call: management-endpoints.deleteprojectendpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/endpoints/{endpoint-id}/restart
+      name: projects-project-id-endpoints-endpoint-id-restart
+      description: REST surface for projects-project_id-endpoints-endpoint_id-restart.
+      operations:
+      - method: POST
+        name: restartprojectendpoint
+        description: Restart a compute endpoint
+        call: management-endpoints.restartprojectendpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/endpoints/{endpoint-id}/start
+      name: projects-project-id-endpoints-endpoint-id-start
+      description: REST surface for projects-project_id-endpoints-endpoint_id-start.
+      operations:
+      - method: POST
+        name: startprojectendpoint
+        description: Start a compute endpoint
+        call: management-endpoints.startprojectendpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/endpoints/{endpoint-id}/suspend
+      name: projects-project-id-endpoints-endpoint-id-suspend
+      description: REST surface for projects-project_id-endpoints-endpoint_id-suspend.
+      operations:
+      - method: POST
+        name: suspendprojectendpoint
+        description: Suspend a compute endpoint
+        call: management-endpoints.suspendprojectendpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-endpoints-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Neon Management API — Endpoints. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-branch-endpoints
+      description: List branch endpoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-endpoints.listprojectbranchendpoints
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-compute-endpoints
+      description: List compute endpoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-endpoints.listprojectendpoints
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-compute-endpoint
+      description: Create a compute endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-endpoints.createprojectendpoint
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-compute-endpoint-details
+      description: Retrieve compute endpoint details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-endpoints.getprojectendpoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-compute-endpoint
+      description: Update a compute endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: management-endpoints.updateprojectendpoint
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-compute-endpoint
+      description: Delete a compute endpoint
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-endpoints.deleteprojectendpoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restart-compute-endpoint
+      description: Restart a compute endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-endpoints.restartprojectendpoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-compute-endpoint
+      description: Start a compute endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-endpoints.startprojectendpoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: suspend-compute-endpoint
+      description: Suspend a compute endpoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-endpoints.suspendprojectendpoint
+      outputParameters:
+      - type: object
+        mapping: $.

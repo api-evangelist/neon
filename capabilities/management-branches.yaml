@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Neon Management API — Branches
+  description: 'Neon Management API — Branches. 6 operations. Lead operation: List branches. Self-contained Naftiko capability
+    covering one Neon business surface.'
+  tags:
+  - Neon
+  - Branches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NEON_API_KEY: NEON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management-branches
+    baseUri: https://console.neon.tech/api/v2
+    description: Neon Management API — Branches business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-project_id-branches
+      path: /projects/{project_id}/branches
+      operations:
+      - name: listprojectbranches
+        method: GET
+        description: List branches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprojectbranch
+        method: POST
+        description: Create a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-project_id-branches-branch_id
+      path: /projects/{project_id}/branches/{branch_id}
+      operations:
+      - name: getprojectbranch
+        method: GET
+        description: Retrieve branch details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprojectbranch
+        method: PATCH
+        description: Update a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprojectbranch
+        method: DELETE
+        description: Delete a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects-project_id-branches-branch_id-restore
+      path: /projects/{project_id}/branches/{branch_id}/restore
+      operations:
+      - name: restoreprojectbranch
+        method: POST
+        description: Restore a branch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NEON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: management-branches-rest
+    port: 8080
+    description: REST adapter for Neon Management API — Branches. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/{project-id}/branches
+      name: projects-project-id-branches
+      description: REST surface for projects-project_id-branches.
+      operations:
+      - method: GET
+        name: listprojectbranches
+        description: List branches
+        call: management-branches.listprojectbranches
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectbranch
+        description: Create a branch
+        call: management-branches.createprojectbranch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/branches/{branch-id}
+      name: projects-project-id-branches-branch-id
+      description: REST surface for projects-project_id-branches-branch_id.
+      operations:
+      - method: GET
+        name: getprojectbranch
+        description: Retrieve branch details
+        call: management-branches.getprojectbranch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateprojectbranch
+        description: Update a branch
+        call: management-branches.updateprojectbranch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprojectbranch
+        description: Delete a branch
+        call: management-branches.deleteprojectbranch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/branches/{branch-id}/restore
+      name: projects-project-id-branches-branch-id-restore
+      description: REST surface for projects-project_id-branches-branch_id-restore.
+      operations:
+      - method: POST
+        name: restoreprojectbranch
+        description: Restore a branch
+        call: management-branches.restoreprojectbranch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-branches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Neon Management API — Branches. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-branches
+      description: List branches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-branches.listprojectbranches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-branch
+      description: Create a branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-branches.createprojectbranch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-branch-details
+      description: Retrieve branch details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-branches.getprojectbranch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-branch
+      description: Update a branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: management-branches.updateprojectbranch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-branch
+      description: Delete a branch
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: management-branches.deleteprojectbranch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restore-branch
+      description: Restore a branch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-branches.restoreprojectbranch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
