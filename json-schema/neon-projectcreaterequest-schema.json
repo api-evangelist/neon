@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProjectCreateRequest",
+  "title": "ProjectCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new project",
+  "properties": {
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The project name",
+          "maxLength": 64
+        },
+        "region_id": {
+          "type": "string",
+          "description": "The region for the project. Available regions include aws-us-east-1, aws-us-east-2, aws-us-west-2, aws-eu-central-1, aws-ap-southeast-1."
+        },
+        "pg_version": {
+          "type": "integer",
+          "description": "The Postgres version",
+          "enum": [
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        "store_passwords": {
+          "type": "boolean",
+          "description": "Whether to store connection passwords"
+        },
+        "default_endpoint_settings": {
+          "type": "object",
+          "properties": {
+            "autoscaling_limit_min_cu": {
+              "type": "number",
+              "description": "Minimum compute units"
+            },
+            "autoscaling_limit_max_cu": {
+              "type": "number",
+              "description": "Maximum compute units"
+            },
+            "suspend_timeout_seconds": {
+              "type": "integer",
+              "description": "Inactivity timeout in seconds"
+            }
+          }
+        },
+        "org_id": {
+          "type": "string",
+          "description": "Organization ID for the project"
+        }
+      }
+    }
+  }
+}

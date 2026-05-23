@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProjectUpdateRequest",
+  "title": "ProjectUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a project",
+  "properties": {
+    "project": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The project name",
+          "maxLength": 64
+        },
+        "default_endpoint_settings": {
+          "type": "object",
+          "properties": {
+            "autoscaling_limit_min_cu": {
+              "type": "number",
+              "description": "Minimum compute units"
+            },
+            "autoscaling_limit_max_cu": {
+              "type": "number",
+              "description": "Maximum compute units"
+            },
+            "suspend_timeout_seconds": {
+              "type": "integer",
+              "description": "Inactivity timeout in seconds"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApiKeyCreateRequest",
+  "title": "ApiKeyCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new API key",
+  "required": [
+    "key_name"
+  ],
+  "properties": {
+    "key_name": {
+      "type": "string",
+      "description": "The name for the new API key"
+    }
+  }
+}

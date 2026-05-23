@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BranchCreateRequest",
+  "title": "BranchCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new branch",
+  "properties": {
+    "branch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The branch name"
+        },
+        "parent_id": {
+          "type": "string",
+          "description": "The parent branch ID to branch from"
+        },
+        "parent_lsn": {
+          "type": "string",
+          "description": "The Log Sequence Number to branch from"
+        },
+        "parent_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp to branch from"
+        }
+      }
+    },
+    "endpoints": {
+      "type": "array",
+      "description": "Compute endpoints to create for the branch",
+      "items": {
+        "$ref": "#/components/schemas/EndpointCreateRequest"
+      }
+    }
+  }
+}

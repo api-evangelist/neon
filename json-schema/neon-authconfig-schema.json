@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthConfig",
+  "title": "AuthConfig",
+  "type": "object",
+  "description": "Neon Auth configuration for a branch, providing managed authentication built on Better Auth.",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether Neon Auth is enabled for this branch"
+    },
+    "auth_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL for the Neon Auth service"
+    },
+    "jwks_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The JWKS URL for JWT validation"
+    },
+    "schema": {
+      "type": "string",
+      "description": "The database schema used by Neon Auth (typically neon_auth)"
+    }
+  }
+}

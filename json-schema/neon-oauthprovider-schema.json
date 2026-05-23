@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OAuthProvider",
+  "title": "OAuthProvider",
+  "type": "object",
+  "description": "An OAuth provider configuration for Neon Auth",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The OAuth provider ID"
+    },
+    "provider": {
+      "type": "string",
+      "description": "The OAuth provider type (e.g., google, github, discord)"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "The OAuth client ID"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this provider is enabled"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Provider creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

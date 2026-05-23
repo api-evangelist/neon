@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataApiConfig",
+  "title": "DataApiConfig",
+  "type": "object",
+  "description": "Configuration for the Neon Data API on a branch, providing a PostgREST-compatible HTTP interface to the database.",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the Data API is enabled for this branch"
+    },
+    "database_name": {
+      "type": "string",
+      "description": "The target database for the Data API"
+    },
+    "exposed_schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of database schemas exposed through the Data API"
+    },
+    "max_rows": {
+      "type": "integer",
+      "description": "Maximum number of rows returned in a single API response"
+    },
+    "auth_provider": {
+      "type": "string",
+      "description": "The authentication provider that validates JWT tokens for Data API requests"
+    }
+  }
+}

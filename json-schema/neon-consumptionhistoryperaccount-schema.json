@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConsumptionHistoryPerAccount",
+  "title": "ConsumptionHistoryPerAccount",
+  "type": "object",
+  "description": "Account-level consumption metrics",
+  "properties": {
+    "periods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "period_id": {
+            "type": "string",
+            "description": "The period identifier"
+          },
+          "consumption": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsumptionMetric"
+            }
+          }
+        }
+      }
+    }
+  }
+}

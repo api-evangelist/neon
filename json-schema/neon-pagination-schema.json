@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Pagination",
+  "title": "Pagination",
+  "type": "object",
+  "description": "Pagination metadata for list responses",
+  "properties": {
+    "cursor": {
+      "type": "string",
+      "description": "Cursor value for the next page of results"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Number of items per page"
+    },
+    "sort_by": {
+      "type": "string",
+      "description": "Field used for sorting"
+    },
+    "sort_order": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "description": "Sort direction"
+    }
+  }
+}

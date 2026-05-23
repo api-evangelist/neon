@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConsumptionMetric",
+  "title": "ConsumptionMetric",
+  "type": "object",
+  "description": "A consumption metric data point",
+  "properties": {
+    "timeframe_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of the measurement timeframe"
+    },
+    "timeframe_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End of the measurement timeframe"
+    },
+    "active_time_seconds": {
+      "type": "integer",
+      "description": "Number of seconds the compute endpoints have been active"
+    },
+    "compute_time_seconds": {
+      "type": "integer",
+      "description": "Number of CPU seconds used by compute endpoints"
+    },
+    "written_data_bytes": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Total bytes of data written"
+    },
+    "data_storage_bytes_hour": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Storage consumption in byte-hours"
+    }
+  }
+}

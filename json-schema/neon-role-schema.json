@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Role",
+  "title": "Role",
+  "type": "object",
+  "description": "A Postgres role within a branch",
+  "properties": {
+    "branch_id": {
+      "type": "string",
+      "description": "The branch ID this role belongs to"
+    },
+    "name": {
+      "type": "string",
+      "description": "The role name"
+    },
+    "password": {
+      "type": "string",
+      "description": "The role password. Only returned when creating a role or resetting a password."
+    },
+    "protected": {
+      "type": "boolean",
+      "description": "Whether this is a protected system role"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Role creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

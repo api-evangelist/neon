@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Database",
+  "title": "Database",
+  "type": "object",
+  "description": "A Postgres database within a branch",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The database ID"
+    },
+    "branch_id": {
+      "type": "string",
+      "description": "The branch ID this database belongs to"
+    },
+    "name": {
+      "type": "string",
+      "description": "The database name"
+    },
+    "owner_name": {
+      "type": "string",
+      "description": "The name of the role that owns this database"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Database creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

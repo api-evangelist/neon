@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConnectionUri",
+  "title": "ConnectionUri",
+  "type": "object",
+  "description": "A database connection URI",
+  "properties": {
+    "connection_uri": {
+      "type": "string",
+      "description": "The full connection URI including host, database, role, and password"
+    },
+    "connection_parameters": {
+      "type": "object",
+      "description": "Individual connection parameters",
+      "properties": {
+        "database": {
+          "type": "string",
+          "description": "The database name"
+        },
+        "host": {
+          "type": "string",
+          "description": "The hostname"
+        },
+        "password": {
+          "type": "string",
+          "description": "The password"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role name"
+        }
+      }
+    }
+  }
+}

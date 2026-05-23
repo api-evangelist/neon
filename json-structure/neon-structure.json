@@ -1,0 +1,616 @@
+{
+  "provider": "Neon",
+  "providerId": "neon",
+  "kind": "json-structure",
+  "description": "Structural overview of the Neon API surface; extracted from openapi/.",
+  "schemaCount": 30,
+  "operationCount": 46,
+  "schemas": [
+    {
+      "name": "Project",
+      "type": "object",
+      "propertyCount": 15,
+      "required": []
+    },
+    {
+      "name": "ProjectCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ProjectUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Branch",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "BranchCreateRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "BranchUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Database",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "DatabaseCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "database"
+      ]
+    },
+    {
+      "name": "DatabaseUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Role",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "RoleCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "role"
+      ]
+    },
+    {
+      "name": "Endpoint",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "EndpointCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "EndpointUpdateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Operation",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "ConnectionUri",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ConsumptionHistoryPerAccount",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ConsumptionHistoryPerProject",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ConsumptionMetric",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ApiKey",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ApiKeyCreateRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "key_name"
+      ]
+    },
+    {
+      "name": "ApiKeyCreateResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "DataApiConfig",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "DataApiConfigUpdate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "AuthConfig",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "AuthConfigUpdate",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "OAuthProvider",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "OAuthProviderCreateRequest",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "provider",
+        "client_id",
+        "client_secret"
+      ]
+    },
+    {
+      "name": "OAuthProviderUpdateRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Pagination",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/projects",
+      "operationId": "listProjects",
+      "summary": "List projects",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects",
+      "operationId": "createProject",
+      "summary": "Create a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}",
+      "operationId": "getProject",
+      "summary": "Retrieve project details",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}",
+      "operationId": "deleteProject",
+      "summary": "Delete a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{project_id}",
+      "operationId": "updateProject",
+      "summary": "Update a project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches",
+      "operationId": "listProjectBranches",
+      "summary": "List branches",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches",
+      "operationId": "createProjectBranch",
+      "summary": "Create a branch",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}",
+      "operationId": "getProjectBranch",
+      "summary": "Retrieve branch details",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}/branches/{branch_id}",
+      "operationId": "deleteProjectBranch",
+      "summary": "Delete a branch",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{project_id}/branches/{branch_id}",
+      "operationId": "updateProjectBranch",
+      "summary": "Update a branch",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches/{branch_id}/restore",
+      "operationId": "restoreProjectBranch",
+      "summary": "Restore a branch",
+      "tags": [
+        "Branches"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/databases",
+      "operationId": "listProjectBranchDatabases",
+      "summary": "List databases",
+      "tags": [
+        "Databases"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches/{branch_id}/databases",
+      "operationId": "createProjectBranchDatabase",
+      "summary": "Create a database",
+      "tags": [
+        "Databases"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+      "operationId": "getProjectBranchDatabase",
+      "summary": "Retrieve database details",
+      "tags": [
+        "Databases"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+      "operationId": "deleteProjectBranchDatabase",
+      "summary": "Delete a database",
+      "tags": [
+        "Databases"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{project_id}/branches/{branch_id}/databases/{database_name}",
+      "operationId": "updateProjectBranchDatabase",
+      "summary": "Update a database",
+      "tags": [
+        "Databases"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/roles",
+      "operationId": "listProjectBranchRoles",
+      "summary": "List roles",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches/{branch_id}/roles",
+      "operationId": "createProjectBranchRole",
+      "summary": "Create a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
+      "operationId": "getProjectBranchRole",
+      "summary": "Retrieve role details",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}/branches/{branch_id}/roles/{role_name}",
+      "operationId": "deleteProjectBranchRole",
+      "summary": "Delete a role",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password",
+      "operationId": "resetProjectBranchRolePassword",
+      "summary": "Reset role password",
+      "tags": [
+        "Roles"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/endpoints",
+      "operationId": "listProjectEndpoints",
+      "summary": "List compute endpoints",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/endpoints",
+      "operationId": "createProjectEndpoint",
+      "summary": "Create a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}",
+      "operationId": "getProjectEndpoint",
+      "summary": "Retrieve compute endpoint details",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}",
+      "operationId": "deleteProjectEndpoint",
+      "summary": "Delete a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}",
+      "operationId": "updateProjectEndpoint",
+      "summary": "Update a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}/start",
+      "operationId": "startProjectEndpoint",
+      "summary": "Start a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}/suspend",
+      "operationId": "suspendProjectEndpoint",
+      "summary": "Suspend a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/endpoints/{endpoint_id}/restart",
+      "operationId": "restartProjectEndpoint",
+      "summary": "Restart a compute endpoint",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/endpoints",
+      "operationId": "listProjectBranchEndpoints",
+      "summary": "List branch endpoints",
+      "tags": [
+        "Endpoints"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/operations",
+      "operationId": "listProjectOperations",
+      "summary": "List project operations",
+      "tags": [
+        "Operations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/operations/{operation_id}",
+      "operationId": "getProjectOperation",
+      "summary": "Retrieve operation details",
+      "tags": [
+        "Operations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/consumption_history/account",
+      "operationId": "getConsumptionHistoryPerAccount",
+      "summary": "Get account consumption metrics",
+      "tags": [
+        "Consumption"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/consumption_history/projects",
+      "operationId": "getConsumptionHistoryPerProject",
+      "summary": "Get project consumption metrics",
+      "tags": [
+        "Consumption"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api_keys",
+      "operationId": "listApiKeys",
+      "summary": "List API keys",
+      "tags": [
+        "API Keys"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api_keys",
+      "operationId": "createApiKey",
+      "summary": "Create an API key",
+      "tags": [
+        "API Keys"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api_keys/{key_id}",
+      "operationId": "revokeApiKey",
+      "summary": "Revoke an API key",
+      "tags": [
+        "API Keys"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/data-api",
+      "operationId": "getProjectBranchDataApi",
+      "summary": "Get Data API configuration",
+      "tags": [
+        "Data API"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{project_id}/branches/{branch_id}/data-api",
+      "operationId": "updateProjectBranchDataApi",
+      "summary": "Update Data API configuration",
+      "tags": [
+        "Data API"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth",
+      "operationId": "getProjectBranchAuth",
+      "summary": "Get Auth configuration",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth",
+      "operationId": "updateProjectBranchAuth",
+      "summary": "Update Auth configuration",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth/providers",
+      "operationId": "listNeonAuthOAuthProviders",
+      "summary": "List OAuth providers",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth/providers",
+      "operationId": "createNeonAuthOAuthProvider",
+      "summary": "Create an OAuth provider",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth/providers/{provider_id}",
+      "operationId": "deleteNeonAuthOAuthProvider",
+      "summary": "Delete an OAuth provider",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{project_id}/branches/{branch_id}/auth/providers/{provider_id}",
+      "operationId": "updateNeonAuthOAuthProvider",
+      "summary": "Update an OAuth provider",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{project_id}/connection_uri",
+      "operationId": "getConnectionUri",
+      "summary": "Retrieve connection URI",
+      "tags": [
+        "Projects"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OAuthProviderUpdateRequest",
+  "title": "OAuthProviderUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating an OAuth provider",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "The OAuth client ID"
+    },
+    "client_secret": {
+      "type": "string",
+      "description": "The OAuth client secret"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this provider is enabled"
+    }
+  }
+}

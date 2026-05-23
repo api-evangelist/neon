@@ -1,0 +1,30 @@
+name: Neon Domain Vocabulary
+provider: Neon
+providerId: neon
+description: Tag-derived vocabulary for the Neon API surface; sourced from openapi/ tags.
+terms:
+- term: API Keys
+  description: Manage API keys for authentication. API keys are used to authenticate requests to the Neon API via Bearer token.
+- term: Auth
+  description: Manage Neon Auth configuration for branches, including OAuth providers, webhooks, and authentication settings.
+- term: Branches
+  description: Manage branches within a project. Branches are copies of your data created using copy-on-write technology for
+    development, testing, and preview environments.
+- term: Consumption
+  description: Query consumption metrics for projects and accounts. Available for Scale, Business, and Enterprise plan accounts.
+- term: Data API
+  description: Manage Data API configuration for branches, including enabling and disabling the PostgREST-compatible HTTP
+    interface.
+- term: Databases
+  description: Manage databases within a branch. A branch can contain multiple databases.
+- term: Endpoints
+  description: Manage compute endpoints for branches. Compute endpoints provide the processing resources for database queries.
+    A branch can have one read-write and multiple read-only endpoints.
+- term: Operations
+  description: View and manage operations for a project. Operations track the progress and status of actions performed on
+    project resources.
+- term: Projects
+  description: Manage Neon projects. A project is the top-level object in the Neon hierarchy containing branches, databases,
+    roles, and compute endpoints.
+- term: Roles
+  description: Manage Postgres roles within a branch. Roles control database access and permissions.

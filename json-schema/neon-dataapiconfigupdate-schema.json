@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataApiConfigUpdate",
+  "title": "DataApiConfigUpdate",
+  "type": "object",
+  "description": "Request body for updating Data API configuration",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether to enable or disable the Data API"
+    },
+    "database_name": {
+      "type": "string",
+      "description": "The target database"
+    },
+    "exposed_schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Schemas to expose"
+    },
+    "max_rows": {
+      "type": "integer",
+      "description": "Maximum rows per response"
+    },
+    "auth_provider": {
+      "type": "string",
+      "description": "Authentication provider for JWT validation"
+    }
+  }
+}
