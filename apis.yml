@@ -5,7 +5,7 @@ description: >-
   cloud and edge application development. Their developer platform offers management APIs, data APIs, authentication
   services, and serverless drivers for building and automating database-driven workflows.
 kind: contract
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Databases
   - Serverless
