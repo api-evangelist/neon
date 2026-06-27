@@ -123,7 +123,7 @@ common:
     url: https://neon.com/pricing
   - type: Login
     url: https://console.neon.tech
-  - type: SignUp
+  - type: Signup
     url: https://console.neon.tech/signup
   - type: Support
     url: https://neon.com/docs/introduction/support
@@ -156,7 +156,7 @@ common:
     sources:
       - https://neon.com/pricing
     updated: '2026-05-04'
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://api-docs.neon.tech/llms.txt
 maintainers:
   - FN: API Evangelist
