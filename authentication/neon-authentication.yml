@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/neon-management-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  description: Neon API keys are used to authenticate requests. Include the API key in the Authorization
+    header as a Bearer token.
+  sources:
+  - openapi/neon-management-api-openapi.yml

@@ -111,6 +111,17 @@ apis:
       - type: AsyncAPI
         url: asyncapi/neon-auth-webhooks-asyncapi.yml
 common:
+  - type: TrustCenter
+    url: security/neon-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/neon-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/neon-domain-security.yml
+  - type: Authentication
+    url: authentication/neon-authentication.yml
+  - name: Agent Skills
+    url: https://github.com/neondatabase/agent-skills
+    type: AgentSkills
   - type: GitHubOrganization
     url: https://github.com/neondatabase
   - type: LinkedIn
