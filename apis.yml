@@ -111,6 +111,8 @@ apis:
       - type: AsyncAPI
         url: asyncapi/neon-auth-webhooks-asyncapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/neon-agentic-access.yml
   - type: TrustCenter
     url: security/neon-trust-center.yml
   - type: VulnerabilityDisclosure
