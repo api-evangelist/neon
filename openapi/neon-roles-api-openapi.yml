@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys Roles API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: Roles
+  description: Manage Postgres roles within a branch. Roles control database access and permissions.
+paths:
+  /projects/{project_id}/branches/{branch_id}/roles:
+    get:
+      operationId: listProjectBranchRoles
+      summary: List roles
+      description: Retrieves a list of Postgres roles for the specified branch.
+      tags:
+      - Roles
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    post:
+      operationId: createProjectBranchRole
+      summary: Create a role
+      description: Creates a Postgres role in the specified branch. You must specify a role name.
+      tags:
+      - Roles
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCreateRequest'
+      responses:
+        '201':
+          description: Role created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/roles/{role_name}:
+    get:
+      operationId: getProjectBranchRole
+      summary: Retrieve role details
+      description: Retrieves information about the specified Postgres role.
+      tags:
+      - Roles
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Successfully retrieved role details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+    delete:
+      operationId: deleteProjectBranchRole
+      summary: Delete a role
+      description: Deletes the specified Postgres role from the branch.
+      tags:
+      - Roles
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Role deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+  /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password:
+    post:
+      operationId: resetProjectBranchRolePassword
+      summary: Reset role password
+      description: Resets the password for the specified Postgres role. Returns the new password in the response.
+      tags:
+      - Roles
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/roleNameParam'
+      responses:
+        '200':
+          description: Password reset successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Role not found
+components:
+  schemas:
+    RoleCreateRequest:
+      type: object
+      description: Request body for creating a new role
+      required:
+      - role
+      properties:
+        role:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: The role name
+    Role:
+      type: object
+      description: A Postgres role within a branch
+      properties:
+        branch_id:
+          type: string
+          description: The branch ID this role belongs to
+        name:
+          type: string
+          description: The role name
+        password:
+          type: string
+          description: The role password. Only returned when creating a role or resetting a password.
+        protected:
+          type: boolean
+          description: Whether this is a protected system role
+        created_at:
+          type: string
+          format: date-time
+          description: Role creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    Operation:
+      type: object
+      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+          - create_compute
+          - create_timeline
+          - start_compute
+          - suspend_compute
+          - apply_config
+          - check_availability
+          - delete_timeline
+          - create_branch
+          - tenant_ignore
+          - tenant_attach
+          - tenant_detach
+          - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+          - scheduling
+          - running
+          - finished
+          - failed
+          - cancelling
+          - cancelled
+          - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    roleNameParam:
+      name: role_name
+      in: path
+      required: true
+      description: The Postgres role name
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference

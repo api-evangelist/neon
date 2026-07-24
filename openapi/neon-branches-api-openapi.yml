@@ -1,0 +1,483 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys Branches API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: Branches
+  description: Manage branches within a project. Branches are copies of your data created using copy-on-write technology for development, testing, and preview environments.
+paths:
+  /projects/{project_id}/branches:
+    get:
+      operationId: listProjectBranches
+      summary: List branches
+      description: Retrieves a list of branches for the specified project. Returns branch metadata including ID, name, parent branch, creation time, and current state.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of branches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Branch'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+    post:
+      operationId: createProjectBranch
+      summary: Create a branch
+      description: Creates a branch in the specified project. You can specify a parent branch, endpoints, and other configuration. Branches use copy-on-write technology for instant creation.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchCreateRequest'
+      responses:
+        '201':
+          description: Branch created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  endpoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Endpoint'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+                  connection_uris:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConnectionUri'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/branches/{branch_id}:
+    get:
+      operationId: getProjectBranch
+      summary: Retrieve branch details
+      description: Retrieves information about the specified branch including its name, parent branch, creation time, and current state.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved branch details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    patch:
+      operationId: updateProjectBranch
+      summary: Update a branch
+      description: Updates the specified branch. You can update the branch name and other configurable settings.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchUpdateRequest'
+      responses:
+        '200':
+          description: Branch updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    delete:
+      operationId: deleteProjectBranch
+      summary: Delete a branch
+      description: Deletes the specified branch and all its associated databases, roles, and compute endpoints.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Branch deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/restore:
+    post:
+      operationId: restoreProjectBranch
+      summary: Restore a branch
+      description: Restores a branch to a specified point in time or to another branch. This operation can be used for point-in-time recovery.
+      tags:
+      - Branches
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source_branch_id:
+                  type: string
+                  description: The ID of the source branch to restore from.
+                source_timestamp:
+                  type: string
+                  format: date-time
+                  description: The point in time to restore the branch to.
+                preserve_under_name:
+                  type: string
+                  description: Name to preserve the current branch state under before restoring.
+      responses:
+        '200':
+          description: Branch restore initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branch:
+                    $ref: '#/components/schemas/Branch'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+components:
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+  schemas:
+    BranchCreateRequest:
+      type: object
+      description: Request body for creating a new branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
+            parent_id:
+              type: string
+              description: The parent branch ID to branch from
+            parent_lsn:
+              type: string
+              description: The Log Sequence Number to branch from
+            parent_timestamp:
+              type: string
+              format: date-time
+              description: The timestamp to branch from
+        endpoints:
+          type: array
+          description: Compute endpoints to create for the branch
+          items:
+            $ref: '#/components/schemas/EndpointCreateRequest'
+    BranchUpdateRequest:
+      type: object
+      description: Request body for updating a branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
+    Endpoint:
+      type: object
+      description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
+      properties:
+        id:
+          type: string
+          description: The endpoint ID
+        host:
+          type: string
+          description: The endpoint hostname
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID
+        region_id:
+          type: string
+          description: The region where the endpoint is deployed
+        autoscaling_limit_min_cu:
+          type: number
+          description: Minimum compute units for autoscaling
+        autoscaling_limit_max_cu:
+          type: number
+          description: Maximum compute units for autoscaling
+        type:
+          type: string
+          enum:
+          - read_write
+          - read_only
+          description: The endpoint type
+        current_state:
+          type: string
+          enum:
+          - init
+          - active
+          - idle
+          description: The current state of the endpoint
+        suspend_timeout_seconds:
+          type: integer
+          description: Seconds of inactivity before the endpoint is suspended
+        provisioner:
+          type: string
+          description: The provisioner type
+        created_at:
+          type: string
+          format: date-time
+          description: Endpoint creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        disabled:
+          type: boolean
+          description: Whether the endpoint is disabled
+    EndpointCreateRequest:
+      type: object
+      description: Request body for creating a new compute endpoint
+      properties:
+        endpoint:
+          type: object
+          required:
+          - branch_id
+          - type
+          properties:
+            branch_id:
+              type: string
+              description: The branch ID to attach the endpoint to
+            type:
+              type: string
+              enum:
+              - read_write
+              - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+    ConnectionUri:
+      type: object
+      description: A database connection URI
+      properties:
+        connection_uri:
+          type: string
+          description: The full connection URI including host, database, role, and password
+        connection_parameters:
+          type: object
+          description: Individual connection parameters
+          properties:
+            database:
+              type: string
+              description: The database name
+            host:
+              type: string
+              description: The hostname
+            password:
+              type: string
+              description: The password
+            role:
+              type: string
+              description: The role name
+    Operation:
+      type: object
+      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+          - create_compute
+          - create_timeline
+          - start_compute
+          - suspend_compute
+          - apply_config
+          - check_availability
+          - delete_timeline
+          - create_branch
+          - tenant_ignore
+          - tenant_attach
+          - tenant_detach
+          - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+          - scheduling
+          - running
+          - finished
+          - failed
+          - cancelling
+          - cancelled
+          - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
+    Branch:
+      type: object
+      description: A branch is a copy-on-write clone of your data that can be used for development, testing, or preview environments.
+      properties:
+        id:
+          type: string
+          description: The branch ID
+        project_id:
+          type: string
+          description: The parent project ID
+        parent_id:
+          type: string
+          description: The parent branch ID
+        parent_lsn:
+          type: string
+          description: The Log Sequence Number of the parent branch point
+        parent_timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the parent branch point
+        name:
+          type: string
+          description: The branch name
+        current_state:
+          type: string
+          enum:
+          - init
+          - ready
+          description: The current state of the branch
+        logical_size:
+          type: integer
+          format: int64
+          description: The logical size of the branch data in bytes
+        created_at:
+          type: string
+          format: date-time
+          description: Branch creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        primary:
+          type: boolean
+          description: Whether this is the primary branch
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference

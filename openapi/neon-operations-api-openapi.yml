@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys Operations API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: Operations
+  description: View and manage operations for a project. Operations track the progress and status of actions performed on project resources.
+paths:
+  /projects/{project_id}/operations:
+    get:
+      operationId: listProjectOperations
+      summary: List project operations
+      description: Retrieves a list of operations for the specified project. Operations track the progress and status of actions such as branch creation, endpoint start, and database updates.
+      tags:
+      - Operations
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/cursorParam'
+      - $ref: '#/components/parameters/limitParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+  /projects/{project_id}/operations/{operation_id}:
+    get:
+      operationId: getProjectOperation
+      summary: Retrieve operation details
+      description: Retrieves information about the specified operation including its action, status, and timing.
+      tags:
+      - Operations
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - name: operation_id
+        in: path
+        required: true
+        description: The operation ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved operation details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operation:
+                    $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Operation not found
+components:
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+  schemas:
+    Operation:
+      type: object
+      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+          - create_compute
+          - create_timeline
+          - start_compute
+          - suspend_compute
+          - apply_config
+          - check_availability
+          - delete_timeline
+          - create_branch
+          - tenant_ignore
+          - tenant_attach
+          - tenant_detach
+          - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+          - scheduling
+          - running
+          - finished
+          - failed
+          - cancelling
+          - cancelled
+          - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference

@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: API Keys
+  description: Manage API keys for authentication. API keys are used to authenticate requests to the Neon API via Bearer token.
+paths:
+  /api_keys:
+    get:
+      operationId: listApiKeys
+      summary: List API keys
+      description: Retrieves a list of API keys for the authenticated user.
+      tags:
+      - API Keys
+      responses:
+        '200':
+          description: Successfully retrieved list of API keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createApiKey
+      summary: Create an API key
+      description: Creates a new API key for the authenticated user. The full key value is only returned in this response and cannot be retrieved again.
+      tags:
+      - API Keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyCreateRequest'
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyCreateResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api_keys/{key_id}:
+    delete:
+      operationId: revokeApiKey
+      summary: Revoke an API key
+      description: Revokes the specified API key. A revoked key can no longer be used to authenticate API requests.
+      tags:
+      - API Keys
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        description: The API key ID
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: API key revoked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '401':
+          description: Unauthorized
+        '404':
+          description: API key not found
+components:
+  schemas:
+    ApiKeyCreateRequest:
+      type: object
+      description: Request body for creating a new API key
+      required:
+      - key_name
+      properties:
+        key_name:
+          type: string
+          description: The name for the new API key
+    ApiKey:
+      type: object
+      description: An API key used to authenticate requests to the Neon API
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The API key ID
+        name:
+          type: string
+          description: The API key name
+        created_at:
+          type: string
+          format: date-time
+          description: API key creation timestamp
+        last_used_at:
+          type: string
+          format: date-time
+          description: Timestamp of last use
+        last_used_from_addr:
+          type: string
+          description: IP address from which the key was last used
+    ApiKeyCreateResponse:
+      type: object
+      description: Response containing the newly created API key
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The API key ID
+        key:
+          type: string
+          description: The full API key value. This is only returned once at creation and cannot be retrieved again.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference

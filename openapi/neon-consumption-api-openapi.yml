@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys Consumption API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: Consumption
+  description: Query consumption metrics for projects and accounts. Available for Scale, Business, and Enterprise plan accounts.
+paths:
+  /consumption_history/account:
+    get:
+      operationId: getConsumptionHistoryPerAccount
+      summary: Get account consumption metrics
+      description: Retrieves total consumption metrics across all projects in your account. Available for Scale, Business, and Enterprise plan accounts.
+      tags:
+      - Consumption
+      parameters:
+      - name: from
+        in: query
+        required: true
+        description: Start date for the consumption period
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        required: true
+        description: End date for the consumption period
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/orgIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved account consumption metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionHistoryPerAccount'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - plan does not support consumption metrics
+  /consumption_history/projects:
+    get:
+      operationId: getConsumptionHistoryPerProject
+      summary: Get project consumption metrics
+      description: Retrieves consumption metrics for projects. Available for Scale, Business, and Enterprise plan projects.
+      tags:
+      - Consumption
+      parameters:
+      - name: from
+        in: query
+        required: true
+        description: Start date for the consumption period
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        required: true
+        description: End date for the consumption period
+        schema:
+          type: string
+          format: date-time
+      - $ref: '#/components/parameters/cursorParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/orgIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved project consumption metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionHistoryPerProject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - plan does not support consumption metrics
+components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+  schemas:
+    ConsumptionHistoryPerAccount:
+      type: object
+      description: Account-level consumption metrics
+      properties:
+        periods:
+          type: array
+          items:
+            type: object
+            properties:
+              period_id:
+                type: string
+                description: The period identifier
+              consumption:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsumptionMetric'
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction
+    ConsumptionMetric:
+      type: object
+      description: A consumption metric data point
+      properties:
+        timeframe_start:
+          type: string
+          format: date-time
+          description: Start of the measurement timeframe
+        timeframe_end:
+          type: string
+          format: date-time
+          description: End of the measurement timeframe
+        active_time_seconds:
+          type: integer
+          description: Number of seconds the compute endpoints have been active
+        compute_time_seconds:
+          type: integer
+          description: Number of CPU seconds used by compute endpoints
+        written_data_bytes:
+          type: integer
+          format: int64
+          description: Total bytes of data written
+        data_storage_bytes_hour:
+          type: integer
+          format: int64
+          description: Storage consumption in byte-hours
+    ConsumptionHistoryPerProject:
+      type: object
+      description: Project-level consumption metrics
+      properties:
+        projects:
+          type: array
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+                description: The project ID
+              periods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    period_id:
+                      type: string
+                      description: The period identifier
+                    consumption:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ConsumptionMetric'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference

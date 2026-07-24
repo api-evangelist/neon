@@ -1,0 +1,311 @@
+openapi: 3.1.0
+info:
+  title: Neon Management API Keys Databases API
+  description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+  version: '2.0'
+  contact:
+    name: Neon Support
+    url: https://neon.com/docs/introduction/support
+  termsOfService: https://neon.com/terms-of-service
+servers:
+- url: https://console.neon.tech/api/v2
+  description: Neon Production API
+security:
+- bearerAuth: []
+tags:
+- name: Databases
+  description: Manage databases within a branch. A branch can contain multiple databases.
+paths:
+  /projects/{project_id}/branches/{branch_id}/databases:
+    get:
+      operationId: listProjectBranchDatabases
+      summary: List databases
+      description: Retrieves a list of databases for the specified branch. A branch can contain multiple databases.
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of databases
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  databases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Database'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+    post:
+      operationId: createProjectBranchDatabase
+      summary: Create a database
+      description: Creates a database in the specified branch. You must specify a database name and owner role.
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseCreateRequest'
+      responses:
+        '201':
+          description: Database created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Branch not found
+  /projects/{project_id}/branches/{branch_id}/databases/{database_name}:
+    get:
+      operationId: getProjectBranchDatabase
+      summary: Retrieve database details
+      description: Retrieves information about the specified database including its name, owner role, and creation time.
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/databaseNameParam'
+      responses:
+        '200':
+          description: Successfully retrieved database details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+    patch:
+      operationId: updateProjectBranchDatabase
+      summary: Update a database
+      description: Updates the specified database. You can update the database name and owner role.
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/databaseNameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseUpdateRequest'
+      responses:
+        '200':
+          description: Database updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+    delete:
+      operationId: deleteProjectBranchDatabase
+      summary: Delete a database
+      description: Deletes the specified database from the branch.
+      tags:
+      - Databases
+      parameters:
+      - $ref: '#/components/parameters/projectIdParam'
+      - $ref: '#/components/parameters/branchIdParam'
+      - $ref: '#/components/parameters/databaseNameParam'
+      responses:
+        '200':
+          description: Database deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database:
+                    $ref: '#/components/schemas/Database'
+                  operations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Operation'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Database not found
+components:
+  parameters:
+    databaseNameParam:
+      name: database_name
+      in: path
+      required: true
+      description: The database name
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+  schemas:
+    DatabaseCreateRequest:
+      type: object
+      description: Request body for creating a new database
+      required:
+      - database
+      properties:
+        database:
+          type: object
+          required:
+          - name
+          - owner_name
+          properties:
+            name:
+              type: string
+              description: The database name
+            owner_name:
+              type: string
+              description: The name of the role that will own this database
+    DatabaseUpdateRequest:
+      type: object
+      description: Request body for updating a database
+      properties:
+        database:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The new database name
+            owner_name:
+              type: string
+              description: The new owner role name
+    Operation:
+      type: object
+      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+          - create_compute
+          - create_timeline
+          - start_compute
+          - suspend_compute
+          - apply_config
+          - check_availability
+          - delete_timeline
+          - create_branch
+          - tenant_ignore
+          - tenant_attach
+          - tenant_detach
+          - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+          - scheduling
+          - running
+          - finished
+          - failed
+          - cancelling
+          - cancelled
+          - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
+    Database:
+      type: object
+      description: A Postgres database within a branch
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The database ID
+        branch_id:
+          type: string
+          description: The branch ID this database belongs to
+        name:
+          type: string
+          description: The database name
+        owner_name:
+          type: string
+          description: The name of the role that owns this database
+        created_at:
+          type: string
+          format: date-time
+          description: Database creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Neon API keys are used to authenticate requests. Include the API key in the Authorization header as a Bearer token.
+externalDocs:
+  description: Neon API Documentation
+  url: https://neon.com/docs/reference/api-reference
