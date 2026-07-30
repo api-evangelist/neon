@@ -5,7 +5,20 @@ description: >-
   cloud and edge application development. Their developer platform offers management APIs, data APIs, authentication
   services, and serverless drivers for building and automating database-driven workflows.
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/neon.png
 tags:
   - Databases
   - Serverless
@@ -18,99 +31,234 @@ created: '2025-03-07'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: neon:management-api
-    name: Neon Management API
-    description: >-
-      The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources.
-      It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations.
-      The API uses bearer token authentication and supports everything available through the Neon Console, enabling
-      automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript,
-      Python, and Go SDKs.
-    humanURL: https://neon.com/docs/reference/api-reference
-    baseURL: https://console.neon.tech/api/v2
-    tags:
-      - Databases
-      - Serverless
-      - Postgres
-      - Projects
-      - Branches
-      - Compute
-      - Infrastructure
-    properties:
-      - type: Documentation
-        url: https://neon.com/docs/reference/api-reference
-      - type: Documentation
-        url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
-      - type: OpenAPI
-        url: openapi/neon-management-api-openapi.yml
-  - aid: neon:data-api
-    name: Neon Data API
-    description: >-
-      The Neon Data API provides a secure, stateless HTTP interface to Neon Postgres databases, allowing developers to
-      access and manage data directly from web browsers, serverless functions, and edge runtimes using standard HTTP
-      methods. It is fully compatible with PostgREST, enabling querying via standard HTTP clients like Postman or cURL.
-      The Data API supports JWT-based authentication and integrates with Row-Level Security policies, making it suitable
-      for building secure client-facing applications without a traditional backend.
-    humanURL: https://neon.com/docs/data-api/overview
-    tags:
-      - Databases
-      - Serverless
-      - Postgres
-      - REST
-      - Data
-      - PostgREST
-      - HTTP
-    properties:
-      - type: Documentation
-        url: https://neon.com/docs/data-api/overview
-      - type: Documentation
-        url: https://neon.com/docs/data-api/get-started
-  - aid: neon:serverless-driver
-    name: Neon Serverless Driver
-    description: >-
-      The Neon Serverless Driver is a low-latency JavaScript and TypeScript driver that enables querying Neon Postgres
-      databases from serverless and edge environments over HTTP or WebSockets in place of TCP. It supports two query
-      modes: HTTP mode using the neon function for fast single non-interactive transactions, and WebSocket mode using
-      Pool and Client constructors for session and transaction support with node-postgres compatibility. The driver is
-      available as @neondatabase/serverless on npm and is optimized for deployment on platforms like Cloudflare Workers,
-      Vercel Edge Functions, and AWS Lambda.
-    humanURL: https://neon.com/docs/serverless/serverless-driver
-    tags:
-      - Databases
-      - Serverless
-      - Postgres
-      - JavaScript
-      - TypeScript
-      - WebSocket
-      - Edge
-      - Driver
-    properties:
-      - type: Documentation
-        url: https://neon.com/docs/serverless/serverless-driver
-  - aid: neon:auth
-    name: Neon Auth
-    description: >-
-      Neon Auth is a managed authentication service built on Better Auth that connects directly to a Neon Postgres
-      database. It stores authentication data including users, sessions, and OAuth configurations in the database's
-      neon_auth schema. Neon Auth provides client and server SDKs, supports multiple OAuth providers, and integrates
-      with the Neon Data API for automatic JWT validation. It enables Row-Level Security policies through the auth.uid()
-      function, allowing developers to implement fine-grained data access control based on authenticated users.
-    humanURL: https://neon.com/docs/auth/overview
-    tags:
-      - Authentication
-      - Authorization
-      - OAuth
-      - JWT
-      - Security
-      - Identity
-    properties:
-      - type: Documentation
-        url: https://neon.com/docs/auth/overview
-      - type: Documentation
-        url: https://neon.com/docs/neon-auth/api
-      - type: AsyncAPI
-        url: asyncapi/neon-auth-webhooks-asyncapi.yml
+- aid: neon:data-api
+  name: Neon Data API
+  description: >-
+    The Neon Data API provides a secure, stateless HTTP interface to Neon Postgres databases, allowing
+    developers to access and manage data directly from web browsers, serverless functions, and edge runtimes
+    using standard HTTP methods. It is fully compatible with PostgREST, enabling querying via standard
+    HTTP clients like Postman or cURL. The Data API supports JWT-based authentication and integrates with
+    Row-Level Security policies, making it suitable for building secure client-facing applications without
+    a traditional backend.
+  humanURL: https://neon.com/docs/data-api/overview
+  tags:
+  - Databases
+  - Serverless
+  - Postgres
+  - REST
+  - Data
+  - PostgREST
+  - HTTP
+  properties:
+  - type: Documentation
+    url: https://neon.com/docs/data-api/overview
+  - type: Documentation
+    url: https://neon.com/docs/data-api/get-started
+- aid: neon:serverless-driver
+  name: Neon Serverless Driver
+  description: >-
+    The Neon Serverless Driver is a low-latency JavaScript and TypeScript driver that enables querying
+    Neon Postgres databases from serverless and edge environments over HTTP or WebSockets in place of
+    TCP. It supports two query modes: HTTP mode using the neon function for fast single non-interactive
+    transactions, and WebSocket mode using Pool and Client constructors for session and transaction support
+    with node-postgres compatibility. The driver is available as @neondatabase/serverless on npm and is
+    optimized for deployment on platforms like Cloudflare Workers, Vercel Edge Functions, and AWS Lambda.
+  humanURL: https://neon.com/docs/serverless/serverless-driver
+  tags:
+  - Databases
+  - Serverless
+  - Postgres
+  - JavaScript
+  - TypeScript
+  - WebSocket
+  - Edge
+  - Driver
+  properties:
+  - type: Documentation
+    url: https://neon.com/docs/serverless/serverless-driver
+- aid: neon:auth
+  name: Neon Auth
+  description: >-
+    Neon Auth is a managed authentication service built on Better Auth that connects directly to a Neon
+    Postgres database. It stores authentication data including users, sessions, and OAuth configurations
+    in the database's neon_auth schema. Neon Auth provides client and server SDKs, supports multiple OAuth
+    providers, and integrates with the Neon Data API for automatic JWT validation. It enables Row-Level
+    Security policies through the auth.uid() function, allowing developers to implement fine-grained data
+    access control based on authenticated users.
+  humanURL: https://neon.com/docs/auth/overview
+  tags:
+  - Authentication
+  - Authorization
+  - OAuth
+  - JWT
+  - Security
+  - Identity
+  properties:
+  - type: Documentation
+    url: https://neon.com/docs/auth/overview
+  - type: Documentation
+    url: https://neon.com/docs/neon-auth/api
+  - type: AsyncAPI
+    url: asyncapi/neon-auth-webhooks-asyncapi.yml
+- aid: neon:neon-api-keys-api
+  name: Neon API Keys API
+  description: >-
+    Manage API keys for authentication. API keys are used to authenticate requests to the Neon API via
+    Bearer token.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-auth-api
+  name: Neon Auth API
+  description: >-
+    Manage Neon Auth configuration for branches, including OAuth providers, webhooks, and authentication
+    settings.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-auth-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-branches-api
+  name: Neon Branches API
+  description: >-
+    Manage branches within a project. Branches are copies of your data created using copy-on-write technology
+    for development, testing, and preview environments.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Branches
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-branches-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-consumption-api
+  name: Neon Consumption API
+  description: >-
+    Query consumption metrics for projects and accounts. Available for Scale, Business, and Enterprise
+    plan accounts.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Consumption
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-consumption-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-data-api-api
+  name: Neon Data API API
+  description: >-
+    Manage Data API configuration for branches, including enabling and disabling the PostgREST-compatible
+    HTTP interface.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Data API
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-data-api-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-databases-api
+  name: Neon Databases API
+  description: Manage databases within a branch. A branch can contain multiple databases.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Databases
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-databases-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-endpoints-api
+  name: Neon Endpoints API
+  description: >-
+    Manage compute endpoints for branches. Compute endpoints provide the processing resources for database
+    queries. A branch can have one read-write and multiple read-only endpoints.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-operations-api
+  name: Neon Operations API
+  description: >-
+    View and manage operations for a project. Operations track the progress and status of actions performed
+    on project resources.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-operations-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-projects-api
+  name: Neon Projects API
+  description: >-
+    Manage Neon projects. A project is the top-level object in the Neon hierarchy containing branches,
+    databases, roles, and compute endpoints.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-projects-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+- aid: neon:neon-roles-api
+  name: Neon Roles API
+  description: Manage Postgres roles within a branch. Roles control database access and permissions.
+  humanURL: https://neon.com/docs/reference/api-reference
+  baseURL: https://console.neon.tech/api/v2
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/neon-roles-api-openapi.yml
+  - type: Documentation
+    url: https://neon.com/docs/reference/api-reference
+  - type: Documentation
+    url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/neon/overview
   - type: AgenticAccess
     url: agentic-access/neon-agentic-access.yml
   - type: TrustCenter
