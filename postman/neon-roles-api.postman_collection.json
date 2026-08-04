@@ -1,0 +1,1234 @@
+{
+  "info": {
+    "_postman_id": "5245f717-1d9e-4df5-9251-44484fc09e67",
+    "name": "Neon Management API Keys Roles API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:17:12.000Z",
+    "updatedAt": "2026-07-28T02:17:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5245f717-1d9e-4df5-9251-44484fc09e67"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "roles",
+                      "item": [
+                        {
+                          "name": "{role_name}",
+                          "item": [
+                            {
+                              "name": "reset_password",
+                              "item": [
+                                {
+                                  "name": "Reset role password",
+                                  "id": "85c99c11-861d-4c82-bf1e-449c6f6833c6",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name/reset_password",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name",
+                                        "reset_password"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3865207f-91aa-4d14-b4f5-3dd27b610ed5",
+                                          "key": "project_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The Neon project ID"
+                                        },
+                                        {
+                                          "id": "069f4669-14f0-4a57-b0ec-1f99c895bdf8",
+                                          "key": "branch_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The branch ID"
+                                        },
+                                        {
+                                          "id": "8e2bf5c3-dcd5-4b44-94c2-a44977b11ca3",
+                                          "key": "role_name",
+                                          "value": "<string>",
+                                          "description": "(Required) The Postgres role name"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Resets the password for the specified Postgres role. Returns the new password in the response."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "f954272f-b240-46ce-935f-1d2e319adaa2",
+                                      "name": "Password reset successfully",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name/reset_password",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "roles",
+                                            ":role_name",
+                                            "reset_password"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "role_name"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"role\": {\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"password\": \"<string>\",\n    \"protected\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"scheduling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T02:17:13.000Z",
+                                      "updatedAt": "2026-07-28T02:17:13.000Z",
+                                      "uid": "35240-f954272f-b240-46ce-935f-1d2e319adaa2"
+                                    },
+                                    {
+                                      "id": "61161396-2e1e-4a2d-9dc0-3d439f77f420",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name/reset_password",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "roles",
+                                            ":role_name",
+                                            "reset_password"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "role_name"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:17:13.000Z",
+                                      "updatedAt": "2026-07-28T02:17:13.000Z",
+                                      "uid": "35240-61161396-2e1e-4a2d-9dc0-3d439f77f420"
+                                    },
+                                    {
+                                      "id": "22942a3f-87fa-4e1e-8f55-316bf5dadcd0",
+                                      "name": "Role not found",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name/reset_password",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "roles",
+                                            ":role_name",
+                                            "reset_password"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "role_name"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:17:13.000Z",
+                                      "updatedAt": "2026-07-28T02:17:13.000Z",
+                                      "uid": "35240-22942a3f-87fa-4e1e-8f55-316bf5dadcd0"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-85c99c11-861d-4c82-bf1e-449c6f6833c6"
+                                }
+                              ],
+                              "id": "5405c0ac-451f-4bb3-992b-04203ff47f82",
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-5405c0ac-451f-4bb3-992b-04203ff47f82"
+                            },
+                            {
+                              "name": "Retrieve role details",
+                              "id": "c4b3e3bd-75d0-4eef-8e19-fde3a701ee25",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles",
+                                    ":role_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "bf77634c-2e3e-4e10-84ff-90f322531a38",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "33f54ef2-0d30-439a-8216-43ecd359ece5",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    },
+                                    {
+                                      "id": "d64d830b-d12c-4d70-85a5-359c684adb9d",
+                                      "key": "role_name",
+                                      "value": "<string>",
+                                      "description": "(Required) The Postgres role name"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves information about the specified Postgres role."
+                              },
+                              "response": [
+                                {
+                                  "id": "5daa4344-5aba-4fc9-9350-a240786c82bf",
+                                  "name": "Successfully retrieved role details",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"role\": {\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"password\": \"<string>\",\n    \"protected\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-5daa4344-5aba-4fc9-9350-a240786c82bf"
+                                },
+                                {
+                                  "id": "28ebc5ad-b928-4249-9bc6-35dea68fc1b4",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-28ebc5ad-b928-4249-9bc6-35dea68fc1b4"
+                                },
+                                {
+                                  "id": "8aac78a3-1e33-4de8-afc2-00cdb2e12417",
+                                  "name": "Role not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-8aac78a3-1e33-4de8-afc2-00cdb2e12417"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-c4b3e3bd-75d0-4eef-8e19-fde3a701ee25"
+                            },
+                            {
+                              "name": "Delete a role",
+                              "id": "6a5f7238-248c-499f-9a7c-eb29cb5469a3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles",
+                                    ":role_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1f1fb963-6481-4402-afde-90c6d0729d5e",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "20f08607-1c35-49fa-8dc5-4d5c630d978f",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    },
+                                    {
+                                      "id": "81762751-1cdc-4abc-b717-7b611fc6f592",
+                                      "key": "role_name",
+                                      "value": "<string>",
+                                      "description": "(Required) The Postgres role name"
+                                    }
+                                  ]
+                                },
+                                "description": "Deletes the specified Postgres role from the branch."
+                              },
+                              "response": [
+                                {
+                                  "id": "6fa2d224-0f62-4069-aef2-b088fd84d986",
+                                  "name": "Role deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"role\": {\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"password\": \"<string>\",\n    \"protected\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"scheduling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-6fa2d224-0f62-4069-aef2-b088fd84d986"
+                                },
+                                {
+                                  "id": "63430fc8-159d-48fd-9529-2f35d75e1382",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-63430fc8-159d-48fd-9529-2f35d75e1382"
+                                },
+                                {
+                                  "id": "512b8ea0-26b7-4c65-a856-6fcefcfd6b9a",
+                                  "name": "Role not found",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles/:role_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "roles",
+                                        ":role_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "role_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:13.000Z",
+                                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                                  "uid": "35240-512b8ea0-26b7-4c65-a856-6fcefcfd6b9a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-6a5f7238-248c-499f-9a7c-eb29cb5469a3"
+                            }
+                          ],
+                          "id": "6069fa64-a549-43da-914b-ac3ffdbff728",
+                          "createdAt": "2026-07-28T02:17:13.000Z",
+                          "updatedAt": "2026-07-28T02:17:13.000Z",
+                          "uid": "35240-6069fa64-a549-43da-914b-ac3ffdbff728"
+                        },
+                        {
+                          "name": "List roles",
+                          "id": "7d31df60-1e31-411d-8079-bffb14d17c2f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "roles"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0a4f1640-a18f-4990-abf6-4e4732198377",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "405e94f9-d5bf-427f-947a-2c198f2c83e8",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves a list of Postgres roles for the specified branch."
+                          },
+                          "response": [
+                            {
+                              "id": "9d1f171d-4bc6-4212-88ea-631c67350a83",
+                              "name": "Successfully retrieved list of roles",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"roles\": [\n    {\n      \"branch_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"password\": \"<string>\",\n      \"protected\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"branch_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"password\": \"<string>\",\n      \"protected\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-9d1f171d-4bc6-4212-88ea-631c67350a83"
+                            },
+                            {
+                              "id": "34382c2c-d80b-461a-b14e-07c93249d607",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-34382c2c-d80b-461a-b14e-07c93249d607"
+                            },
+                            {
+                              "id": "e6fab342-90d1-4cb9-8c22-2b912b0e0abb",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-e6fab342-90d1-4cb9-8c22-2b912b0e0abb"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:13.000Z",
+                          "updatedAt": "2026-07-28T02:17:13.000Z",
+                          "uid": "35240-7d31df60-1e31-411d-8079-bffb14d17c2f"
+                        },
+                        {
+                          "name": "Create a role",
+                          "id": "dfb91490-698e-4d93-afca-6abbaa5ed660",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": {\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "roles"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "07865a84-a121-4bff-9ec2-9788d84b5339",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "1218d316-f40c-413c-b397-a7d83b169ffa",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Creates a Postgres role in the specified branch. You must specify a role name."
+                          },
+                          "response": [
+                            {
+                              "id": "aab52a85-d69d-4a84-b969-5e78d3af2645",
+                              "name": "Role created successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"role\": {\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"role\": {\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"password\": \"<string>\",\n    \"protected\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"scheduling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-aab52a85-d69d-4a84-b969-5e78d3af2645"
+                            },
+                            {
+                              "id": "1503b9bf-1db3-4800-9e03-56e26eaf37f8",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"role\": {\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-1503b9bf-1db3-4800-9e03-56e26eaf37f8"
+                            },
+                            {
+                              "id": "817085db-e214-499f-b944-d24ab3473a42",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"role\": {\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-817085db-e214-499f-b944-d24ab3473a42"
+                            },
+                            {
+                              "id": "1d60f035-5911-4a09-8df8-579256cc2ce8",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"role\": {\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/roles",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "roles"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:13.000Z",
+                              "updatedAt": "2026-07-28T02:17:13.000Z",
+                              "uid": "35240-1d60f035-5911-4a09-8df8-579256cc2ce8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:13.000Z",
+                          "updatedAt": "2026-07-28T02:17:13.000Z",
+                          "uid": "35240-dfb91490-698e-4d93-afca-6abbaa5ed660"
+                        }
+                      ],
+                      "id": "f0b64934-2548-414a-9ee8-49e43f9f10ee",
+                      "createdAt": "2026-07-28T02:17:13.000Z",
+                      "updatedAt": "2026-07-28T02:17:13.000Z",
+                      "uid": "35240-f0b64934-2548-414a-9ee8-49e43f9f10ee"
+                    }
+                  ],
+                  "id": "1105d6f3-c983-4e20-93ef-cf83aaedd756",
+                  "createdAt": "2026-07-28T02:17:13.000Z",
+                  "updatedAt": "2026-07-28T02:17:13.000Z",
+                  "uid": "35240-1105d6f3-c983-4e20-93ef-cf83aaedd756"
+                }
+              ],
+              "id": "087057e5-9f41-4f97-b7c4-7ed0b45eb13e",
+              "createdAt": "2026-07-28T02:17:13.000Z",
+              "updatedAt": "2026-07-28T02:17:13.000Z",
+              "uid": "35240-087057e5-9f41-4f97-b7c4-7ed0b45eb13e"
+            }
+          ],
+          "id": "83c64e29-e5a4-4b24-98ff-2e12f01b7573",
+          "createdAt": "2026-07-28T02:17:13.000Z",
+          "updatedAt": "2026-07-28T02:17:13.000Z",
+          "uid": "35240-83c64e29-e5a4-4b24-98ff-2e12f01b7573"
+        }
+      ],
+      "id": "4e050bdc-52e6-48ca-b7eb-eed187431764",
+      "createdAt": "2026-07-28T02:17:13.000Z",
+      "updatedAt": "2026-07-28T02:17:13.000Z",
+      "uid": "35240-4e050bdc-52e6-48ca-b7eb-eed187431764"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}

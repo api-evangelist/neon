@@ -1,0 +1,576 @@
+{
+  "info": {
+    "_postman_id": "b29831a5-9777-43fe-a798-edbf2d2c95d4",
+    "name": "Neon Management API Keys Data API API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:17:01.000Z",
+    "updatedAt": "2026-07-28T02:17:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b29831a5-9777-43fe-a798-edbf2d2c95d4"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "data-api",
+                      "item": [
+                        {
+                          "name": "Get Data API configuration",
+                          "id": "02cacdca-1680-45c9-9483-60e97c1fbb63",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "data-api"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "19b4ebd6-da04-4385-8ecc-c456c2ca1c0e",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "10d0f661-1604-4e89-8a5f-b94856042982",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the Data API configuration for the specified branch, including whether it is enabled, the target database, exposed schemas, and authentication provider settings."
+                          },
+                          "response": [
+                            {
+                              "id": "422ab010-5326-46a8-bea3-ec4fd33d1305",
+                              "name": "Successfully retrieved Data API configuration",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data_api\": {\n    \"enabled\": \"<boolean>\",\n    \"database_name\": \"<string>\",\n    \"exposed_schemas\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"max_rows\": \"<integer>\",\n    \"auth_provider\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-422ab010-5326-46a8-bea3-ec4fd33d1305"
+                            },
+                            {
+                              "id": "d9bc24b4-0d61-4aca-b4f2-4b6754cdb235",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-d9bc24b4-0d61-4aca-b4f2-4b6754cdb235"
+                            },
+                            {
+                              "id": "d0ec78e3-749f-4da0-8fa9-d29485c17fd3",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-d0ec78e3-749f-4da0-8fa9-d29485c17fd3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:02.000Z",
+                          "updatedAt": "2026-07-28T02:17:02.000Z",
+                          "uid": "35240-02cacdca-1680-45c9-9483-60e97c1fbb63"
+                        },
+                        {
+                          "name": "Update Data API configuration",
+                          "id": "cfd453df-4e28-4949-9d81-9b825ce44a55",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"database_name\": \"<string>\",\n  \"exposed_schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_rows\": \"<integer>\",\n  \"auth_provider\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "data-api"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1a2ff467-9b33-4dc4-8438-f1becfcf09bb",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "b1be7d9f-7234-4409-b764-96183106b784",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Updates the Data API configuration for the specified branch, including enabling or disabling the API, configuring exposed schemas, setting response limits, and configuring authentication providers."
+                          },
+                          "response": [
+                            {
+                              "id": "727c1f9f-de71-49c4-98ab-fa9791a99643",
+                              "name": "Data API configuration updated successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"database_name\": \"<string>\",\n  \"exposed_schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_rows\": \"<integer>\",\n  \"auth_provider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data_api\": {\n    \"enabled\": \"<boolean>\",\n    \"database_name\": \"<string>\",\n    \"exposed_schemas\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"max_rows\": \"<integer>\",\n    \"auth_provider\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-727c1f9f-de71-49c4-98ab-fa9791a99643"
+                            },
+                            {
+                              "id": "6df25b09-47b7-4167-ab9e-228baa3dab42",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"database_name\": \"<string>\",\n  \"exposed_schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_rows\": \"<integer>\",\n  \"auth_provider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-6df25b09-47b7-4167-ab9e-228baa3dab42"
+                            },
+                            {
+                              "id": "387ff0bf-367b-4f4d-90f1-77b30b9389dd",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"database_name\": \"<string>\",\n  \"exposed_schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_rows\": \"<integer>\",\n  \"auth_provider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-387ff0bf-367b-4f4d-90f1-77b30b9389dd"
+                            },
+                            {
+                              "id": "517ddd91-d8e6-4b8d-9d26-e0cdeed76996",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"database_name\": \"<string>\",\n  \"exposed_schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_rows\": \"<integer>\",\n  \"auth_provider\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/data-api",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "data-api"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:02.000Z",
+                              "updatedAt": "2026-07-28T02:17:02.000Z",
+                              "uid": "35240-517ddd91-d8e6-4b8d-9d26-e0cdeed76996"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:02.000Z",
+                          "updatedAt": "2026-07-28T02:17:02.000Z",
+                          "uid": "35240-cfd453df-4e28-4949-9d81-9b825ce44a55"
+                        }
+                      ],
+                      "id": "f6818012-c99b-40bd-b690-cfd6dc431e5d",
+                      "createdAt": "2026-07-28T02:17:02.000Z",
+                      "updatedAt": "2026-07-28T02:17:02.000Z",
+                      "uid": "35240-f6818012-c99b-40bd-b690-cfd6dc431e5d"
+                    }
+                  ],
+                  "id": "579b4282-4309-4aae-a5b6-db8c5607e37e",
+                  "createdAt": "2026-07-28T02:17:02.000Z",
+                  "updatedAt": "2026-07-28T02:17:02.000Z",
+                  "uid": "35240-579b4282-4309-4aae-a5b6-db8c5607e37e"
+                }
+              ],
+              "id": "e428d123-8c3c-4721-a6dd-dbcd5c804828",
+              "createdAt": "2026-07-28T02:17:02.000Z",
+              "updatedAt": "2026-07-28T02:17:02.000Z",
+              "uid": "35240-e428d123-8c3c-4721-a6dd-dbcd5c804828"
+            }
+          ],
+          "id": "4611e9b3-ac13-4182-b683-3b90f500ad45",
+          "createdAt": "2026-07-28T02:17:02.000Z",
+          "updatedAt": "2026-07-28T02:17:02.000Z",
+          "uid": "35240-4611e9b3-ac13-4182-b683-3b90f500ad45"
+        }
+      ],
+      "id": "b65cac99-1fee-4d6b-ac58-d6736be16e07",
+      "createdAt": "2026-07-28T02:17:02.000Z",
+      "updatedAt": "2026-07-28T02:17:02.000Z",
+      "uid": "35240-b65cac99-1fee-4d6b-ac58-d6736be16e07"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}

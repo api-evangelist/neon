@@ -1,0 +1,1642 @@
+{
+  "info": {
+    "_postman_id": "9aee44b3-7600-4e7e-8e70-f20f3ad04ec7",
+    "name": "Neon Management API Keys Auth API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:16:49.000Z",
+    "updatedAt": "2026-07-28T02:16:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9aee44b3-7600-4e7e-8e70-f20f3ad04ec7"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "auth",
+                      "item": [
+                        {
+                          "name": "providers",
+                          "item": [
+                            {
+                              "name": "{provider_id}",
+                              "item": [
+                                {
+                                  "name": "Update an OAuth provider",
+                                  "id": "d9afc3be-299b-4065-81d7-8da870740953",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers",
+                                        ":provider_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "e7935c70-7a35-4cd1-9242-299e723900d5",
+                                          "key": "project_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The Neon project ID"
+                                        },
+                                        {
+                                          "id": "29a1f9cf-b8c1-44cc-a896-abe10c5ca211",
+                                          "key": "branch_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The branch ID"
+                                        },
+                                        {
+                                          "id": "932e67be-5b7e-4730-8a2d-2c2adbd40e30",
+                                          "key": "provider_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The OAuth provider ID"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Updates the configuration for the specified OAuth provider."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "0c35d45b-18c2-40e7-8b94-b9e5f313ee80",
+                                      "name": "OAuth provider updated successfully",
+                                      "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"provider\": {\n    \"id\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-0c35d45b-18c2-40e7-8b94-b9e5f313ee80"
+                                    },
+                                    {
+                                      "id": "8126de71-a8c6-4768-a8dc-a1a601aa0887",
+                                      "name": "Bad request",
+                                      "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-8126de71-a8c6-4768-a8dc-a1a601aa0887"
+                                    },
+                                    {
+                                      "id": "a58f857e-e7db-4ac7-a3f3-8a33e1e24d90",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-a58f857e-e7db-4ac7-a3f3-8a33e1e24d90"
+                                    },
+                                    {
+                                      "id": "e0259c1c-d12f-48ba-95c7-3e8200162267",
+                                      "name": "OAuth provider not found",
+                                      "originalRequest": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-e0259c1c-d12f-48ba-95c7-3e8200162267"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-d9afc3be-299b-4065-81d7-8da870740953"
+                                },
+                                {
+                                  "name": "Delete an OAuth provider",
+                                  "id": "b579ef89-d36a-4982-8b39-c6af540ba39f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers",
+                                        ":provider_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3b5c87e1-8c35-4e9c-b39a-54031db8617d",
+                                          "key": "project_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The Neon project ID"
+                                        },
+                                        {
+                                          "id": "57d11f9f-a7be-4ad1-85aa-90c9699a8297",
+                                          "key": "branch_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The branch ID"
+                                        },
+                                        {
+                                          "id": "f7d30e9e-fc0d-4dae-8e44-e068dd3ca18d",
+                                          "key": "provider_id",
+                                          "value": "<string>",
+                                          "description": "(Required) The OAuth provider ID"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Removes the specified OAuth provider from Neon Auth configuration."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "b9f72c13-4380-4acf-a23b-41c869d43c6f",
+                                      "name": "OAuth provider deleted successfully",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-b9f72c13-4380-4acf-a23b-41c869d43c6f"
+                                    },
+                                    {
+                                      "id": "cbf33ed1-97ea-44f5-9d24-5934fc850416",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-cbf33ed1-97ea-44f5-9d24-5934fc850416"
+                                    },
+                                    {
+                                      "id": "b03c1143-dbdd-4be2-9d25-f468abb6e6f8",
+                                      "name": "OAuth provider not found",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "projects",
+                                            ":project_id",
+                                            "branches",
+                                            ":branch_id",
+                                            "auth",
+                                            "providers",
+                                            ":provider_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "project_id"
+                                            },
+                                            {
+                                              "key": "branch_id"
+                                            },
+                                            {
+                                              "key": "provider_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T02:16:50.000Z",
+                                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                                      "uid": "35240-b03c1143-dbdd-4be2-9d25-f468abb6e6f8"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-b579ef89-d36a-4982-8b39-c6af540ba39f"
+                                }
+                              ],
+                              "id": "48352c5e-152a-44b4-883a-f0f958bfebb0",
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-48352c5e-152a-44b4-883a-f0f958bfebb0"
+                            },
+                            {
+                              "name": "List OAuth providers",
+                              "id": "798942a9-9828-43bc-bba8-030ad4eb0625",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth",
+                                    "providers"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b78a2720-5cc9-4733-b2a8-f17337305ffe",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "2a932017-53ef-4e83-a6c9-81fe3835eab2",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a list of configured OAuth providers for Neon Auth on the specified branch."
+                              },
+                              "response": [
+                                {
+                                  "id": "3c5254cc-90a2-4813-be0f-583c03ba45a9",
+                                  "name": "Successfully retrieved list of OAuth providers",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"providers\": [\n    {\n      \"id\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-3c5254cc-90a2-4813-be0f-583c03ba45a9"
+                                },
+                                {
+                                  "id": "6fdeacc7-cab9-4b01-97d0-2a4565e6378f",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-6fdeacc7-cab9-4b01-97d0-2a4565e6378f"
+                                },
+                                {
+                                  "id": "349d92a1-c713-4b28-bcef-083168797592",
+                                  "name": "Branch not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-349d92a1-c713-4b28-bcef-083168797592"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-798942a9-9828-43bc-bba8-030ad4eb0625"
+                            },
+                            {
+                              "name": "Create an OAuth provider",
+                              "id": "7053a05d-04c7-47d2-85c6-eea3540a36bb",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"provider\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth",
+                                    "providers"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "dd8d79a7-8877-4346-abcf-dea958037735",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "7c818901-0f72-406e-885e-abe43f9fdc9b",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Configures a new OAuth provider for Neon Auth on the specified branch."
+                              },
+                              "response": [
+                                {
+                                  "id": "11563fc9-1d41-40bc-bb00-39c67c114ef1",
+                                  "name": "OAuth provider created successfully",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"provider\": {\n    \"id\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-11563fc9-1d41-40bc-bb00-39c67c114ef1"
+                                },
+                                {
+                                  "id": "af1e6292-0146-474f-9996-84c66e551730",
+                                  "name": "Bad request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-af1e6292-0146-474f-9996-84c66e551730"
+                                },
+                                {
+                                  "id": "e5ab395d-4da2-4709-829e-abbbb139b1a8",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-e5ab395d-4da2-4709-829e-abbbb139b1a8"
+                                },
+                                {
+                                  "id": "170a16d6-31ba-4b41-8667-b5172bddcdb5",
+                                  "name": "Branch not found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"enabled\": true\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth/providers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "auth",
+                                        "providers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:16:50.000Z",
+                                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                                  "uid": "35240-170a16d6-31ba-4b41-8667-b5172bddcdb5"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-7053a05d-04c7-47d2-85c6-eea3540a36bb"
+                            }
+                          ],
+                          "id": "fe1f783c-6853-4e5d-9cfa-1faf392f3fe2",
+                          "createdAt": "2026-07-28T02:16:50.000Z",
+                          "updatedAt": "2026-07-28T02:16:50.000Z",
+                          "uid": "35240-fe1f783c-6853-4e5d-9cfa-1faf392f3fe2"
+                        },
+                        {
+                          "name": "Get Auth configuration",
+                          "id": "476cd4d5-bdf9-4c69-af32-d45ba7433a75",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "auth"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "865db7fe-44b5-429f-bd44-9150918de3c3",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "d6d477b6-0e2e-4043-b0ea-a11812ee606f",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the Neon Auth configuration for the specified branch, including whether Auth is enabled, the Auth URL, and OAuth provider settings."
+                          },
+                          "response": [
+                            {
+                              "id": "a91dae86-0362-4c61-8315-6d1c483e9357",
+                              "name": "Successfully retrieved Auth configuration",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"auth\": {\n    \"enabled\": \"<boolean>\",\n    \"auth_url\": \"<uri>\",\n    \"jwks_url\": \"<uri>\",\n    \"schema\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-a91dae86-0362-4c61-8315-6d1c483e9357"
+                            },
+                            {
+                              "id": "56643cab-d196-4416-839a-83e12f2d09ca",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-56643cab-d196-4416-839a-83e12f2d09ca"
+                            },
+                            {
+                              "id": "dcbec573-15ae-43a7-9654-aab2b578cc81",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-dcbec573-15ae-43a7-9654-aab2b578cc81"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:16:50.000Z",
+                          "updatedAt": "2026-07-28T02:16:50.000Z",
+                          "uid": "35240-476cd4d5-bdf9-4c69-af32-d45ba7433a75"
+                        },
+                        {
+                          "name": "Update Auth configuration",
+                          "id": "3d4412c8-d276-4ff3-9b72-fa27db9145b3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "auth"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2e8f4cd3-a116-47ad-ac99-24c3ccd5b831",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "034df6dc-edac-4c9f-9007-96859d6a4659",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Updates the Neon Auth configuration for the specified branch, including enabling or disabling Auth and configuring settings."
+                          },
+                          "response": [
+                            {
+                              "id": "a711192c-2013-480d-ae93-c58b4f43c834",
+                              "name": "Auth configuration updated successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"auth\": {\n    \"enabled\": \"<boolean>\",\n    \"auth_url\": \"<uri>\",\n    \"jwks_url\": \"<uri>\",\n    \"schema\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-a711192c-2013-480d-ae93-c58b4f43c834"
+                            },
+                            {
+                              "id": "11e01da5-744b-4340-a15a-e190e664a2e7",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-11e01da5-744b-4340-a15a-e190e664a2e7"
+                            },
+                            {
+                              "id": "60f3a7e3-154e-472c-abd3-8a4fe49ed275",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-60f3a7e3-154e-472c-abd3-8a4fe49ed275"
+                            },
+                            {
+                              "id": "15314ec2-978f-4a6b-9b9d-9eebdc1716ba",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/auth",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "auth"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:50.000Z",
+                              "updatedAt": "2026-07-28T02:16:50.000Z",
+                              "uid": "35240-15314ec2-978f-4a6b-9b9d-9eebdc1716ba"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:16:50.000Z",
+                          "updatedAt": "2026-07-28T02:16:50.000Z",
+                          "uid": "35240-3d4412c8-d276-4ff3-9b72-fa27db9145b3"
+                        }
+                      ],
+                      "id": "b11108ae-b9f0-47f6-9bc5-b5e7286763f0",
+                      "createdAt": "2026-07-28T02:16:50.000Z",
+                      "updatedAt": "2026-07-28T02:16:50.000Z",
+                      "uid": "35240-b11108ae-b9f0-47f6-9bc5-b5e7286763f0"
+                    }
+                  ],
+                  "id": "6272ce29-b335-41eb-9456-4a5cde0dca59",
+                  "createdAt": "2026-07-28T02:16:50.000Z",
+                  "updatedAt": "2026-07-28T02:16:50.000Z",
+                  "uid": "35240-6272ce29-b335-41eb-9456-4a5cde0dca59"
+                }
+              ],
+              "id": "cd49d49a-48af-4518-881e-2ba1c86c4d0b",
+              "createdAt": "2026-07-28T02:16:50.000Z",
+              "updatedAt": "2026-07-28T02:16:50.000Z",
+              "uid": "35240-cd49d49a-48af-4518-881e-2ba1c86c4d0b"
+            }
+          ],
+          "id": "3951b10a-bd2d-4c61-adc0-ac1a13900745",
+          "createdAt": "2026-07-28T02:16:50.000Z",
+          "updatedAt": "2026-07-28T02:16:50.000Z",
+          "uid": "35240-3951b10a-bd2d-4c61-adc0-ac1a13900745"
+        }
+      ],
+      "id": "f6cadecf-9612-49c5-b950-e500ea9f7159",
+      "createdAt": "2026-07-28T02:16:50.000Z",
+      "updatedAt": "2026-07-28T02:16:50.000Z",
+      "uid": "35240-f6cadecf-9612-49c5-b950-e500ea9f7159"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}

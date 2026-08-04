@@ -1,0 +1,32 @@
+{
+  "provider": "neon",
+  "sources": [
+    "neon-api-keys-api-openapi.yml",
+    "neon-auth-api-openapi.yml",
+    "neon-branches-api-openapi.yml",
+    "neon-consumption-api-openapi.yml",
+    "neon-data-api-api-openapi.yml",
+    "neon-databases-api-openapi.yml",
+    "neon-endpoints-api-openapi.yml",
+    "neon-operations-api-openapi.yml",
+    "neon-projects-api-openapi.yml",
+    "neon-roles-api-openapi.yml"
+  ],
+  "outputs": [
+    "neon-api-keys-api-openapi.yml",
+    "neon-auth-api-openapi.yml",
+    "neon-branches-api-openapi.yml",
+    "neon-consumption-api-openapi.yml",
+    "neon-data-api-api-openapi.yml",
+    "neon-databases-api-openapi.yml",
+    "neon-endpoints-api-openapi.yml",
+    "neon-operations-api-openapi.yml",
+    "neon-projects-api-openapi.yml",
+    "neon-roles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

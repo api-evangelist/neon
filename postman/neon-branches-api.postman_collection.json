@@ -1,0 +1,1514 @@
+{
+  "info": {
+    "_postman_id": "4cd2d64e-51c2-4c6e-b95f-601cca9c1d35",
+    "name": "Neon Management API Keys Branches API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:16:52.000Z",
+    "updatedAt": "2026-07-28T02:16:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4cd2d64e-51c2-4c6e-b95f-601cca9c1d35"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "restore",
+                      "item": [
+                        {
+                          "name": "Restore a branch",
+                          "id": "b88bd380-be10-4071-b8fa-f57ffe87b63e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d8e305ca-4132-4120-80bc-a6f36d25cc1b",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "925da949-bde0-4d44-9265-0cfdd6625c7b",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Restores a branch to a specified point in time or to another branch. This operation can be used for point-in-time recovery."
+                          },
+                          "response": [
+                            {
+                              "id": "c995a07d-9a94-4c7c-a93c-4435a02d5656",
+                              "name": "Branch restore initiated successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"branch\": {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"current_state\": \"init\",\n    \"logical_size\": \"<long>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"primary\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:16:53.000Z",
+                              "updatedAt": "2026-07-28T02:16:53.000Z",
+                              "uid": "35240-c995a07d-9a94-4c7c-a93c-4435a02d5656"
+                            },
+                            {
+                              "id": "7e364b3c-a2cd-43bb-bad3-f2db44de7124",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:53.000Z",
+                              "updatedAt": "2026-07-28T02:16:53.000Z",
+                              "uid": "35240-7e364b3c-a2cd-43bb-bad3-f2db44de7124"
+                            },
+                            {
+                              "id": "85899337-43b7-4d4c-a4aa-ede299fc1581",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:53.000Z",
+                              "updatedAt": "2026-07-28T02:16:53.000Z",
+                              "uid": "35240-85899337-43b7-4d4c-a4aa-ede299fc1581"
+                            },
+                            {
+                              "id": "3e55e350-bf52-4934-925d-34f1d3b897f9",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:16:53.000Z",
+                              "updatedAt": "2026-07-28T02:16:53.000Z",
+                              "uid": "35240-3e55e350-bf52-4934-925d-34f1d3b897f9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-b88bd380-be10-4071-b8fa-f57ffe87b63e"
+                        }
+                      ],
+                      "id": "ef6cdeac-0cee-45e4-8f89-83fa952e2675",
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-ef6cdeac-0cee-45e4-8f89-83fa952e2675"
+                    },
+                    {
+                      "name": "Retrieve branch details",
+                      "id": "1c2ec168-dd69-40e8-b9af-8e45cae1ad76",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches",
+                            ":branch_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1eeda0bb-8e34-4bf8-9313-8b82279e5176",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "b45589ce-d911-4c94-be21-90b36fb79319",
+                              "key": "branch_id",
+                              "value": "<string>",
+                              "description": "(Required) The branch ID"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves information about the specified branch including its name, parent branch, creation time, and current state."
+                      },
+                      "response": [
+                        {
+                          "id": "d1db810b-fc08-4258-b7fa-90a0e3d80226",
+                          "name": "Successfully retrieved branch details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"branch\": {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"current_state\": \"init\",\n    \"logical_size\": \"<long>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"primary\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-d1db810b-fc08-4258-b7fa-90a0e3d80226"
+                        },
+                        {
+                          "id": "5a12b9bd-9f8e-4e01-ae28-59cf25daed8d",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-5a12b9bd-9f8e-4e01-ae28-59cf25daed8d"
+                        },
+                        {
+                          "id": "aa4926e0-d681-42f6-b856-d950dbe92cca",
+                          "name": "Branch not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-aa4926e0-d681-42f6-b856-d950dbe92cca"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-1c2ec168-dd69-40e8-b9af-8e45cae1ad76"
+                    },
+                    {
+                      "name": "Update a branch",
+                      "id": "ad81a877-5355-4213-8b58-6188a9b6793f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches",
+                            ":branch_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "76cde702-c322-4e9a-a26d-830ba8302395",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "85d930d9-3341-4a6c-a67d-d590b5a96d13",
+                              "key": "branch_id",
+                              "value": "<string>",
+                              "description": "(Required) The branch ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates the specified branch. You can update the branch name and other configurable settings."
+                      },
+                      "response": [
+                        {
+                          "id": "22b81ad6-79b9-40e6-a04d-59705e7d51ee",
+                          "name": "Branch updated successfully",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"branch\": {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"current_state\": \"init\",\n    \"logical_size\": \"<long>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"primary\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-22b81ad6-79b9-40e6-a04d-59705e7d51ee"
+                        },
+                        {
+                          "id": "f85faf75-a06b-4c6d-9b05-59f77bc5fcad",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-f85faf75-a06b-4c6d-9b05-59f77bc5fcad"
+                        },
+                        {
+                          "id": "5fda0882-3bdb-456c-ae79-30cec2514764",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-5fda0882-3bdb-456c-ae79-30cec2514764"
+                        },
+                        {
+                          "id": "237691ac-32ea-42ca-ab1e-8a1d08a3e47f",
+                          "name": "Branch not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-237691ac-32ea-42ca-ab1e-8a1d08a3e47f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-ad81a877-5355-4213-8b58-6188a9b6793f"
+                    },
+                    {
+                      "name": "Delete a branch",
+                      "id": "007a9d4c-3ffa-4a76-91ab-ae9f3c8f28c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches",
+                            ":branch_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2e87e4dd-2dfb-4f1a-a6b0-aa301643dc13",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "6f8908e0-53e6-4e37-925e-3e7979bfa1de",
+                              "key": "branch_id",
+                              "value": "<string>",
+                              "description": "(Required) The branch ID"
+                            }
+                          ]
+                        },
+                        "description": "Deletes the specified branch and all its associated databases, roles, and compute endpoints."
+                      },
+                      "response": [
+                        {
+                          "id": "677322d7-1c9c-4213-8471-3664de135db9",
+                          "name": "Branch deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"branch\": {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"current_state\": \"init\",\n    \"logical_size\": \"<long>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"primary\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-677322d7-1c9c-4213-8471-3664de135db9"
+                        },
+                        {
+                          "id": "265626cd-d638-4a27-880e-15d290006063",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-265626cd-d638-4a27-880e-15d290006063"
+                        },
+                        {
+                          "id": "60d505ad-8112-4f4b-849d-a42f7fa659c0",
+                          "name": "Branch not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "branch_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:16:53.000Z",
+                          "updatedAt": "2026-07-28T02:16:53.000Z",
+                          "uid": "35240-60d505ad-8112-4f4b-849d-a42f7fa659c0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-007a9d4c-3ffa-4a76-91ab-ae9f3c8f28c9"
+                    }
+                  ],
+                  "id": "a11f9c76-c976-4390-8eaf-540eb7aff70d",
+                  "createdAt": "2026-07-28T02:16:53.000Z",
+                  "updatedAt": "2026-07-28T02:16:53.000Z",
+                  "uid": "35240-a11f9c76-c976-4390-8eaf-540eb7aff70d"
+                },
+                {
+                  "name": "List branches",
+                  "id": "ebb4701e-cccd-492a-85be-1a19574e9269",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:project_id/branches",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":project_id",
+                        "branches"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7b363edb-270a-45df-aa1d-dd21aee32b64",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) The Neon project ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of branches for the specified project. Returns branch metadata including ID, name, parent branch, creation time, and current state."
+                  },
+                  "response": [
+                    {
+                      "id": "8f4f6ad8-3561-4f1c-bb82-12d9348d2898",
+                      "name": "Successfully retrieved list of branches",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"branches\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"parent_lsn\": \"<string>\",\n      \"parent_timestamp\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"current_state\": \"ready\",\n      \"logical_size\": \"<long>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"parent_lsn\": \"<string>\",\n      \"parent_timestamp\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"current_state\": \"ready\",\n      \"logical_size\": \"<long>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"primary\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-8f4f6ad8-3561-4f1c-bb82-12d9348d2898"
+                    },
+                    {
+                      "id": "12b2b7c1-a5ab-4a31-8495-878b3c173f00",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-12b2b7c1-a5ab-4a31-8495-878b3c173f00"
+                    },
+                    {
+                      "id": "70762a6a-e84a-4f72-aee7-7c4e076bfcb0",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-70762a6a-e84a-4f72-aee7-7c4e076bfcb0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:16:53.000Z",
+                  "updatedAt": "2026-07-28T02:16:53.000Z",
+                  "uid": "35240-ebb4701e-cccd-492a-85be-1a19574e9269"
+                },
+                {
+                  "name": "Create a branch",
+                  "id": "b4ae7784-bbc1-487c-8318-01e6a3cad8d6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:project_id/branches",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":project_id",
+                        "branches"
+                      ],
+                      "variable": [
+                        {
+                          "id": "431c1cac-14a9-4490-9341-cc1bb685daca",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) The Neon project ID"
+                        }
+                      ]
+                    },
+                    "description": "Creates a branch in the specified project. You can specify a parent branch, endpoints, and other configuration. Branches use copy-on-write technology for instant creation."
+                  },
+                  "response": [
+                    {
+                      "id": "f9a4cdd4-f679-42c0-891b-0a5ea7b482f9",
+                      "name": "Branch created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"branch\": {\n    \"id\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"current_state\": \"ready\",\n    \"logical_size\": \"<long>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"primary\": \"<boolean>\"\n  },\n  \"endpoints\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_only\",\n      \"current_state\": \"init\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_only\",\n      \"current_state\": \"active\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    }\n  ],\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"apply_config\",\n      \"status\": \"cancelling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"cancelling\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"connection_uris\": [\n    {\n      \"connection_uri\": \"<string>\",\n      \"connection_parameters\": {\n        \"database\": \"<string>\",\n        \"host\": \"<string>\",\n        \"password\": \"<string>\",\n        \"role\": \"<string>\"\n      }\n    },\n    {\n      \"connection_uri\": \"<string>\",\n      \"connection_parameters\": {\n        \"database\": \"<string>\",\n        \"host\": \"<string>\",\n        \"password\": \"<string>\",\n        \"role\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-f9a4cdd4-f679-42c0-891b-0a5ea7b482f9"
+                    },
+                    {
+                      "id": "1ccea7ae-7fb6-440a-b3ee-865892a2f956",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-1ccea7ae-7fb6-440a-b3ee-865892a2f956"
+                    },
+                    {
+                      "id": "f88d2e79-1984-45d1-bdab-06ecb9f92826",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-f88d2e79-1984-45d1-bdab-06ecb9f92826"
+                    },
+                    {
+                      "id": "08f6f809-3971-4f73-bbd9-4129c28659ee",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/branches",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "branches"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:16:53.000Z",
+                      "updatedAt": "2026-07-28T02:16:53.000Z",
+                      "uid": "35240-08f6f809-3971-4f73-bbd9-4129c28659ee"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:16:53.000Z",
+                  "updatedAt": "2026-07-28T02:16:53.000Z",
+                  "uid": "35240-b4ae7784-bbc1-487c-8318-01e6a3cad8d6"
+                }
+              ],
+              "id": "20481531-9453-4bbb-b725-47a8c4ff44df",
+              "createdAt": "2026-07-28T02:16:53.000Z",
+              "updatedAt": "2026-07-28T02:16:53.000Z",
+              "uid": "35240-20481531-9453-4bbb-b725-47a8c4ff44df"
+            }
+          ],
+          "id": "4c092ccb-3932-4464-b46a-d16a90932e8e",
+          "createdAt": "2026-07-28T02:16:53.000Z",
+          "updatedAt": "2026-07-28T02:16:53.000Z",
+          "uid": "35240-4c092ccb-3932-4464-b46a-d16a90932e8e"
+        }
+      ],
+      "id": "52eefd4c-bad9-45c0-81f7-7526e08bd97a",
+      "createdAt": "2026-07-28T02:16:53.000Z",
+      "updatedAt": "2026-07-28T02:16:53.000Z",
+      "uid": "35240-52eefd4c-bad9-45c0-81f7-7526e08bd97a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}

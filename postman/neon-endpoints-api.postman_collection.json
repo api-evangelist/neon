@@ -1,0 +1,2023 @@
+{
+  "info": {
+    "_postman_id": "1184987c-60ee-4d47-8ccc-6f5a70414794",
+    "name": "Neon Management API Keys Endpoints API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:17:09.000Z",
+    "updatedAt": "2026-07-28T02:17:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1184987c-60ee-4d47-8ccc-6f5a70414794"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "endpoints",
+              "item": [
+                {
+                  "name": "{endpoint_id}",
+                  "item": [
+                    {
+                      "name": "start",
+                      "item": [
+                        {
+                          "name": "Start a compute endpoint",
+                          "id": "4c069c6f-53cd-4b18-8942-cdb86bcf44a0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "208b0c6d-f7d9-4c88-89e2-1d8a28b920a4",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "87d8d858-7ca8-4567-b33e-6943e869d99e",
+                                  "key": "endpoint_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The compute endpoint ID"
+                                }
+                              ]
+                            },
+                            "description": "Starts the specified compute endpoint. This operation resumes a suspended endpoint."
+                          },
+                          "response": [
+                            {
+                              "id": "2424a877-4860-4edd-b133-d036e388df3e",
+                              "name": "Endpoint started successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/start",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "start"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-2424a877-4860-4edd-b133-d036e388df3e"
+                            },
+                            {
+                              "id": "6dc572f6-ecc8-4675-a608-2dd9286bec6d",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/start",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "start"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-6dc572f6-ecc8-4675-a608-2dd9286bec6d"
+                            },
+                            {
+                              "id": "bdf3192d-db69-4763-b393-5c53d485b859",
+                              "name": "Endpoint not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/start",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "start"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-bdf3192d-db69-4763-b393-5c53d485b859"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-4c069c6f-53cd-4b18-8942-cdb86bcf44a0"
+                        }
+                      ],
+                      "id": "f8c73358-e477-41d1-86e6-32e1b9a901f1",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-f8c73358-e477-41d1-86e6-32e1b9a901f1"
+                    },
+                    {
+                      "name": "suspend",
+                      "item": [
+                        {
+                          "name": "Suspend a compute endpoint",
+                          "id": "fcf43213-3a93-40b5-9c8a-c4774f2f258d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/suspend",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id",
+                                "suspend"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9bb59dc1-6eff-4ce7-9e86-f26cf9ed9ec8",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "8680b171-0e4d-4526-a403-8ee906f64f7a",
+                                  "key": "endpoint_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The compute endpoint ID"
+                                }
+                              ]
+                            },
+                            "description": "Suspends the specified compute endpoint. A suspended endpoint does not consume compute resources."
+                          },
+                          "response": [
+                            {
+                              "id": "5bd9d064-bb8b-48a1-a4b3-583c5347b3f5",
+                              "name": "Endpoint suspended successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/suspend",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "suspend"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-5bd9d064-bb8b-48a1-a4b3-583c5347b3f5"
+                            },
+                            {
+                              "id": "bf3750c5-f3eb-46fa-b152-dcdc3eb761da",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/suspend",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "suspend"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-bf3750c5-f3eb-46fa-b152-dcdc3eb761da"
+                            },
+                            {
+                              "id": "0bf967c0-0473-4767-bdf1-d660ef7ce46e",
+                              "name": "Endpoint not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/suspend",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "suspend"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-0bf967c0-0473-4767-bdf1-d660ef7ce46e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-fcf43213-3a93-40b5-9c8a-c4774f2f258d"
+                        }
+                      ],
+                      "id": "a4cdf363-2410-4811-b7fc-fce279177779",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-a4cdf363-2410-4811-b7fc-fce279177779"
+                    },
+                    {
+                      "name": "restart",
+                      "item": [
+                        {
+                          "name": "Restart a compute endpoint",
+                          "id": "31f5e65d-99f0-4607-9459-1ef0836f32da",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/restart",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id",
+                                "restart"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c0411cd5-7d13-4c11-9b24-ce98cc90720f",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "e027189b-b5a5-48ca-a7ee-92eee407d08a",
+                                  "key": "endpoint_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The compute endpoint ID"
+                                }
+                              ]
+                            },
+                            "description": "Restarts the specified compute endpoint."
+                          },
+                          "response": [
+                            {
+                              "id": "68d3082f-c34c-45d9-bf0d-5952fb80c9b1",
+                              "name": "Endpoint restarted successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/restart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "restart"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-68d3082f-c34c-45d9-bf0d-5952fb80c9b1"
+                            },
+                            {
+                              "id": "08ae4336-7c1f-418f-9d0e-c72fb3c29ace",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/restart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "restart"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-08ae4336-7c1f-418f-9d0e-c72fb3c29ace"
+                            },
+                            {
+                              "id": "9b0a713b-12e6-4a43-a258-6ff84e772327",
+                              "name": "Endpoint not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id/restart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "endpoints",
+                                    ":endpoint_id",
+                                    "restart"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "endpoint_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-9b0a713b-12e6-4a43-a258-6ff84e772327"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-31f5e65d-99f0-4607-9459-1ef0836f32da"
+                        }
+                      ],
+                      "id": "0ee5f5a4-542c-48d4-a154-990925080ecd",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-0ee5f5a4-542c-48d4-a154-990925080ecd"
+                    },
+                    {
+                      "name": "Retrieve compute endpoint details",
+                      "id": "7e0bff89-79b2-45c2-8535-66f97f25bc70",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints",
+                            ":endpoint_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d776ec76-94b1-40ad-91e7-7c6c05ec02f7",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "51c086ff-7c66-4d70-8631-b8815d49367d",
+                              "key": "endpoint_id",
+                              "value": "<string>",
+                              "description": "(Required) The compute endpoint ID"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves information about the specified compute endpoint including its host, type, branch, autoscaling configuration, and current state."
+                      },
+                      "response": [
+                        {
+                          "id": "84b6fc51-c403-416d-bab3-3afe76125c72",
+                          "name": "Successfully retrieved endpoint details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-84b6fc51-c403-416d-bab3-3afe76125c72"
+                        },
+                        {
+                          "id": "350b8eb2-b545-46d6-8765-f137b29d1b57",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-350b8eb2-b545-46d6-8765-f137b29d1b57"
+                        },
+                        {
+                          "id": "c86ee5bc-2122-4075-8090-bd6d7e11eb84",
+                          "name": "Endpoint not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-c86ee5bc-2122-4075-8090-bd6d7e11eb84"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-7e0bff89-79b2-45c2-8535-66f97f25bc70"
+                    },
+                    {
+                      "name": "Update a compute endpoint",
+                      "id": "c1d73670-9913-48f1-a1a7-6ec63ff83a26",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"endpoint\": {\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints",
+                            ":endpoint_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "73d57d78-c7f8-4e8d-aa6f-7c6d421b622e",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "b700ee3a-bfc3-4d9d-b629-3076f0d97768",
+                              "key": "endpoint_id",
+                              "value": "<string>",
+                              "description": "(Required) The compute endpoint ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates the specified compute endpoint. You can update autoscaling settings, suspend timeout, and other configuration."
+                      },
+                      "response": [
+                        {
+                          "id": "06f13ce4-f520-4a23-9ae2-6134eec7e4a8",
+                          "name": "Endpoint updated successfully",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"endpoint\": {\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-06f13ce4-f520-4a23-9ae2-6134eec7e4a8"
+                        },
+                        {
+                          "id": "115f6450-388e-42a8-8796-811d695d1681",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"endpoint\": {\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-115f6450-388e-42a8-8796-811d695d1681"
+                        },
+                        {
+                          "id": "e51b7c21-4887-441d-9639-e44708fceff7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"endpoint\": {\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-e51b7c21-4887-441d-9639-e44708fceff7"
+                        },
+                        {
+                          "id": "e0ba515e-d0dc-44dc-9062-55ba87635625",
+                          "name": "Endpoint not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"endpoint\": {\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-e0ba515e-d0dc-44dc-9062-55ba87635625"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-c1d73670-9913-48f1-a1a7-6ec63ff83a26"
+                    },
+                    {
+                      "name": "Delete a compute endpoint",
+                      "id": "d01012cf-bbeb-4cba-962d-61c832d1f60f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints",
+                            ":endpoint_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fad0913b-b489-40b1-84d3-36894e33c21f",
+                              "key": "project_id",
+                              "value": "<string>",
+                              "description": "(Required) The Neon project ID"
+                            },
+                            {
+                              "id": "ecc68f93-a31b-4354-bc00-69b135ed54b1",
+                              "key": "endpoint_id",
+                              "value": "<string>",
+                              "description": "(Required) The compute endpoint ID"
+                            }
+                          ]
+                        },
+                        "description": "Deletes the specified compute endpoint."
+                      },
+                      "response": [
+                        {
+                          "id": "f84e4595-594a-4f6c-9031-c81e47a6baac",
+                          "name": "Endpoint deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-f84e4595-594a-4f6c-9031-c81e47a6baac"
+                        },
+                        {
+                          "id": "0e9a9858-d4f2-45ec-9823-26d89eab86df",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-0e9a9858-d4f2-45ec-9823-26d89eab86df"
+                        },
+                        {
+                          "id": "1914915d-75e5-4efa-8176-2d529d75fa8c",
+                          "name": "Endpoint not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/endpoints/:endpoint_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "endpoints",
+                                ":endpoint_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id"
+                                },
+                                {
+                                  "key": "endpoint_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-1914915d-75e5-4efa-8176-2d529d75fa8c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-d01012cf-bbeb-4cba-962d-61c832d1f60f"
+                    }
+                  ],
+                  "id": "f9b06d0b-29e4-4fc0-a560-ec15a59e9b98",
+                  "createdAt": "2026-07-28T02:17:10.000Z",
+                  "updatedAt": "2026-07-28T02:17:10.000Z",
+                  "uid": "35240-f9b06d0b-29e4-4fc0-a560-ec15a59e9b98"
+                },
+                {
+                  "name": "List compute endpoints",
+                  "id": "9c627f03-b5c7-486f-be12-5bab00a9ca76",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":project_id",
+                        "endpoints"
+                      ],
+                      "variable": [
+                        {
+                          "id": "65443c96-5db5-4a91-af91-eba691957e14",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) The Neon project ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of compute endpoints for the specified project. Returns endpoint metadata including ID, branch, type, host, and current state."
+                  },
+                  "response": [
+                    {
+                      "id": "158a834c-9fc9-4bc5-9066-3f0c4777b653",
+                      "name": "Successfully retrieved list of endpoints",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"endpoints\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_only\",\n      \"current_state\": \"init\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_write\",\n      \"current_state\": \"idle\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-158a834c-9fc9-4bc5-9066-3f0c4777b653"
+                    },
+                    {
+                      "id": "99b64ebf-6703-4705-a911-9b5165a32c98",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-99b64ebf-6703-4705-a911-9b5165a32c98"
+                    },
+                    {
+                      "id": "896af647-9814-4b0c-93ae-8e874ada6652",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-896af647-9814-4b0c-93ae-8e874ada6652"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:17:10.000Z",
+                  "updatedAt": "2026-07-28T02:17:10.000Z",
+                  "uid": "35240-9c627f03-b5c7-486f-be12-5bab00a9ca76"
+                },
+                {
+                  "name": "Create a compute endpoint",
+                  "id": "db0a17ba-9e01-4cce-bf78-b233a3eede14",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"endpoint\": {\n    \"branch_id\": \"<string>\",\n    \"type\": \"read_write\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":project_id",
+                        "endpoints"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eb03696a-24b4-493e-8513-4ad82f5cb969",
+                          "key": "project_id",
+                          "value": "<string>",
+                          "description": "(Required) The Neon project ID"
+                        }
+                      ]
+                    },
+                    "description": "Creates a compute endpoint for the specified branch. There is a maximum of one read-write compute endpoint per branch, while a branch can have multiple read-only compute endpoints."
+                  },
+                  "response": [
+                    {
+                      "id": "12fbdb46-ba97-4405-9a7e-fe2b4a08d4ab",
+                      "name": "Endpoint created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"endpoint\": {\n    \"branch_id\": \"<string>\",\n    \"type\": \"read_write\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"endpoint\": {\n    \"id\": \"<string>\",\n    \"host\": \"<string>\",\n    \"project_id\": \"<string>\",\n    \"branch_id\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"type\": \"read_write\",\n    \"current_state\": \"init\",\n    \"suspend_timeout_seconds\": \"<integer>\",\n    \"provisioner\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"disabled\": \"<boolean>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_compute\",\n      \"status\": \"running\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"skipped\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-12fbdb46-ba97-4405-9a7e-fe2b4a08d4ab"
+                    },
+                    {
+                      "id": "edd6201d-6b56-41c4-9439-93b6b8638eba",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"endpoint\": {\n    \"branch_id\": \"<string>\",\n    \"type\": \"read_write\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-edd6201d-6b56-41c4-9439-93b6b8638eba"
+                    },
+                    {
+                      "id": "dda434e4-6bba-40e5-a576-c0ec2c94971e",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"endpoint\": {\n    \"branch_id\": \"<string>\",\n    \"type\": \"read_write\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-dda434e4-6bba-40e5-a576-c0ec2c94971e"
+                    },
+                    {
+                      "id": "720eb820-47e4-4590-9de3-a80534bdf49a",
+                      "name": "Project not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"endpoint\": {\n    \"branch_id\": \"<string>\",\n    \"type\": \"read_write\",\n    \"autoscaling_limit_min_cu\": \"<number>\",\n    \"autoscaling_limit_max_cu\": \"<number>\",\n    \"suspend_timeout_seconds\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/projects/:project_id/endpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "projects",
+                            ":project_id",
+                            "endpoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-720eb820-47e4-4590-9de3-a80534bdf49a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:17:10.000Z",
+                  "updatedAt": "2026-07-28T02:17:10.000Z",
+                  "uid": "35240-db0a17ba-9e01-4cce-bf78-b233a3eede14"
+                }
+              ],
+              "id": "1271ce1c-53cf-46fe-b07e-0963d3645ce4",
+              "createdAt": "2026-07-28T02:17:10.000Z",
+              "updatedAt": "2026-07-28T02:17:10.000Z",
+              "uid": "35240-1271ce1c-53cf-46fe-b07e-0963d3645ce4"
+            },
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "endpoints",
+                      "item": [
+                        {
+                          "name": "List branch endpoints",
+                          "id": "db8f67da-3d8f-4adf-89cc-c09ca65b4474",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/endpoints",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "endpoints"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f2ba9013-9a04-4b52-8f4d-a8477486d218",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "7d768df1-047f-4128-a33c-bfbdfea54619",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves a list of compute endpoints for the specified branch."
+                          },
+                          "response": [
+                            {
+                              "id": "05b0128b-cd74-4dd5-99cf-adfced26946a",
+                              "name": "Successfully retrieved list of branch endpoints",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/endpoints",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "endpoints"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"endpoints\": [\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_only\",\n      \"current_state\": \"init\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"host\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"region_id\": \"<string>\",\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"type\": \"read_write\",\n      \"current_state\": \"idle\",\n      \"suspend_timeout_seconds\": \"<integer>\",\n      \"provisioner\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"disabled\": \"<boolean>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-05b0128b-cd74-4dd5-99cf-adfced26946a"
+                            },
+                            {
+                              "id": "ca4ab8c8-3ca9-4abc-9dad-0340e11faa44",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/endpoints",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "endpoints"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-ca4ab8c8-3ca9-4abc-9dad-0340e11faa44"
+                            },
+                            {
+                              "id": "6552c53e-f2d1-4c30-b78b-5d84f7fc2083",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/endpoints",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "endpoints"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:10.000Z",
+                              "updatedAt": "2026-07-28T02:17:10.000Z",
+                              "uid": "35240-6552c53e-f2d1-4c30-b78b-5d84f7fc2083"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:10.000Z",
+                          "updatedAt": "2026-07-28T02:17:10.000Z",
+                          "uid": "35240-db8f67da-3d8f-4adf-89cc-c09ca65b4474"
+                        }
+                      ],
+                      "id": "d193c874-75f0-401a-9061-b1fa08b3d80d",
+                      "createdAt": "2026-07-28T02:17:10.000Z",
+                      "updatedAt": "2026-07-28T02:17:10.000Z",
+                      "uid": "35240-d193c874-75f0-401a-9061-b1fa08b3d80d"
+                    }
+                  ],
+                  "id": "9bfc7d08-ec4b-4eee-af1c-1a050b3939ac",
+                  "createdAt": "2026-07-28T02:17:10.000Z",
+                  "updatedAt": "2026-07-28T02:17:10.000Z",
+                  "uid": "35240-9bfc7d08-ec4b-4eee-af1c-1a050b3939ac"
+                }
+              ],
+              "id": "c0941a1a-4cf0-4098-9c3f-e90c19175873",
+              "createdAt": "2026-07-28T02:17:10.000Z",
+              "updatedAt": "2026-07-28T02:17:10.000Z",
+              "uid": "35240-c0941a1a-4cf0-4098-9c3f-e90c19175873"
+            }
+          ],
+          "id": "39fe44c6-2cce-4d6d-a4cf-218f9b930e88",
+          "createdAt": "2026-07-28T02:17:10.000Z",
+          "updatedAt": "2026-07-28T02:17:10.000Z",
+          "uid": "35240-39fe44c6-2cce-4d6d-a4cf-218f9b930e88"
+        }
+      ],
+      "id": "4ca78530-d2d4-4bef-a5d9-2d74b928fabf",
+      "createdAt": "2026-07-28T02:17:10.000Z",
+      "updatedAt": "2026-07-28T02:17:10.000Z",
+      "uid": "35240-4ca78530-d2d4-4bef-a5d9-2d74b928fabf"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}

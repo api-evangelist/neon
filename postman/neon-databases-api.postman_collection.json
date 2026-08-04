@@ -1,0 +1,1340 @@
+{
+  "info": {
+    "_postman_id": "43747329-409e-4722-8611-ec98e1797444",
+    "name": "Neon Management API Keys Databases API",
+    "description": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:17:03.000Z",
+    "updatedAt": "2026-07-28T02:17:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-43747329-409e-4722-8611-ec98e1797444"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{project_id}",
+          "item": [
+            {
+              "name": "branches",
+              "item": [
+                {
+                  "name": "{branch_id}",
+                  "item": [
+                    {
+                      "name": "databases",
+                      "item": [
+                        {
+                          "name": "{database_name}",
+                          "item": [
+                            {
+                              "name": "Retrieve database details",
+                              "id": "960337d7-2369-4b15-a549-057f4e8c7a71",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases",
+                                    ":database_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b0483dca-ef9e-44c3-9d40-6daa90148097",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "13bc6f86-4b38-4c78-9f3e-4f2c0c7dcf00",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    },
+                                    {
+                                      "id": "eb07fcf6-3f39-42ff-beeb-f1ed55307e00",
+                                      "key": "database_name",
+                                      "value": "<string>",
+                                      "description": "(Required) The database name"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves information about the specified database including its name, owner role, and creation time."
+                              },
+                              "response": [
+                                {
+                                  "id": "bce1c14c-d8d5-4fc5-ba6a-0360acb2352d",
+                                  "name": "Successfully retrieved database details",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"database\": {\n    \"id\": \"<long>\",\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-bce1c14c-d8d5-4fc5-ba6a-0360acb2352d"
+                                },
+                                {
+                                  "id": "a1314578-5d10-4a29-84f1-09756ae35808",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-a1314578-5d10-4a29-84f1-09756ae35808"
+                                },
+                                {
+                                  "id": "241c0b23-e884-4ee1-83e1-75d3432eac32",
+                                  "name": "Database not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-241c0b23-e884-4ee1-83e1-75d3432eac32"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-960337d7-2369-4b15-a549-057f4e8c7a71"
+                            },
+                            {
+                              "name": "Update a database",
+                              "id": "5b218ff4-7161-4b53-aaee-69683a80a92d",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases",
+                                    ":database_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "98816e3f-67a2-4a1b-bd4b-3bbd31a03667",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "802cf950-4de9-453a-a39b-203935577edc",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    },
+                                    {
+                                      "id": "7a737df0-1d83-422b-8e63-222089556432",
+                                      "key": "database_name",
+                                      "value": "<string>",
+                                      "description": "(Required) The database name"
+                                    }
+                                  ]
+                                },
+                                "description": "Updates the specified database. You can update the database name and owner role."
+                              },
+                              "response": [
+                                {
+                                  "id": "163888c5-2530-4df1-a7c9-89b3463ff0d6",
+                                  "name": "Database updated successfully",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"database\": {\n    \"id\": \"<long>\",\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelled\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"finished\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-163888c5-2530-4df1-a7c9-89b3463ff0d6"
+                                },
+                                {
+                                  "id": "8798f5b2-6036-443f-a789-6c7c74d90f95",
+                                  "name": "Bad request",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-8798f5b2-6036-443f-a789-6c7c74d90f95"
+                                },
+                                {
+                                  "id": "f3d3f4cf-aab7-44e3-9284-5e1d22afcd87",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-f3d3f4cf-aab7-44e3-9284-5e1d22afcd87"
+                                },
+                                {
+                                  "id": "ab3e3e94-b432-4621-b363-9cbb9e83adc0",
+                                  "name": "Database not found",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-ab3e3e94-b432-4621-b363-9cbb9e83adc0"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-5b218ff4-7161-4b53-aaee-69683a80a92d"
+                            },
+                            {
+                              "name": "Delete a database",
+                              "id": "dfbc5a54-dd1f-42ed-a30a-a44160005c6f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases",
+                                    ":database_name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "e4bc1201-d9ef-4dde-86fa-bf6873b1af7d",
+                                      "key": "project_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The Neon project ID"
+                                    },
+                                    {
+                                      "id": "7c7eb261-6616-49d1-a25a-bb521ba9a624",
+                                      "key": "branch_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The branch ID"
+                                    },
+                                    {
+                                      "id": "21c5f1f0-8270-456f-9eab-da6f9de374b0",
+                                      "key": "database_name",
+                                      "value": "<string>",
+                                      "description": "(Required) The database name"
+                                    }
+                                  ]
+                                },
+                                "description": "Deletes the specified database from the branch."
+                              },
+                              "response": [
+                                {
+                                  "id": "dc659506-42e8-4f16-aec5-630b2b2721cf",
+                                  "name": "Database deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"database\": {\n    \"id\": \"<long>\",\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelled\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"finished\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-dc659506-42e8-4f16-aec5-630b2b2721cf"
+                                },
+                                {
+                                  "id": "87dc6571-15a1-4ec4-beab-b6e5431a2d2f",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-87dc6571-15a1-4ec4-beab-b6e5431a2d2f"
+                                },
+                                {
+                                  "id": "c61a467d-9a1c-4296-bd43-af5b132e6817",
+                                  "name": "Database not found",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases/:database_name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "projects",
+                                        ":project_id",
+                                        "branches",
+                                        ":branch_id",
+                                        "databases",
+                                        ":database_name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id"
+                                        },
+                                        {
+                                          "key": "branch_id"
+                                        },
+                                        {
+                                          "key": "database_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:17:04.000Z",
+                                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                                  "uid": "35240-c61a467d-9a1c-4296-bd43-af5b132e6817"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-dfbc5a54-dd1f-42ed-a30a-a44160005c6f"
+                            }
+                          ],
+                          "id": "f3698aec-a499-411a-91ce-6fd7a97cd5cd",
+                          "createdAt": "2026-07-28T02:17:04.000Z",
+                          "updatedAt": "2026-07-28T02:17:04.000Z",
+                          "uid": "35240-f3698aec-a499-411a-91ce-6fd7a97cd5cd"
+                        },
+                        {
+                          "name": "List databases",
+                          "id": "26933da9-9f3d-4c8c-918c-2b89b65f650b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "databases"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "18fe7967-9a4f-49e2-8b61-4af7956cfb5e",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "c60352d3-11b2-43ab-a501-af28a1f28195",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves a list of databases for the specified branch. A branch can contain multiple databases."
+                          },
+                          "response": [
+                            {
+                              "id": "100031ae-69e3-47dc-82be-66f0f0db4a3c",
+                              "name": "Successfully retrieved list of databases",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"databases\": [\n    {\n      \"id\": \"<long>\",\n      \"branch_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"owner_name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"branch_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"owner_name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-100031ae-69e3-47dc-82be-66f0f0db4a3c"
+                            },
+                            {
+                              "id": "7dc8d8f4-771d-4f7c-b099-436f2b4da2a0",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-7dc8d8f4-771d-4f7c-b099-436f2b4da2a0"
+                            },
+                            {
+                              "id": "f4279559-62a8-4d08-bd26-d7baa76907e6",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-f4279559-62a8-4d08-bd26-d7baa76907e6"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:04.000Z",
+                          "updatedAt": "2026-07-28T02:17:04.000Z",
+                          "uid": "35240-26933da9-9f3d-4c8c-918c-2b89b65f650b"
+                        },
+                        {
+                          "name": "Create a database",
+                          "id": "08efe329-90b5-457f-bd1a-f84aacd943dc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "projects",
+                                ":project_id",
+                                "branches",
+                                ":branch_id",
+                                "databases"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9ca73813-c65a-4b57-a26c-e9804917c705",
+                                  "key": "project_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The Neon project ID"
+                                },
+                                {
+                                  "id": "b696a560-0ba4-4aa0-b32a-34e1234cb87b",
+                                  "key": "branch_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The branch ID"
+                                }
+                              ]
+                            },
+                            "description": "Creates a database in the specified branch. You must specify a database name and owner role."
+                          },
+                          "response": [
+                            {
+                              "id": "4449bfcd-73f6-4272-a327-eef95ce8e273",
+                              "name": "Database created successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"database\": {\n    \"id\": \"<long>\",\n    \"branch_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelled\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"branch_id\": \"<string>\",\n      \"endpoint_id\": \"<string>\",\n      \"action\": \"create_timeline\",\n      \"status\": \"finished\",\n      \"failures_count\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-4449bfcd-73f6-4272-a327-eef95ce8e273"
+                            },
+                            {
+                              "id": "6eca40ee-7f72-451f-a2ec-61ae62a0384b",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-6eca40ee-7f72-451f-a2ec-61ae62a0384b"
+                            },
+                            {
+                              "id": "8b252804-5bb5-4011-b624-e76213c6eb3c",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-8b252804-5bb5-4011-b624-e76213c6eb3c"
+                            },
+                            {
+                              "id": "270df1b3-244b-487c-8654-2013241874ee",
+                              "name": "Branch not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"database\": {\n    \"name\": \"<string>\",\n    \"owner_name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/projects/:project_id/branches/:branch_id/databases",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "projects",
+                                    ":project_id",
+                                    "branches",
+                                    ":branch_id",
+                                    "databases"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id"
+                                    },
+                                    {
+                                      "key": "branch_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T02:17:04.000Z",
+                              "updatedAt": "2026-07-28T02:17:04.000Z",
+                              "uid": "35240-270df1b3-244b-487c-8654-2013241874ee"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:17:04.000Z",
+                          "updatedAt": "2026-07-28T02:17:04.000Z",
+                          "uid": "35240-08efe329-90b5-457f-bd1a-f84aacd943dc"
+                        }
+                      ],
+                      "id": "a36e9947-f5cd-44a4-897f-183b5c7eea17",
+                      "createdAt": "2026-07-28T02:17:04.000Z",
+                      "updatedAt": "2026-07-28T02:17:04.000Z",
+                      "uid": "35240-a36e9947-f5cd-44a4-897f-183b5c7eea17"
+                    }
+                  ],
+                  "id": "98b262bb-fdfb-42a4-a680-644ae036054d",
+                  "createdAt": "2026-07-28T02:17:04.000Z",
+                  "updatedAt": "2026-07-28T02:17:04.000Z",
+                  "uid": "35240-98b262bb-fdfb-42a4-a680-644ae036054d"
+                }
+              ],
+              "id": "84ecc1de-01dd-407d-baf2-fe168ca8a9d1",
+              "createdAt": "2026-07-28T02:17:04.000Z",
+              "updatedAt": "2026-07-28T02:17:04.000Z",
+              "uid": "35240-84ecc1de-01dd-407d-baf2-fe168ca8a9d1"
+            }
+          ],
+          "id": "f7e3c1c7-c89b-4da8-89f9-6f4fd54dcba7",
+          "createdAt": "2026-07-28T02:17:04.000Z",
+          "updatedAt": "2026-07-28T02:17:04.000Z",
+          "uid": "35240-f7e3c1c7-c89b-4da8-89f9-6f4fd54dcba7"
+        }
+      ],
+      "id": "30041cbd-3a5a-4f3a-9ed1-09743a407c8d",
+      "createdAt": "2026-07-28T02:17:04.000Z",
+      "updatedAt": "2026-07-28T02:17:04.000Z",
+      "uid": "35240-30041cbd-3a5a-4f3a-9ed1-09743a407c8d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://console.neon.tech/api/v2"
+    }
+  ]
+}
