@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Endpoints API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List compute endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of compute endpoints for the specified project. Returns endpoint metadata including ID, branch, type, host, and current state."
+        },
+        {
+          "info": {
+            "name": "Create a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a compute endpoint for the specified branch. There is a maximum of one read-write compute endpoint per branch, while a branch can have multiple read-only compute endpoints."
+        },
+        {
+          "info": {
+            "name": "Retrieve compute endpoint details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ]
+          },
+          "docs": "Retrieves information about the specified compute endpoint including its host, type, branch, autoscaling configuration, and current state."
+        },
+        {
+          "info": {
+            "name": "Update a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified compute endpoint. You can update autoscaling settings, suspend timeout, and other configuration."
+        },
+        {
+          "info": {
+            "name": "Delete a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ]
+          },
+          "docs": "Deletes the specified compute endpoint."
+        },
+        {
+          "info": {
+            "name": "Start a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id/start",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ]
+          },
+          "docs": "Starts the specified compute endpoint. This operation resumes a suspended endpoint."
+        },
+        {
+          "info": {
+            "name": "Suspend a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id/suspend",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ]
+          },
+          "docs": "Suspends the specified compute endpoint. A suspended endpoint does not consume compute resources."
+        },
+        {
+          "info": {
+            "name": "Restart a compute endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/endpoints/:endpoint_id/restart",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "path",
+                "description": "The compute endpoint ID"
+              }
+            ]
+          },
+          "docs": "Restarts the specified compute endpoint."
+        },
+        {
+          "info": {
+            "name": "List branch endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/endpoints",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of compute endpoints for the specified branch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

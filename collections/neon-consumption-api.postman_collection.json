@@ -1,0 +1,513 @@
+{
+  "item": [
+    {
+      "id": "4e90ba0e-a94b-40dc-84e8-b0fab725a97e",
+      "name": "Consumption",
+      "description": {
+        "content": "Query consumption metrics for projects and accounts. Available for Scale, Business, and Enterprise plan accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f720c48-4524-4e4d-88cf-c1cdd199ac5e",
+          "name": "Get account consumption metrics",
+          "request": {
+            "name": "Get account consumption metrics",
+            "description": {
+              "content": "Retrieves total consumption metrics across all projects in your account. Available for Scale, Business, and Enterprise plan accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consumption_history",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date for the consumption period"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "(Required) End date for the consumption period"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "The organization ID to scope the request to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "582ceb02-557f-402c-bbec-353622b885c7",
+              "name": "Successfully retrieved account consumption metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"periods\": [\n    {\n      \"period_id\": \"string\",\n      \"consumption\": [\n        {\n          \"timeframe_start\": \"2001-01-09T00:16:57.990Z\",\n          \"timeframe_end\": \"2016-12-18T06:23:36.779Z\",\n          \"active_time_seconds\": 309,\n          \"compute_time_seconds\": 1798,\n          \"written_data_bytes\": 4364,\n          \"data_storage_bytes_hour\": 6586\n        },\n        {\n          \"timeframe_start\": \"2002-11-06T06:37:13.839Z\",\n          \"timeframe_end\": \"2002-09-28T08:18:02.576Z\",\n          \"active_time_seconds\": 8933,\n          \"compute_time_seconds\": 4132,\n          \"written_data_bytes\": 3797,\n          \"data_storage_bytes_hour\": 6357\n        }\n      ]\n    },\n    {\n      \"period_id\": \"string\",\n      \"consumption\": [\n        {\n          \"timeframe_start\": \"1993-12-01T12:59:45.364Z\",\n          \"timeframe_end\": \"1973-11-30T16:42:01.663Z\",\n          \"active_time_seconds\": 6937,\n          \"compute_time_seconds\": 8903,\n          \"written_data_bytes\": 7599,\n          \"data_storage_bytes_hour\": 8777\n        },\n        {\n          \"timeframe_start\": \"1988-03-04T21:19:06.806Z\",\n          \"timeframe_end\": \"2001-07-16T17:03:11.496Z\",\n          \"active_time_seconds\": 5919,\n          \"compute_time_seconds\": 9245,\n          \"written_data_bytes\": 1243,\n          \"data_storage_bytes_hour\": 4730\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97ab2000-1d4b-4ba9-88e7-351ceb316cae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "844ae5d2-3ad6-4d4c-8aaa-d299bc22af13",
+              "name": "Forbidden - plan does not support consumption metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c348e4c-709c-49f0-a80e-6f1aebcc831b",
+          "name": "Get project consumption metrics",
+          "request": {
+            "name": "Get project consumption metrics",
+            "description": {
+              "content": "Retrieves consumption metrics for projects. Available for Scale, Business, and Enterprise plan projects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "consumption_history",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date for the consumption period"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "(Required) End date for the consumption period"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor for retrieving the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of items to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "The organization ID to scope the request to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74d21284-8837-4190-ba6b-6735a47ae063",
+              "name": "Successfully retrieved project consumption metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"project_id\": \"string\",\n      \"periods\": [\n        {\n          \"period_id\": \"string\",\n          \"consumption\": [\n            {\n              \"timeframe_start\": \"1972-10-15T12:09:10.513Z\",\n              \"timeframe_end\": \"1955-07-07T03:21:55.009Z\",\n              \"active_time_seconds\": 1434,\n              \"compute_time_seconds\": 5503,\n              \"written_data_bytes\": 4853,\n              \"data_storage_bytes_hour\": 8588\n            },\n            {\n              \"timeframe_start\": \"1972-04-02T13:13:36.805Z\",\n              \"timeframe_end\": \"2012-03-23T22:27:39.472Z\",\n              \"active_time_seconds\": 9763,\n              \"compute_time_seconds\": 5777,\n              \"written_data_bytes\": 1594,\n              \"data_storage_bytes_hour\": 1131\n            }\n          ]\n        },\n        {\n          \"period_id\": \"string\",\n          \"consumption\": [\n            {\n              \"timeframe_start\": \"1995-11-03T22:18:31.835Z\",\n              \"timeframe_end\": \"2004-01-14T11:29:41.750Z\",\n              \"active_time_seconds\": 316,\n              \"compute_time_seconds\": 5854,\n              \"written_data_bytes\": 5144,\n              \"data_storage_bytes_hour\": 6182\n            },\n            {\n              \"timeframe_start\": \"1982-08-03T09:08:57.778Z\",\n              \"timeframe_end\": \"2022-08-07T01:37:50.597Z\",\n              \"active_time_seconds\": 5283,\n              \"compute_time_seconds\": 3394,\n              \"written_data_bytes\": 775,\n              \"data_storage_bytes_hour\": 9438\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"project_id\": \"string\",\n      \"periods\": [\n        {\n          \"period_id\": \"string\",\n          \"consumption\": [\n            {\n              \"timeframe_start\": \"1970-09-20T15:19:38.348Z\",\n              \"timeframe_end\": \"1962-08-10T19:12:37.577Z\",\n              \"active_time_seconds\": 6145,\n              \"compute_time_seconds\": 2603,\n              \"written_data_bytes\": 6456,\n              \"data_storage_bytes_hour\": 8364\n            },\n            {\n              \"timeframe_start\": \"1984-04-26T22:49:43.512Z\",\n              \"timeframe_end\": \"1978-08-02T17:03:36.388Z\",\n              \"active_time_seconds\": 62,\n              \"compute_time_seconds\": 4401,\n              \"written_data_bytes\": 8352,\n              \"data_storage_bytes_hour\": 6746\n            }\n          ]\n        },\n        {\n          \"period_id\": \"string\",\n          \"consumption\": [\n            {\n              \"timeframe_start\": \"2025-11-07T14:22:18.283Z\",\n              \"timeframe_end\": \"1966-11-16T06:07:03.806Z\",\n              \"active_time_seconds\": 9980,\n              \"compute_time_seconds\": 782,\n              \"written_data_bytes\": 5806,\n              \"data_storage_bytes_hour\": 8484\n            },\n            {\n              \"timeframe_start\": \"1991-12-15T19:36:27.625Z\",\n              \"timeframe_end\": \"1953-08-19T05:59:42.619Z\",\n              \"active_time_seconds\": 6154,\n              \"compute_time_seconds\": 4644,\n              \"written_data_bytes\": 8352,\n              \"data_storage_bytes_hour\": 5175\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"cursor\": \"string\",\n    \"limit\": 2776,\n    \"sort_by\": \"string\",\n    \"sort_order\": \"desc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20c813ad-dcd6-42b7-8263-d8f8e7c47e57",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef1528ff-a3a4-443f-95a7-eda1fb2a0c4a",
+              "name": "Forbidden - plan does not support consumption metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "consumption_history",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://console.neon.tech/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "31a9d198-1058-44cb-8dfa-3494e9d49f85",
+    "name": "Neon Management API Keys Consumption API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+      "type": "text/plain"
+    }
+  }
+}

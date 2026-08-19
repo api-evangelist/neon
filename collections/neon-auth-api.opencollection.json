@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Auth API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Auth configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the Neon Auth configuration for the specified branch, including whether Auth is enabled, the Auth URL, and OAuth provider settings."
+        },
+        {
+          "info": {
+            "name": "Update Auth configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the Neon Auth configuration for the specified branch, including enabling or disabling Auth and configuring settings."
+        },
+        {
+          "info": {
+            "name": "List OAuth providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth/providers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of configured OAuth providers for Neon Auth on the specified branch."
+        },
+        {
+          "info": {
+            "name": "Create an OAuth provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth/providers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures a new OAuth provider for Neon Auth on the specified branch."
+        },
+        {
+          "info": {
+            "name": "Update an OAuth provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path",
+                "description": "The OAuth provider ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration for the specified OAuth provider."
+        },
+        {
+          "info": {
+            "name": "Delete an OAuth provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/auth/providers/:provider_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path",
+                "description": "The OAuth provider ID"
+              }
+            ]
+          },
+          "docs": "Removes the specified OAuth provider from Neon Auth configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

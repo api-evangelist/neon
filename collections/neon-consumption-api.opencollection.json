@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Consumption API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consumption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account consumption metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/consumption_history/account",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the consumption period"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date for the consumption period"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to scope the request to"
+              }
+            ]
+          },
+          "docs": "Retrieves total consumption metrics across all projects in your account. Available for Scale, Business, and Enterprise plan accounts."
+        },
+        {
+          "info": {
+            "name": "Get project consumption metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/consumption_history/projects",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the consumption period"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date for the consumption period"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for retrieving the next page of results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to scope the request to"
+              }
+            ]
+          },
+          "docs": "Retrieves consumption metrics for projects. Available for Scale, Business, and Enterprise plan projects."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

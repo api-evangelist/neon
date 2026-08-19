@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Branches API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Branches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List branches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of branches for the specified project. Returns branch metadata including ID, name, parent branch, creation time, and current state."
+        },
+        {
+          "info": {
+            "name": "Create a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a branch in the specified project. You can specify a parent branch, endpoints, and other configuration. Branches use copy-on-write technology for instant creation."
+        },
+        {
+          "info": {
+            "name": "Retrieve branch details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves information about the specified branch including its name, parent branch, creation time, and current state."
+        },
+        {
+          "info": {
+            "name": "Update a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified branch. You can update the branch name and other configurable settings."
+        },
+        {
+          "info": {
+            "name": "Delete a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Deletes the specified branch and all its associated databases, roles, and compute endpoints."
+        },
+        {
+          "info": {
+            "name": "Restore a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/restore",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores a branch to a specified point in time or to another branch. This operation can be used for point-in-time recovery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

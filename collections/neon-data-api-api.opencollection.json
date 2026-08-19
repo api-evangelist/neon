@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Data API API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Data API configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/data-api",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the Data API configuration for the specified branch, including whether it is enabled, the target database, exposed schemas, and authentication provider settings."
+        },
+        {
+          "info": {
+            "name": "Update Data API configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/data-api",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the Data API configuration for the specified branch, including enabling or disabling the API, configuring exposed schemas, setting response limits, and configuring authentication providers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

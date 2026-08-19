@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Projects API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for retrieving the next page of results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return per page"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to scope the request to"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of projects for the authenticated user or organization. Returns project metadata including ID, name, region, creation time, and current status."
+        },
+        {
+          "info": {
+            "name": "Create a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Neon project within an organization. You can specify a region and Postgres version in the request body. Neon currently supports PostgreSQL 14, 15, 16, and 17."
+        },
+        {
+          "info": {
+            "name": "Retrieve project details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ]
+          },
+          "docs": "Retrieves information about the specified project including its name, region, Postgres version, creation time, and current settings."
+        },
+        {
+          "info": {
+            "name": "Update a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified project. You can update the project name and other configurable settings."
+        },
+        {
+          "info": {
+            "name": "Delete a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              }
+            ]
+          },
+          "docs": "Deletes the specified project and all its associated resources including branches, databases, roles, and compute endpoints."
+        },
+        {
+          "info": {
+            "name": "Retrieve connection URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/connection_uri",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "query",
+                "description": "The branch ID"
+              },
+              {
+                "name": "endpoint_id",
+                "value": "",
+                "type": "query",
+                "description": "The endpoint ID"
+              },
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "query",
+                "description": "The database name"
+              },
+              {
+                "name": "role_name",
+                "value": "",
+                "type": "query",
+                "description": "The role name"
+              }
+            ]
+          },
+          "docs": "Retrieves the connection URI for the specified project. The connection URI includes the host, database, role, and password needed to connect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

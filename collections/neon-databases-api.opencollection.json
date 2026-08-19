@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Neon Management API Keys Databases API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Databases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/databases",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of databases for the specified branch. A branch can contain multiple databases."
+        },
+        {
+          "info": {
+            "name": "Create a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/databases",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a database in the specified branch. You must specify a database name and owner role."
+        },
+        {
+          "info": {
+            "name": "Retrieve database details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/databases/:database_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              },
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "The database name"
+              }
+            ]
+          },
+          "docs": "Retrieves information about the specified database including its name, owner role, and creation time."
+        },
+        {
+          "info": {
+            "name": "Update a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/databases/:database_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              },
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "The database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified database. You can update the database name and owner role."
+        },
+        {
+          "info": {
+            "name": "Delete a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.neon.tech/api/v2/projects/:project_id/branches/:branch_id/databases/:database_name",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The Neon project ID"
+              },
+              {
+                "name": "branch_id",
+                "value": "",
+                "type": "path",
+                "description": "The branch ID"
+              },
+              {
+                "name": "database_name",
+                "value": "",
+                "type": "path",
+                "description": "The database name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified database from the branch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

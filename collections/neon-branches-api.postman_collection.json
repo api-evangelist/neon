@@ -1,0 +1,1648 @@
+{
+  "item": [
+    {
+      "id": "d31906ad-975a-4917-972b-59f2b32fb7db",
+      "name": "Branches",
+      "description": {
+        "content": "Manage branches within a project. Branches are copies of your data created using copy-on-write technology for development, testing, and preview environments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14e3587d-27c9-4185-84db-ea8c4b325016",
+          "name": "List branches",
+          "request": {
+            "name": "List branches",
+            "description": {
+              "content": "Retrieves a list of branches for the specified project. Returns branch metadata including ID, name, parent branch, creation time, and current state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cab7f77-1b76-466c-8ef6-e0a5d1f90aad",
+              "name": "Successfully retrieved list of branches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branches\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"parent_lsn\": \"string\",\n      \"parent_timestamp\": \"1975-09-25T12:21:14.903Z\",\n      \"name\": \"string\",\n      \"current_state\": \"ready\",\n      \"logical_size\": 2647,\n      \"created_at\": \"2021-07-02T23:40:43.472Z\",\n      \"updated_at\": \"1985-05-09T18:11:33.064Z\",\n      \"primary\": false\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"parent_lsn\": \"string\",\n      \"parent_timestamp\": \"1984-02-18T22:23:12.380Z\",\n      \"name\": \"string\",\n      \"current_state\": \"ready\",\n      \"logical_size\": 7868,\n      \"created_at\": \"1962-01-12T04:52:36.285Z\",\n      \"updated_at\": \"1991-08-10T03:34:27.729Z\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f49d018-7366-473b-9e37-55ccf2067b6c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9197b9b2-7c46-4358-b8e4-3053f153b7f1",
+              "name": "Project not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "742c5eba-2211-4af1-8917-4b9f90675a5e",
+          "name": "Create a branch",
+          "request": {
+            "name": "Create a branch",
+            "description": {
+              "content": "Creates a branch in the specified project. You can specify a parent branch, endpoints, and other configuration. Branches use copy-on-write technology for instant creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"autoscaling_limit_min_cu\": \"<number>\",\n        \"autoscaling_limit_max_cu\": \"<number>\",\n        \"suspend_timeout_seconds\": \"<integer>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2f18374-8260-408f-b548-6431ea94a7a5",
+              "name": "Branch created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": 6934.311497470541,\n        \"autoscaling_limit_max_cu\": 2733.3219749440564,\n        \"suspend_timeout_seconds\": 6439\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_only\",\n        \"autoscaling_limit_min_cu\": 9820.453642800558,\n        \"autoscaling_limit_max_cu\": 4009.5312699472706,\n        \"suspend_timeout_seconds\": 2176\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branch\": {\n    \"id\": \"string\",\n    \"project_id\": \"string\",\n    \"parent_id\": \"string\",\n    \"parent_lsn\": \"string\",\n    \"parent_timestamp\": \"1996-06-13T22:27:29.788Z\",\n    \"name\": \"string\",\n    \"current_state\": \"init\",\n    \"logical_size\": 3686,\n    \"created_at\": \"2017-06-07T11:41:31.953Z\",\n    \"updated_at\": \"2003-10-20T04:33:44.847Z\",\n    \"primary\": false\n  },\n  \"endpoints\": [\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"region_id\": \"string\",\n      \"autoscaling_limit_min_cu\": 5401.051550010851,\n      \"autoscaling_limit_max_cu\": 7870.733291709242,\n      \"type\": \"read_write\",\n      \"current_state\": \"active\",\n      \"suspend_timeout_seconds\": 769,\n      \"provisioner\": \"string\",\n      \"created_at\": \"1980-07-05T07:56:20.341Z\",\n      \"updated_at\": \"2021-02-02T17:10:02.082Z\",\n      \"disabled\": true\n    },\n    {\n      \"id\": \"string\",\n      \"host\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"region_id\": \"string\",\n      \"autoscaling_limit_min_cu\": 7659.664253869843,\n      \"autoscaling_limit_max_cu\": 66.01462375842249,\n      \"type\": \"read_only\",\n      \"current_state\": \"init\",\n      \"suspend_timeout_seconds\": 4893,\n      \"provisioner\": \"string\",\n      \"created_at\": \"1989-01-05T23:46:50.046Z\",\n      \"updated_at\": \"1974-04-23T04:58:28.214Z\",\n      \"disabled\": true\n    }\n  ],\n  \"operations\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"apply_config\",\n      \"status\": \"finished\",\n      \"failures_count\": 1253,\n      \"created_at\": \"1969-12-22T11:27:18.115Z\",\n      \"updated_at\": \"2024-12-30T00:38:20.977Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"skipped\",\n      \"failures_count\": 6021,\n      \"created_at\": \"1975-11-22T16:49:38.472Z\",\n      \"updated_at\": \"1996-01-01T13:29:15.955Z\"\n    }\n  ],\n  \"connection_uris\": [\n    {\n      \"connection_uri\": \"string\",\n      \"connection_parameters\": {\n        \"database\": \"string\",\n        \"host\": \"string\",\n        \"password\": \"string\",\n        \"role\": \"string\"\n      }\n    },\n    {\n      \"connection_uri\": \"string\",\n      \"connection_parameters\": {\n        \"database\": \"string\",\n        \"host\": \"string\",\n        \"password\": \"string\",\n        \"role\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4edc0b70-39f7-4ec3-9f92-4a71f78a547d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": 6934.311497470541,\n        \"autoscaling_limit_max_cu\": 2733.3219749440564,\n        \"suspend_timeout_seconds\": 6439\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_only\",\n        \"autoscaling_limit_min_cu\": 9820.453642800558,\n        \"autoscaling_limit_max_cu\": 4009.5312699472706,\n        \"suspend_timeout_seconds\": 2176\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "698f2c6b-e861-43a0-829c-8a08b6742b50",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": 6934.311497470541,\n        \"autoscaling_limit_max_cu\": 2733.3219749440564,\n        \"suspend_timeout_seconds\": 6439\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_only\",\n        \"autoscaling_limit_min_cu\": 9820.453642800558,\n        \"autoscaling_limit_max_cu\": 4009.5312699472706,\n        \"suspend_timeout_seconds\": 2176\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c394231-c9da-4fdf-8333-9f6da70cae4e",
+              "name": "Project not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\",\n    \"parent_id\": \"<string>\",\n    \"parent_lsn\": \"<string>\",\n    \"parent_timestamp\": \"<dateTime>\"\n  },\n  \"endpoints\": [\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_write\",\n        \"autoscaling_limit_min_cu\": 6934.311497470541,\n        \"autoscaling_limit_max_cu\": 2733.3219749440564,\n        \"suspend_timeout_seconds\": 6439\n      }\n    },\n    {\n      \"endpoint\": {\n        \"branch_id\": \"string\",\n        \"type\": \"read_only\",\n        \"autoscaling_limit_min_cu\": 9820.453642800558,\n        \"autoscaling_limit_max_cu\": 4009.5312699472706,\n        \"suspend_timeout_seconds\": 2176\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80d28419-402f-425e-b25b-ae8eb0aeff31",
+          "name": "Retrieve branch details",
+          "request": {
+            "name": "Retrieve branch details",
+            "description": {
+              "content": "Retrieves information about the specified branch including its name, parent branch, creation time, and current state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches",
+                ":branch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branch_id",
+                  "description": "(Required) The branch ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "846f9ef5-79d5-45ce-a2dc-8e3f4a7f6482",
+              "name": "Successfully retrieved branch details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branch\": {\n    \"id\": \"string\",\n    \"project_id\": \"string\",\n    \"parent_id\": \"string\",\n    \"parent_lsn\": \"string\",\n    \"parent_timestamp\": \"1949-08-16T21:55:33.899Z\",\n    \"name\": \"string\",\n    \"current_state\": \"ready\",\n    \"logical_size\": 2185,\n    \"created_at\": \"1990-10-13T18:03:13.584Z\",\n    \"updated_at\": \"1950-01-27T22:07:00.348Z\",\n    \"primary\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beddd9c1-1df1-4385-827b-cd3c51926b54",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c983aa1-6589-4619-8c21-cc859b3037c7",
+              "name": "Branch not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "284781a5-ecdf-4eff-b92a-e3f9de1294dc",
+          "name": "Update a branch",
+          "request": {
+            "name": "Update a branch",
+            "description": {
+              "content": "Updates the specified branch. You can update the branch name and other configurable settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches",
+                ":branch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branch_id",
+                  "description": "(Required) The branch ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4837cb6c-6ceb-4094-8d8f-d8e39756d8f9",
+              "name": "Branch updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branch\": {\n    \"id\": \"string\",\n    \"project_id\": \"string\",\n    \"parent_id\": \"string\",\n    \"parent_lsn\": \"string\",\n    \"parent_timestamp\": \"2015-03-27T12:51:58.153Z\",\n    \"name\": \"string\",\n    \"current_state\": \"ready\",\n    \"logical_size\": 4439,\n    \"created_at\": \"1956-01-02T07:01:08.238Z\",\n    \"updated_at\": \"1961-04-11T03:20:08.723Z\",\n    \"primary\": false\n  },\n  \"operations\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": 8235,\n      \"created_at\": \"1976-09-30T20:45:21.565Z\",\n      \"updated_at\": \"2002-10-10T07:10:36.106Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"finished\",\n      \"failures_count\": 8311,\n      \"created_at\": \"1963-07-25T22:34:16.711Z\",\n      \"updated_at\": \"2003-03-15T05:33:08.206Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b2bbf98-48ed-4d8b-895f-e949bc18ab41",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "289ff777-59d5-467b-bb78-331545e90086",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4db9efbd-874f-4262-9731-74a79e679481",
+              "name": "Branch not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branch\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3173ec23-e36a-4b31-9db7-1cf93f07ecc1",
+          "name": "Delete a branch",
+          "request": {
+            "name": "Delete a branch",
+            "description": {
+              "content": "Deletes the specified branch and all its associated databases, roles, and compute endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches",
+                ":branch_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branch_id",
+                  "description": "(Required) The branch ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87819ca6-d30b-44a9-9ce9-4a047cb73734",
+              "name": "Branch deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branch\": {\n    \"id\": \"string\",\n    \"project_id\": \"string\",\n    \"parent_id\": \"string\",\n    \"parent_lsn\": \"string\",\n    \"parent_timestamp\": \"2015-03-27T12:51:58.153Z\",\n    \"name\": \"string\",\n    \"current_state\": \"ready\",\n    \"logical_size\": 4439,\n    \"created_at\": \"1956-01-02T07:01:08.238Z\",\n    \"updated_at\": \"1961-04-11T03:20:08.723Z\",\n    \"primary\": false\n  },\n  \"operations\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": 8235,\n      \"created_at\": \"1976-09-30T20:45:21.565Z\",\n      \"updated_at\": \"2002-10-10T07:10:36.106Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"finished\",\n      \"failures_count\": 8311,\n      \"created_at\": \"1963-07-25T22:34:16.711Z\",\n      \"updated_at\": \"2003-03-15T05:33:08.206Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "870dc8e6-3b93-4e79-a26e-3e7b10b362d8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0eba747e-72d2-4062-bcb3-db0df1b39181",
+              "name": "Branch not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c948ec6-ea97-4009-bf0d-9760443970d8",
+          "name": "Restore a branch",
+          "request": {
+            "name": "Restore a branch",
+            "description": {
+              "content": "Restores a branch to a specified point in time or to another branch. This operation can be used for point-in-time recovery.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "branches",
+                ":branch_id",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branch_id",
+                  "description": "(Required) The branch ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0138d98e-07e1-40e2-9bdc-2e469948074c",
+              "name": "Branch restore initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branch\": {\n    \"id\": \"string\",\n    \"project_id\": \"string\",\n    \"parent_id\": \"string\",\n    \"parent_lsn\": \"string\",\n    \"parent_timestamp\": \"2015-03-27T12:51:58.153Z\",\n    \"name\": \"string\",\n    \"current_state\": \"ready\",\n    \"logical_size\": 4439,\n    \"created_at\": \"1956-01-02T07:01:08.238Z\",\n    \"updated_at\": \"1961-04-11T03:20:08.723Z\",\n    \"primary\": false\n  },\n  \"operations\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"create_branch\",\n      \"status\": \"cancelling\",\n      \"failures_count\": 8235,\n      \"created_at\": \"1976-09-30T20:45:21.565Z\",\n      \"updated_at\": \"2002-10-10T07:10:36.106Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"tenant_detach\",\n      \"status\": \"finished\",\n      \"failures_count\": 8311,\n      \"created_at\": \"1963-07-25T22:34:16.711Z\",\n      \"updated_at\": \"2003-03-15T05:33:08.206Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e410a529-ef9d-43d0-afcb-82653078db9f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17cea303-56c3-416d-a51d-eeeb014f23f5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57b8135b-981b-400b-ac20-350805c0cc9f",
+              "name": "Branch not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "branches",
+                    ":branch_id",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branch_id",
+                      "description": "(Required) The branch ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_branch_id\": \"<string>\",\n  \"source_timestamp\": \"<dateTime>\",\n  \"preserve_under_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://console.neon.tech/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9f7a337b-0bcb-47e8-b27a-7a44fd8c6cfb",
+    "name": "Neon Management API Keys Branches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+      "type": "text/plain"
+    }
+  }
+}

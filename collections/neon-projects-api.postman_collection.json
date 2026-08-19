@@ -1,0 +1,1389 @@
+{
+  "item": [
+    {
+      "id": "c741d509-b372-447c-8f73-bbf49e9b1bfa",
+      "name": "Projects",
+      "description": {
+        "content": "Manage Neon projects. A project is the top-level object in the Neon hierarchy containing branches, databases, roles, and compute endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "caaba0c0-6bf7-4bff-a339-36c01953c31d",
+          "name": "List projects",
+          "request": {
+            "name": "List projects",
+            "description": {
+              "content": "Retrieves a list of projects for the authenticated user or organization. Returns project metadata including ID, name, region, creation time, and current status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor for retrieving the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of items to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "The organization ID to scope the request to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08488fc0-81dd-40e0-9d83-40176e1c3772",
+              "name": "Successfully retrieved list of projects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"id\": \"string\",\n      \"platform_id\": \"string\",\n      \"region_id\": \"string\",\n      \"name\": \"string\",\n      \"provisioner\": \"k8s-pod\",\n      \"default_endpoint_settings\": {\n        \"autoscaling_limit_min_cu\": 2816.3254716870842,\n        \"autoscaling_limit_max_cu\": 8678.929490358305,\n        \"suspend_timeout_seconds\": 1593\n      },\n      \"pg_version\": 17,\n      \"store_passwords\": true,\n      \"active_time\": 9181,\n      \"cpu_used_sec\": 3709,\n      \"maintenance_starts_at\": \"1970-08-11T21:03:14.417Z\",\n      \"creation_source\": \"string\",\n      \"created_at\": \"1993-03-31T01:29:58.899Z\",\n      \"updated_at\": \"2001-10-13T12:01:46.412Z\",\n      \"org_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"platform_id\": \"string\",\n      \"region_id\": \"string\",\n      \"name\": \"string\",\n      \"provisioner\": \"k8s-pod\",\n      \"default_endpoint_settings\": {\n        \"autoscaling_limit_min_cu\": 4839.101441158337,\n        \"autoscaling_limit_max_cu\": 3367.7578096370776,\n        \"suspend_timeout_seconds\": 9092\n      },\n      \"pg_version\": 14,\n      \"store_passwords\": false,\n      \"active_time\": 4797,\n      \"cpu_used_sec\": 7757,\n      \"maintenance_starts_at\": \"2012-08-25T07:24:32.772Z\",\n      \"creation_source\": \"string\",\n      \"created_at\": \"1994-04-25T14:48:42.178Z\",\n      \"updated_at\": \"1949-12-17T06:39:39.902Z\",\n      \"org_id\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"cursor\": \"string\",\n    \"limit\": 7659,\n    \"sort_by\": \"string\",\n    \"sort_order\": \"asc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "866e3f52-8dae-492e-bce6-ef57681cf389",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab5aa365-4ede-41db-a5b1-a1ade492a5c3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d74481e0-cb95-4097-91d3-d30f6d738e47",
+          "name": "Create a project",
+          "request": {
+            "name": "Create a project",
+            "description": {
+              "content": "Creates a new Neon project within an organization. You can specify a region and Postgres version in the request body. Neon currently supports PostgreSQL 14, 15, 16, and 17.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"pg_version\": \"<integer>\",\n    \"store_passwords\": \"<boolean>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    },\n    \"org_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "651d0c39-794b-4502-ad94-f0a9ef2c2ae0",
+              "name": "Project created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"pg_version\": \"<integer>\",\n    \"store_passwords\": \"<boolean>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    },\n    \"org_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"string\",\n    \"platform_id\": \"string\",\n    \"region_id\": \"string\",\n    \"name\": \"string\",\n    \"provisioner\": \"k8s-pod\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": 5428.828594777958,\n      \"autoscaling_limit_max_cu\": 3175.247101717289,\n      \"suspend_timeout_seconds\": 5080\n    },\n    \"pg_version\": 17,\n    \"store_passwords\": true,\n    \"active_time\": 8748,\n    \"cpu_used_sec\": 6506,\n    \"maintenance_starts_at\": \"1971-02-16T19:30:01.013Z\",\n    \"creation_source\": \"string\",\n    \"created_at\": \"1975-06-13T18:50:37.557Z\",\n    \"updated_at\": \"1969-11-07T14:08:39.860Z\",\n    \"org_id\": \"string\"\n  },\n  \"connection_uris\": [\n    {\n      \"connection_uri\": \"string\",\n      \"connection_parameters\": {\n        \"database\": \"string\",\n        \"host\": \"string\",\n        \"password\": \"string\",\n        \"role\": \"string\"\n      }\n    },\n    {\n      \"connection_uri\": \"string\",\n      \"connection_parameters\": {\n        \"database\": \"string\",\n        \"host\": \"string\",\n        \"password\": \"string\",\n        \"role\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54034d23-2d50-4f99-a10c-d46814870464",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"pg_version\": \"<integer>\",\n    \"store_passwords\": \"<boolean>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    },\n    \"org_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6813a79-9d86-4436-a20a-2693a4bf98d4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"region_id\": \"<string>\",\n    \"pg_version\": \"<integer>\",\n    \"store_passwords\": \"<boolean>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    },\n    \"org_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15c17727-4749-4cac-9793-1eb8406cd0a4",
+          "name": "Retrieve project details",
+          "request": {
+            "name": "Retrieve project details",
+            "description": {
+              "content": "Retrieves information about the specified project including its name, region, Postgres version, creation time, and current settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fab7b1c-3c15-42a1-9220-79084ada1898",
+              "name": "Successfully retrieved project details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"string\",\n    \"platform_id\": \"string\",\n    \"region_id\": \"string\",\n    \"name\": \"string\",\n    \"provisioner\": \"k8s-pod\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": 4081.5349737855113,\n      \"autoscaling_limit_max_cu\": 4336.600689884787,\n      \"suspend_timeout_seconds\": 4159\n    },\n    \"pg_version\": 17,\n    \"store_passwords\": false,\n    \"active_time\": 7309,\n    \"cpu_used_sec\": 8905,\n    \"maintenance_starts_at\": \"1946-12-20T10:45:57.643Z\",\n    \"creation_source\": \"string\",\n    \"created_at\": \"2000-06-26T22:38:00.826Z\",\n    \"updated_at\": \"1953-09-09T08:12:28.471Z\",\n    \"org_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "064167e9-5ada-41d9-ba52-1f25a41a6bf2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d76cde7-a0ff-4913-9d8f-4aab137058eb",
+              "name": "Project not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8150514f-7e25-43fe-8f57-35112bdca361",
+          "name": "Update a project",
+          "request": {
+            "name": "Update a project",
+            "description": {
+              "content": "Updates the specified project. You can update the project name and other configurable settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1363a2e6-265d-4cb3-aef9-40115396da39",
+              "name": "Project updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"string\",\n    \"platform_id\": \"string\",\n    \"region_id\": \"string\",\n    \"name\": \"string\",\n    \"provisioner\": \"k8s-pod\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": 5771.261416555772,\n      \"autoscaling_limit_max_cu\": 171.29275439292658,\n      \"suspend_timeout_seconds\": 1554\n    },\n    \"pg_version\": 16,\n    \"store_passwords\": true,\n    \"active_time\": 9456,\n    \"cpu_used_sec\": 7552,\n    \"maintenance_starts_at\": \"1971-11-13T03:29:59.561Z\",\n    \"creation_source\": \"string\",\n    \"created_at\": \"1970-09-01T13:26:36.511Z\",\n    \"updated_at\": \"1962-05-10T09:27:51.611Z\",\n    \"org_id\": \"string\"\n  },\n  \"operations\": [\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"suspend_compute\",\n      \"status\": \"cancelling\",\n      \"failures_count\": 501,\n      \"created_at\": \"1995-07-24T05:55:56.277Z\",\n      \"updated_at\": \"1962-03-25T03:02:21.021Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"project_id\": \"string\",\n      \"branch_id\": \"string\",\n      \"endpoint_id\": \"string\",\n      \"action\": \"tenant_attach\",\n      \"status\": \"failed\",\n      \"failures_count\": 2579,\n      \"created_at\": \"2023-09-22T22:54:42.725Z\",\n      \"updated_at\": \"1977-03-15T07:07:32.324Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be498f67-3e97-45db-8d19-3ac6ebbbee13",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f2fb1a7-e34a-4713-be84-abd8352331c8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10d90bb0-7778-4ec8-a793-9671c326fc5f",
+              "name": "Project not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project\": {\n    \"name\": \"<string>\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": \"<number>\",\n      \"autoscaling_limit_max_cu\": \"<number>\",\n      \"suspend_timeout_seconds\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bda7a6bd-f59a-4fb4-9c60-5067ce5443c5",
+          "name": "Delete a project",
+          "request": {
+            "name": "Delete a project",
+            "description": {
+              "content": "Deletes the specified project and all its associated resources including branches, databases, roles, and compute endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aebfb5c5-c624-4091-9a38-dd7d6394b5c9",
+              "name": "Project deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"string\",\n    \"platform_id\": \"string\",\n    \"region_id\": \"string\",\n    \"name\": \"string\",\n    \"provisioner\": \"k8s-pod\",\n    \"default_endpoint_settings\": {\n      \"autoscaling_limit_min_cu\": 4081.5349737855113,\n      \"autoscaling_limit_max_cu\": 4336.600689884787,\n      \"suspend_timeout_seconds\": 4159\n    },\n    \"pg_version\": 17,\n    \"store_passwords\": false,\n    \"active_time\": 7309,\n    \"cpu_used_sec\": 8905,\n    \"maintenance_starts_at\": \"1946-12-20T10:45:57.643Z\",\n    \"creation_source\": \"string\",\n    \"created_at\": \"2000-06-26T22:38:00.826Z\",\n    \"updated_at\": \"1953-09-09T08:12:28.471Z\",\n    \"org_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8505164-4df3-4fa2-bd50-1ee9ffa6a526",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "372946d4-163d-4b73-9597-7912fe47e8c9",
+              "name": "Project not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a64207d-53a2-4714-a4cd-c250fea696b6",
+          "name": "Retrieve connection URI",
+          "request": {
+            "name": "Retrieve connection URI",
+            "description": {
+              "content": "Retrieves the connection URI for the specified project. The connection URI includes the host, database, role, and password needed to connect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id",
+                "connection_uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "branch_id",
+                  "value": "<string>",
+                  "description": "The branch ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "endpoint_id",
+                  "value": "<string>",
+                  "description": "The endpoint ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "database_name",
+                  "value": "<string>",
+                  "description": "(Required) The database name"
+                },
+                {
+                  "disabled": false,
+                  "key": "role_name",
+                  "value": "<string>",
+                  "description": "(Required) The role name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project_id",
+                  "description": "(Required) The Neon project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b6f888c-26b6-499d-95f5-2022766ea99d",
+              "name": "Successfully retrieved connection URI",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "connection_uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endpoint_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "database_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"connection_uri\": \"string\",\n  \"connection_parameters\": {\n    \"database\": \"string\",\n    \"host\": \"string\",\n    \"password\": \"string\",\n    \"role\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cbcfaca-321d-4b94-91e5-b593f1604fae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "connection_uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endpoint_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "database_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9edc7b6f-f49d-41bb-969f-0581609314c5",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id",
+                    "connection_uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endpoint_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "database_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project_id",
+                      "description": "(Required) The Neon project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://console.neon.tech/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d8a41abf-b784-4093-a21c-2454c19f33ef",
+    "name": "Neon Management API Keys Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.\n\nContact Support:\n Name: Neon Support",
+      "type": "text/plain"
+    }
+  }
+}
