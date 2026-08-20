@@ -89,6 +89,12 @@ apis:
   tags:
   - Authentication
   - Authorization
+  - JWT
+  - Security
+  - Identity
+  tags_raw:
+  - Authentication
+  - Authorization
   - OAuth
   - JWT
   - Security
@@ -108,6 +114,8 @@ apis:
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -124,6 +132,8 @@ apis:
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -201,7 +211,8 @@ apis:
     queries. A branch can have one read-write and multiple read-only endpoints.
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - Endpoints
   properties:
   - type: OpenAPI
@@ -217,7 +228,8 @@ apis:
     on project resources.
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - Operations
   properties:
   - type: OpenAPI
@@ -234,6 +246,8 @@ apis:
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
