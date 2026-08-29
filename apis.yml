@@ -5,6 +5,18 @@ description: >-
   cloud and edge application development. Their developer platform offers management APIs, data APIs, authentication
   services, and serverless drivers for building and automating database-driven workflows.
 kind: contract
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
