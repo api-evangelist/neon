@@ -104,6 +104,7 @@ conformance:
       application extension media type. ARD permits extension types without core registration.'
     - '[urn:air:neon.com:skill:neon-functions] Media type ''application/agent-skills+md'' is a valid application
       extension media type. ARD permits extension types without core registration.'
+  did_web: null
 catalog:
   host_display_name: Neon
   host_identifier: neon.com
