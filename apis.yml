@@ -33,6 +33,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/neon.png
 tags:
+- Database
+- Serverless
+- Postgres
+- Infrastructure
+- Authentication
+- Edge
+tags_raw:
 - Databases
 - Serverless
 - Postgres
@@ -54,6 +61,14 @@ apis:
     applications without a traditional backend.
   humanURL: https://neon.com/docs/data-api/overview
   tags:
+  - Database
+  - Serverless
+  - Postgres
+  - REST
+  - Data
+  - PostgREST
+  - HTTP
+  tags_raw:
   - Databases
   - Serverless
   - Postgres
@@ -76,6 +91,15 @@ apis:
     optimized for deployment on platforms like Cloudflare Workers, Vercel Edge Functions, and AWS Lambda.'
   humanURL: https://neon.com/docs/serverless/serverless-driver
   tags:
+  - Database
+  - Serverless
+  - Postgres
+  - JavaScript
+  - TypeScript
+  - WebSocket
+  - Edge
+  - Driver
+  tags_raw:
   - Databases
   - Serverless
   - Postgres
@@ -201,6 +225,8 @@ apis:
   humanURL: https://neon.com/docs/reference/api-reference
   baseURL: https://console.neon.tech/api/v2
   tags:
+  - Database
+  tags_raw:
   - Databases
   properties:
   - type: OpenAPI
