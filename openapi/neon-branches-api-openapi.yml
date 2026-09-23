@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Neon Management API Keys Branches API
+  title: Neon Management Branches API
   description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
   version: '2.0'
   contact:
@@ -217,21 +217,6 @@ paths:
         '404':
           description: Branch not found
 components:
-  parameters:
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
   schemas:
     BranchCreateRequest:
       type: object
@@ -258,16 +243,6 @@ components:
           description: Compute endpoints to create for the branch
           items:
             $ref: '#/components/schemas/EndpointCreateRequest'
-    BranchUpdateRequest:
-      type: object
-      description: Request body for updating a branch
-      properties:
-        branch:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The branch name
     Endpoint:
       type: object
       description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
@@ -323,34 +298,6 @@ components:
         disabled:
           type: boolean
           description: Whether the endpoint is disabled
-    EndpointCreateRequest:
-      type: object
-      description: Request body for creating a new compute endpoint
-      properties:
-        endpoint:
-          type: object
-          required:
-          - branch_id
-          - type
-          properties:
-            branch_id:
-              type: string
-              description: The branch ID to attach the endpoint to
-            type:
-              type: string
-              enum:
-              - read_write
-              - read_only
-              description: The endpoint type
-            autoscaling_limit_min_cu:
-              type: number
-              description: Minimum compute units for autoscaling
-            autoscaling_limit_max_cu:
-              type: number
-              description: Maximum compute units for autoscaling
-            suspend_timeout_seconds:
-              type: integer
-              description: Inactivity timeout in seconds
     ConnectionUri:
       type: object
       description: A database connection URI
@@ -428,6 +375,16 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
+    BranchUpdateRequest:
+      type: object
+      description: Request body for updating a branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
     Branch:
       type: object
       description: A branch is a copy-on-write clone of your data that can be used for development, testing, or preview environments.
@@ -472,6 +429,49 @@ components:
         primary:
           type: boolean
           description: Whether this is the primary branch
+    EndpointCreateRequest:
+      type: object
+      description: Request body for creating a new compute endpoint
+      properties:
+        endpoint:
+          type: object
+          required:
+          - branch_id
+          - type
+          properties:
+            branch_id:
+              type: string
+              description: The branch ID to attach the endpoint to
+            type:
+              type: string
+              enum:
+              - read_write
+              - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+  parameters:
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

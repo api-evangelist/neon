@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Neon Management API Keys Consumption API
+  title: Neon Management Consumption API
   description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
   version: '2.0'
   contact:
@@ -87,28 +87,6 @@ paths:
         '403':
           description: Forbidden - plan does not support consumption metrics
 components:
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    orgIdParam:
-      name: org_id
-      in: query
-      description: The organization ID to scope the request to
-      schema:
-        type: string
-    cursorParam:
-      name: cursor
-      in: query
-      description: Pagination cursor for retrieving the next page of results
-      schema:
-        type: string
   schemas:
     ConsumptionHistoryPerAccount:
       type: object
@@ -145,32 +123,6 @@ components:
           - asc
           - desc
           description: Sort direction
-    ConsumptionMetric:
-      type: object
-      description: A consumption metric data point
-      properties:
-        timeframe_start:
-          type: string
-          format: date-time
-          description: Start of the measurement timeframe
-        timeframe_end:
-          type: string
-          format: date-time
-          description: End of the measurement timeframe
-        active_time_seconds:
-          type: integer
-          description: Number of seconds the compute endpoints have been active
-        compute_time_seconds:
-          type: integer
-          description: Number of CPU seconds used by compute endpoints
-        written_data_bytes:
-          type: integer
-          format: int64
-          description: Total bytes of data written
-        data_storage_bytes_hour:
-          type: integer
-          format: int64
-          description: Storage consumption in byte-hours
     ConsumptionHistoryPerProject:
       type: object
       description: Project-level consumption metrics
@@ -197,6 +149,54 @@ components:
                         $ref: '#/components/schemas/ConsumptionMetric'
         pagination:
           $ref: '#/components/schemas/Pagination'
+    ConsumptionMetric:
+      type: object
+      description: A consumption metric data point
+      properties:
+        timeframe_start:
+          type: string
+          format: date-time
+          description: Start of the measurement timeframe
+        timeframe_end:
+          type: string
+          format: date-time
+          description: End of the measurement timeframe
+        active_time_seconds:
+          type: integer
+          description: Number of seconds the compute endpoints have been active
+        compute_time_seconds:
+          type: integer
+          description: Number of CPU seconds used by compute endpoints
+        written_data_bytes:
+          type: integer
+          format: int64
+          description: Total bytes of data written
+        data_storage_bytes_hour:
+          type: integer
+          format: int64
+          description: Storage consumption in byte-hours
+  parameters:
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
   securitySchemes:
     bearerAuth:
       type: http

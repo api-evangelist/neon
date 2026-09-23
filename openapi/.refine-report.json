@@ -1,16 +1,7 @@
 {
   "provider": "neon",
   "sources": [
-    "neon-api-keys-api-openapi.yml",
-    "neon-auth-api-openapi.yml",
-    "neon-branches-api-openapi.yml",
-    "neon-consumption-api-openapi.yml",
-    "neon-data-api-api-openapi.yml",
-    "neon-databases-api-openapi.yml",
-    "neon-endpoints-api-openapi.yml",
-    "neon-operations-api-openapi.yml",
-    "neon-projects-api-openapi.yml",
-    "neon-roles-api-openapi.yml"
+    "_original/neon-management-api-openapi.yml"
   ],
   "outputs": [
     "neon-api-keys-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "neon-management-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "neon-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-branches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-consumption-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-data-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-databases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "neon-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

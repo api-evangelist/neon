@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Neon Management API Keys Roles API
+  title: Neon Management Roles API
   description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
   version: '2.0'
   contact:
@@ -161,44 +161,6 @@ paths:
           description: Role not found
 components:
   schemas:
-    RoleCreateRequest:
-      type: object
-      description: Request body for creating a new role
-      required:
-      - role
-      properties:
-        role:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-              description: The role name
-    Role:
-      type: object
-      description: A Postgres role within a branch
-      properties:
-        branch_id:
-          type: string
-          description: The branch ID this role belongs to
-        name:
-          type: string
-          description: The role name
-        password:
-          type: string
-          description: The role password. Only returned when creating a role or resetting a password.
-        protected:
-          type: boolean
-          description: Whether this is a protected system role
-        created_at:
-          type: string
-          format: date-time
-          description: Role creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          description: Last update timestamp
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -253,7 +215,52 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
+    Role:
+      type: object
+      description: A Postgres role within a branch
+      properties:
+        branch_id:
+          type: string
+          description: The branch ID this role belongs to
+        name:
+          type: string
+          description: The role name
+        password:
+          type: string
+          description: The role password. Only returned when creating a role or resetting a password.
+        protected:
+          type: boolean
+          description: Whether this is a protected system role
+        created_at:
+          type: string
+          format: date-time
+          description: Role creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    RoleCreateRequest:
+      type: object
+      description: Request body for creating a new role
+      required:
+      - role
+      properties:
+        role:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: The role name
   parameters:
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
     projectIdParam:
       name: project_id
       in: path
@@ -266,13 +273,6 @@ components:
       in: path
       required: true
       description: The Postgres role name
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
       schema:
         type: string
   securitySchemes:

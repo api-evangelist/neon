@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Neon Management API Keys Databases API
+  title: Neon Management Databases API
   description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
   version: '2.0'
   contact:
@@ -167,60 +167,32 @@ paths:
         '404':
           description: Database not found
 components:
-  parameters:
-    databaseNameParam:
-      name: database_name
-      in: path
-      required: true
-      description: The database name
-      schema:
-        type: string
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
   schemas:
-    DatabaseCreateRequest:
+    Database:
       type: object
-      description: Request body for creating a new database
-      required:
-      - database
+      description: A Postgres database within a branch
       properties:
-        database:
-          type: object
-          required:
-          - name
-          - owner_name
-          properties:
-            name:
-              type: string
-              description: The database name
-            owner_name:
-              type: string
-              description: The name of the role that will own this database
-    DatabaseUpdateRequest:
-      type: object
-      description: Request body for updating a database
-      properties:
-        database:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The new database name
-            owner_name:
-              type: string
-              description: The new owner role name
+        id:
+          type: integer
+          format: int64
+          description: The database ID
+        branch_id:
+          type: string
+          description: The branch ID this database belongs to
+        name:
+          type: string
+          description: The database name
+        owner_name:
+          type: string
+          description: The name of the role that owns this database
+        created_at:
+          type: string
+          format: date-time
+          description: Database creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -275,31 +247,59 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    Database:
+    DatabaseUpdateRequest:
       type: object
-      description: A Postgres database within a branch
+      description: Request body for updating a database
       properties:
-        id:
-          type: integer
-          format: int64
-          description: The database ID
-        branch_id:
-          type: string
-          description: The branch ID this database belongs to
-        name:
-          type: string
-          description: The database name
-        owner_name:
-          type: string
-          description: The name of the role that owns this database
-        created_at:
-          type: string
-          format: date-time
-          description: Database creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          description: Last update timestamp
+        database:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The new database name
+            owner_name:
+              type: string
+              description: The new owner role name
+    DatabaseCreateRequest:
+      type: object
+      description: Request body for creating a new database
+      required:
+      - database
+      properties:
+        database:
+          type: object
+          required:
+          - name
+          - owner_name
+          properties:
+            name:
+              type: string
+              description: The database name
+            owner_name:
+              type: string
+              description: The name of the role that will own this database
+  parameters:
+    databaseNameParam:
+      name: database_name
+      in: path
+      required: true
+      description: The database name
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

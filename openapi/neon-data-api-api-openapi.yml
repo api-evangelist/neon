@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Neon Management API Keys Data API API
+  title: Neon Management Data API
   description: The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
   version: '2.0'
   contact:
@@ -72,28 +72,22 @@ paths:
         '404':
           description: Branch not found
 components:
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
   schemas:
-    DataApiConfig:
-      type: object
-      description: Configuration for the Neon Data API on a branch, providing a PostgREST-compatible HTTP interface to the database.
-      properties:
-        enabled:
-          type: boolean
-          description: Whether the Data API is enabled for this branch
-        database_name:
-          type: string
-          description: The target database for the Data API
-        exposed_schemas:
-          type: array
-          items:
-            type: string
-          description: List of database schemas exposed through the Data API
-        max_rows:
-          type: integer
-          description: Maximum number of rows returned in a single API response
-        auth_provider:
-          type: string
-          description: The authentication provider that validates JWT tokens for Data API requests
     DataApiConfigUpdate:
       type: object
       description: Request body for updating Data API configuration
@@ -115,21 +109,27 @@ components:
         auth_provider:
           type: string
           description: Authentication provider for JWT validation
-  parameters:
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
+    DataApiConfig:
+      type: object
+      description: Configuration for the Neon Data API on a branch, providing a PostgREST-compatible HTTP interface to the database.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the Data API is enabled for this branch
+        database_name:
+          type: string
+          description: The target database for the Data API
+        exposed_schemas:
+          type: array
+          items:
+            type: string
+          description: List of database schemas exposed through the Data API
+        max_rows:
+          type: integer
+          description: Maximum number of rows returned in a single API response
+        auth_provider:
+          type: string
+          description: The authentication provider that validates JWT tokens for Data API requests
   securitySchemes:
     bearerAuth:
       type: http
