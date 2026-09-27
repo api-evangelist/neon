@@ -218,86 +218,34 @@ paths:
           description: Branch not found
 components:
   schemas:
-    BranchCreateRequest:
+    EndpointCreateRequest:
       type: object
-      description: Request body for creating a new branch
+      description: Request body for creating a new compute endpoint
       properties:
-        branch:
+        endpoint:
           type: object
+          required:
+          - branch_id
+          - type
           properties:
-            name:
+            branch_id:
               type: string
-              description: The branch name
-            parent_id:
+              description: The branch ID to attach the endpoint to
+            type:
               type: string
-              description: The parent branch ID to branch from
-            parent_lsn:
-              type: string
-              description: The Log Sequence Number to branch from
-            parent_timestamp:
-              type: string
-              format: date-time
-              description: The timestamp to branch from
-        endpoints:
-          type: array
-          description: Compute endpoints to create for the branch
-          items:
-            $ref: '#/components/schemas/EndpointCreateRequest'
-    Endpoint:
-      type: object
-      description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
-      properties:
-        id:
-          type: string
-          description: The endpoint ID
-        host:
-          type: string
-          description: The endpoint hostname
-        project_id:
-          type: string
-          description: The project ID
-        branch_id:
-          type: string
-          description: The branch ID
-        region_id:
-          type: string
-          description: The region where the endpoint is deployed
-        autoscaling_limit_min_cu:
-          type: number
-          description: Minimum compute units for autoscaling
-        autoscaling_limit_max_cu:
-          type: number
-          description: Maximum compute units for autoscaling
-        type:
-          type: string
-          enum:
-          - read_write
-          - read_only
-          description: The endpoint type
-        current_state:
-          type: string
-          enum:
-          - init
-          - active
-          - idle
-          description: The current state of the endpoint
-        suspend_timeout_seconds:
-          type: integer
-          description: Seconds of inactivity before the endpoint is suspended
-        provisioner:
-          type: string
-          description: The provisioner type
-        created_at:
-          type: string
-          format: date-time
-          description: Endpoint creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          description: Last update timestamp
-        disabled:
-          type: boolean
-          description: Whether the endpoint is disabled
+              enum:
+              - read_write
+              - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
     ConnectionUri:
       type: object
       description: A database connection URI
@@ -375,9 +323,64 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    BranchUpdateRequest:
+    Endpoint:
       type: object
-      description: Request body for updating a branch
+      description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
+      properties:
+        id:
+          type: string
+          description: The endpoint ID
+        host:
+          type: string
+          description: The endpoint hostname
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID
+        region_id:
+          type: string
+          description: The region where the endpoint is deployed
+        autoscaling_limit_min_cu:
+          type: number
+          description: Minimum compute units for autoscaling
+        autoscaling_limit_max_cu:
+          type: number
+          description: Maximum compute units for autoscaling
+        type:
+          type: string
+          enum:
+          - read_write
+          - read_only
+          description: The endpoint type
+        current_state:
+          type: string
+          enum:
+          - init
+          - active
+          - idle
+          description: The current state of the endpoint
+        suspend_timeout_seconds:
+          type: integer
+          description: Seconds of inactivity before the endpoint is suspended
+        provisioner:
+          type: string
+          description: The provisioner type
+        created_at:
+          type: string
+          format: date-time
+          description: Endpoint creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        disabled:
+          type: boolean
+          description: Whether the endpoint is disabled
+    BranchCreateRequest:
+      type: object
+      description: Request body for creating a new branch
       properties:
         branch:
           type: object
@@ -385,6 +388,21 @@ components:
             name:
               type: string
               description: The branch name
+            parent_id:
+              type: string
+              description: The parent branch ID to branch from
+            parent_lsn:
+              type: string
+              description: The Log Sequence Number to branch from
+            parent_timestamp:
+              type: string
+              format: date-time
+              description: The timestamp to branch from
+        endpoints:
+          type: array
+          description: Compute endpoints to create for the branch
+          items:
+            $ref: '#/components/schemas/EndpointCreateRequest'
     Branch:
       type: object
       description: A branch is a copy-on-write clone of your data that can be used for development, testing, or preview environments.
@@ -429,34 +447,16 @@ components:
         primary:
           type: boolean
           description: Whether this is the primary branch
-    EndpointCreateRequest:
+    BranchUpdateRequest:
       type: object
-      description: Request body for creating a new compute endpoint
+      description: Request body for updating a branch
       properties:
-        endpoint:
+        branch:
           type: object
-          required:
-          - branch_id
-          - type
           properties:
-            branch_id:
+            name:
               type: string
-              description: The branch ID to attach the endpoint to
-            type:
-              type: string
-              enum:
-              - read_write
-              - read_only
-              description: The endpoint type
-            autoscaling_limit_min_cu:
-              type: number
-              description: Minimum compute units for autoscaling
-            autoscaling_limit_max_cu:
-              type: number
-              description: Maximum compute units for autoscaling
-            suspend_timeout_seconds:
-              type: integer
-              description: Inactivity timeout in seconds
+              description: The branch name
   parameters:
     branchIdParam:
       name: branch_id

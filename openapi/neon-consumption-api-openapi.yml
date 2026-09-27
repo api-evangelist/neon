@@ -88,22 +88,6 @@ paths:
           description: Forbidden - plan does not support consumption metrics
 components:
   schemas:
-    ConsumptionHistoryPerAccount:
-      type: object
-      description: Account-level consumption metrics
-      properties:
-        periods:
-          type: array
-          items:
-            type: object
-            properties:
-              period_id:
-                type: string
-                description: The period identifier
-              consumption:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ConsumptionMetric'
     Pagination:
       type: object
       description: Pagination metadata for list responses
@@ -123,32 +107,22 @@ components:
           - asc
           - desc
           description: Sort direction
-    ConsumptionHistoryPerProject:
+    ConsumptionHistoryPerAccount:
       type: object
-      description: Project-level consumption metrics
+      description: Account-level consumption metrics
       properties:
-        projects:
+        periods:
           type: array
           items:
             type: object
             properties:
-              project_id:
+              period_id:
                 type: string
-                description: The project ID
-              periods:
+                description: The period identifier
+              consumption:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    period_id:
-                      type: string
-                      description: The period identifier
-                    consumption:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/ConsumptionMetric'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+                  $ref: '#/components/schemas/ConsumptionMetric'
     ConsumptionMetric:
       type: object
       description: A consumption metric data point
@@ -175,13 +149,33 @@ components:
           type: integer
           format: int64
           description: Storage consumption in byte-hours
+    ConsumptionHistoryPerProject:
+      type: object
+      description: Project-level consumption metrics
+      properties:
+        projects:
+          type: array
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+                description: The project ID
+              periods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    period_id:
+                      type: string
+                      description: The period identifier
+                    consumption:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ConsumptionMetric'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
   parameters:
-    orgIdParam:
-      name: org_id
-      in: query
-      description: The organization ID to scope the request to
-      schema:
-        type: string
     cursorParam:
       name: cursor
       in: query
@@ -197,6 +191,12 @@ components:
         minimum: 1
         maximum: 100
         default: 10
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

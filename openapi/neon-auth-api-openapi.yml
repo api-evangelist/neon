@@ -190,13 +190,6 @@ paths:
           description: OAuth provider not found
 components:
   schemas:
-    AuthConfigUpdate:
-      type: object
-      description: Request body for updating Auth configuration
-      properties:
-        enabled:
-          type: boolean
-          description: Whether to enable or disable Neon Auth
     OAuthProvider:
       type: object
       description: An OAuth provider configuration for Neon Auth
@@ -221,19 +214,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    OAuthProviderUpdateRequest:
-      type: object
-      description: Request body for updating an OAuth provider
-      properties:
-        client_id:
-          type: string
-          description: The OAuth client ID
-        client_secret:
-          type: string
-          description: The OAuth client secret
-        enabled:
-          type: boolean
-          description: Whether this provider is enabled
     OAuthProviderCreateRequest:
       type: object
       description: Request body for creating a new OAuth provider
@@ -255,6 +235,13 @@ components:
           type: boolean
           description: Whether to enable this provider
           default: true
+    AuthConfigUpdate:
+      type: object
+      description: Request body for updating Auth configuration
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable Neon Auth
     AuthConfig:
       type: object
       description: Neon Auth configuration for a branch, providing managed authentication built on Better Auth.
@@ -273,6 +260,19 @@ components:
         schema:
           type: string
           description: The database schema used by Neon Auth (typically neon_auth)
+    OAuthProviderUpdateRequest:
+      type: object
+      description: Request body for updating an OAuth provider
+      properties:
+        client_id:
+          type: string
+          description: The OAuth client ID
+        client_secret:
+          type: string
+          description: The OAuth client secret
+        enabled:
+          type: boolean
+          description: Whether this provider is enabled
   parameters:
     branchIdParam:
       name: branch_id

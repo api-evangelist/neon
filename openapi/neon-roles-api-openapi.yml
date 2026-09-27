@@ -160,6 +160,28 @@ paths:
         '404':
           description: Role not found
 components:
+  parameters:
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    roleNameParam:
+      name: role_name
+      in: path
+      required: true
+      description: The Postgres role name
+      schema:
+        type: string
   schemas:
     Operation:
       type: object
@@ -215,6 +237,20 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
+    RoleCreateRequest:
+      type: object
+      description: Request body for creating a new role
+      required:
+      - role
+      properties:
+        role:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: The role name
     Role:
       type: object
       description: A Postgres role within a branch
@@ -239,42 +275,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    RoleCreateRequest:
-      type: object
-      description: Request body for creating a new role
-      required:
-      - role
-      properties:
-        role:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-              description: The role name
-  parameters:
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    roleNameParam:
-      name: role_name
-      in: path
-      required: true
-      description: The Postgres role name
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

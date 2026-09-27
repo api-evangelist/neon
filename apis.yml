@@ -35,7 +35,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/neon.png
 tags:
 - Database
 - Serverless
-- Postgres
+- PostgreSQL
 - Infrastructure
 - Authentication
 - Edge
@@ -63,7 +63,7 @@ apis:
   tags:
   - Database
   - Serverless
-  - Postgres
+  - PostgreSQL
   - REST
   - Data
   - PostgREST
@@ -93,7 +93,7 @@ apis:
   tags:
   - Database
   - Serverless
-  - Postgres
+  - PostgreSQL
   - JavaScript
   - TypeScript
   - WebSocket

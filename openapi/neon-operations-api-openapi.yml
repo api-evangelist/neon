@@ -76,6 +76,25 @@ paths:
           description: Operation not found
 components:
   schemas:
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -130,25 +149,6 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    Pagination:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        cursor:
-          type: string
-          description: Cursor value for the next page of results
-        limit:
-          type: integer
-          description: Number of items per page
-        sort_by:
-          type: string
-          description: Field used for sorting
-        sort_order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction
   parameters:
     projectIdParam:
       name: project_id
