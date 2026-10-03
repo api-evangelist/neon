@@ -85,6 +85,15 @@ paths:
           description: API key not found
 components:
   schemas:
+    ApiKeyCreateRequest:
+      type: object
+      description: Request body for creating a new API key
+      required:
+      - key_name
+      properties:
+        key_name:
+          type: string
+          description: The name for the new API key
     ApiKey:
       type: object
       description: An API key used to authenticate requests to the Neon API
@@ -107,15 +116,6 @@ components:
         last_used_from_addr:
           type: string
           description: IP address from which the key was last used
-    ApiKeyCreateRequest:
-      type: object
-      description: Request body for creating a new API key
-      required:
-      - key_name
-      properties:
-        key_name:
-          type: string
-          description: The name for the new API key
     ApiKeyCreateResponse:
       type: object
       description: Response containing the newly created API key

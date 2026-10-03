@@ -73,27 +73,6 @@ paths:
           description: Branch not found
 components:
   schemas:
-    DataApiConfigUpdate:
-      type: object
-      description: Request body for updating Data API configuration
-      properties:
-        enabled:
-          type: boolean
-          description: Whether to enable or disable the Data API
-        database_name:
-          type: string
-          description: The target database
-        exposed_schemas:
-          type: array
-          items:
-            type: string
-          description: Schemas to expose
-        max_rows:
-          type: integer
-          description: Maximum rows per response
-        auth_provider:
-          type: string
-          description: Authentication provider for JWT validation
     DataApiConfig:
       type: object
       description: Configuration for the Neon Data API on a branch, providing a PostgREST-compatible HTTP interface to the database.
@@ -115,6 +94,27 @@ components:
         auth_provider:
           type: string
           description: The authentication provider that validates JWT tokens for Data API requests
+    DataApiConfigUpdate:
+      type: object
+      description: Request body for updating Data API configuration
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable the Data API
+        database_name:
+          type: string
+          description: The target database
+        exposed_schemas:
+          type: array
+          items:
+            type: string
+          description: Schemas to expose
+        max_rows:
+          type: integer
+          description: Maximum rows per response
+        auth_provider:
+          type: string
+          description: Authentication provider for JWT validation
   parameters:
     projectIdParam:
       name: project_id

@@ -198,6 +198,60 @@ paths:
           description: Resource not found
 components:
   schemas:
+    Operation:
+      type: object
+      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      properties:
+        id:
+          type: string
+          description: The operation ID
+        project_id:
+          type: string
+          description: The project ID
+        branch_id:
+          type: string
+          description: The branch ID associated with the operation
+        endpoint_id:
+          type: string
+          description: The endpoint ID associated with the operation
+        action:
+          type: string
+          description: The type of action being performed
+          enum:
+          - create_compute
+          - create_timeline
+          - start_compute
+          - suspend_compute
+          - apply_config
+          - check_availability
+          - delete_timeline
+          - create_branch
+          - tenant_ignore
+          - tenant_attach
+          - tenant_detach
+          - replace_safekeeper
+        status:
+          type: string
+          description: The current status of the operation
+          enum:
+          - scheduling
+          - running
+          - finished
+          - failed
+          - cancelling
+          - cancelled
+          - skipped
+        failures_count:
+          type: integer
+          description: Number of times the operation has failed
+        created_at:
+          type: string
+          format: date-time
+          description: Operation creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last status update timestamp
     ProjectUpdateRequest:
       type: object
       description: Request body for updating a project
@@ -261,25 +315,29 @@ components:
             org_id:
               type: string
               description: Organization ID for the project
-    Pagination:
+    ConnectionUri:
       type: object
-      description: Pagination metadata for list responses
+      description: A database connection URI
       properties:
-        cursor:
+        connection_uri:
           type: string
-          description: Cursor value for the next page of results
-        limit:
-          type: integer
-          description: Number of items per page
-        sort_by:
-          type: string
-          description: Field used for sorting
-        sort_order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction
+          description: The full connection URI including host, database, role, and password
+        connection_parameters:
+          type: object
+          description: Individual connection parameters
+          properties:
+            database:
+              type: string
+              description: The database name
+            host:
+              type: string
+              description: The hostname
+            password:
+              type: string
+              description: The password
+            role:
+              type: string
+              description: The role name
     Project:
       type: object
       description: A Neon project is the top-level object in the Neon hierarchy. It contains branches, databases, roles, and compute endpoints.
@@ -350,84 +408,35 @@ components:
         org_id:
           type: string
           description: The organization ID this project belongs to
-    Operation:
+    Pagination:
       type: object
-      description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
+      description: Pagination metadata for list responses
       properties:
-        id:
+        cursor:
           type: string
-          description: The operation ID
-        project_id:
-          type: string
-          description: The project ID
-        branch_id:
-          type: string
-          description: The branch ID associated with the operation
-        endpoint_id:
-          type: string
-          description: The endpoint ID associated with the operation
-        action:
-          type: string
-          description: The type of action being performed
-          enum:
-          - create_compute
-          - create_timeline
-          - start_compute
-          - suspend_compute
-          - apply_config
-          - check_availability
-          - delete_timeline
-          - create_branch
-          - tenant_ignore
-          - tenant_attach
-          - tenant_detach
-          - replace_safekeeper
-        status:
-          type: string
-          description: The current status of the operation
-          enum:
-          - scheduling
-          - running
-          - finished
-          - failed
-          - cancelling
-          - cancelled
-          - skipped
-        failures_count:
+          description: Cursor value for the next page of results
+        limit:
           type: integer
-          description: Number of times the operation has failed
-        created_at:
+          description: Number of items per page
+        sort_by:
           type: string
-          format: date-time
-          description: Operation creation timestamp
-        updated_at:
+          description: Field used for sorting
+        sort_order:
           type: string
-          format: date-time
-          description: Last status update timestamp
-    ConnectionUri:
-      type: object
-      description: A database connection URI
-      properties:
-        connection_uri:
-          type: string
-          description: The full connection URI including host, database, role, and password
-        connection_parameters:
-          type: object
-          description: Individual connection parameters
-          properties:
-            database:
-              type: string
-              description: The database name
-            host:
-              type: string
-              description: The hostname
-            password:
-              type: string
-              description: The password
-            role:
-              type: string
-              description: The role name
+          enum:
+          - asc
+          - desc
+          description: Sort direction
   parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
     projectIdParam:
       name: project_id
       in: path
@@ -441,15 +450,6 @@ components:
       description: Pagination cursor for retrieving the next page of results
       schema:
         type: string
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
     orgIdParam:
       name: org_id
       in: query

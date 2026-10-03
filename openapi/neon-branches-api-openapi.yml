@@ -218,57 +218,50 @@ paths:
           description: Branch not found
 components:
   schemas:
-    EndpointCreateRequest:
+    Branch:
       type: object
-      description: Request body for creating a new compute endpoint
+      description: A branch is a copy-on-write clone of your data that can be used for development, testing, or preview environments.
       properties:
-        endpoint:
-          type: object
-          required:
-          - branch_id
-          - type
-          properties:
-            branch_id:
-              type: string
-              description: The branch ID to attach the endpoint to
-            type:
-              type: string
-              enum:
-              - read_write
-              - read_only
-              description: The endpoint type
-            autoscaling_limit_min_cu:
-              type: number
-              description: Minimum compute units for autoscaling
-            autoscaling_limit_max_cu:
-              type: number
-              description: Maximum compute units for autoscaling
-            suspend_timeout_seconds:
-              type: integer
-              description: Inactivity timeout in seconds
-    ConnectionUri:
-      type: object
-      description: A database connection URI
-      properties:
-        connection_uri:
+        id:
           type: string
-          description: The full connection URI including host, database, role, and password
-        connection_parameters:
-          type: object
-          description: Individual connection parameters
-          properties:
-            database:
-              type: string
-              description: The database name
-            host:
-              type: string
-              description: The hostname
-            password:
-              type: string
-              description: The password
-            role:
-              type: string
-              description: The role name
+          description: The branch ID
+        project_id:
+          type: string
+          description: The parent project ID
+        parent_id:
+          type: string
+          description: The parent branch ID
+        parent_lsn:
+          type: string
+          description: The Log Sequence Number of the parent branch point
+        parent_timestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the parent branch point
+        name:
+          type: string
+          description: The branch name
+        current_state:
+          type: string
+          enum:
+          - init
+          - ready
+          description: The current state of the branch
+        logical_size:
+          type: integer
+          format: int64
+          description: The logical size of the branch data in bytes
+        created_at:
+          type: string
+          format: date-time
+          description: Branch creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        primary:
+          type: boolean
+          description: Whether this is the primary branch
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -323,6 +316,44 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
+    EndpointCreateRequest:
+      type: object
+      description: Request body for creating a new compute endpoint
+      properties:
+        endpoint:
+          type: object
+          required:
+          - branch_id
+          - type
+          properties:
+            branch_id:
+              type: string
+              description: The branch ID to attach the endpoint to
+            type:
+              type: string
+              enum:
+              - read_write
+              - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+    BranchUpdateRequest:
+      type: object
+      description: Request body for updating a branch
+      properties:
+        branch:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The branch name
     Endpoint:
       type: object
       description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
@@ -378,6 +409,29 @@ components:
         disabled:
           type: boolean
           description: Whether the endpoint is disabled
+    ConnectionUri:
+      type: object
+      description: A database connection URI
+      properties:
+        connection_uri:
+          type: string
+          description: The full connection URI including host, database, role, and password
+        connection_parameters:
+          type: object
+          description: Individual connection parameters
+          properties:
+            database:
+              type: string
+              description: The database name
+            host:
+              type: string
+              description: The hostname
+            password:
+              type: string
+              description: The password
+            role:
+              type: string
+              description: The role name
     BranchCreateRequest:
       type: object
       description: Request body for creating a new branch
@@ -403,73 +457,19 @@ components:
           description: Compute endpoints to create for the branch
           items:
             $ref: '#/components/schemas/EndpointCreateRequest'
-    Branch:
-      type: object
-      description: A branch is a copy-on-write clone of your data that can be used for development, testing, or preview environments.
-      properties:
-        id:
-          type: string
-          description: The branch ID
-        project_id:
-          type: string
-          description: The parent project ID
-        parent_id:
-          type: string
-          description: The parent branch ID
-        parent_lsn:
-          type: string
-          description: The Log Sequence Number of the parent branch point
-        parent_timestamp:
-          type: string
-          format: date-time
-          description: The timestamp of the parent branch point
-        name:
-          type: string
-          description: The branch name
-        current_state:
-          type: string
-          enum:
-          - init
-          - ready
-          description: The current state of the branch
-        logical_size:
-          type: integer
-          format: int64
-          description: The logical size of the branch data in bytes
-        created_at:
-          type: string
-          format: date-time
-          description: Branch creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          description: Last update timestamp
-        primary:
-          type: boolean
-          description: Whether this is the primary branch
-    BranchUpdateRequest:
-      type: object
-      description: Request body for updating a branch
-      properties:
-        branch:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The branch name
   parameters:
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
     projectIdParam:
       name: project_id
       in: path
       required: true
       description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
       schema:
         type: string
   securitySchemes:

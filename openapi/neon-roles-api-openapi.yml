@@ -160,29 +160,21 @@ paths:
         '404':
           description: Role not found
 components:
-  parameters:
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    roleNameParam:
-      name: role_name
-      in: path
-      required: true
-      description: The Postgres role name
-      schema:
-        type: string
   schemas:
+    RoleCreateRequest:
+      type: object
+      description: Request body for creating a new role
+      required:
+      - role
+      properties:
+        role:
+          type: object
+          required:
+          - name
+          properties:
+            name:
+              type: string
+              description: The role name
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -237,20 +229,6 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    RoleCreateRequest:
-      type: object
-      description: Request body for creating a new role
-      required:
-      - role
-      properties:
-        role:
-          type: object
-          required:
-          - name
-          properties:
-            name:
-              type: string
-              description: The role name
     Role:
       type: object
       description: A Postgres role within a branch
@@ -275,6 +253,28 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    roleNameParam:
+      name: role_name
+      in: path
+      required: true
+      description: The Postgres role name
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

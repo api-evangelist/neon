@@ -189,7 +189,81 @@ paths:
         '404':
           description: OAuth provider not found
 components:
+  parameters:
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
   schemas:
+    AuthConfigUpdate:
+      type: object
+      description: Request body for updating Auth configuration
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable Neon Auth
+    OAuthProviderCreateRequest:
+      type: object
+      description: Request body for creating a new OAuth provider
+      required:
+      - provider
+      - client_id
+      - client_secret
+      properties:
+        provider:
+          type: string
+          description: The OAuth provider type
+        client_id:
+          type: string
+          description: The OAuth client ID
+        client_secret:
+          type: string
+          description: The OAuth client secret
+        enabled:
+          type: boolean
+          description: Whether to enable this provider
+          default: true
+    OAuthProviderUpdateRequest:
+      type: object
+      description: Request body for updating an OAuth provider
+      properties:
+        client_id:
+          type: string
+          description: The OAuth client ID
+        client_secret:
+          type: string
+          description: The OAuth client secret
+        enabled:
+          type: boolean
+          description: Whether this provider is enabled
+    AuthConfig:
+      type: object
+      description: Neon Auth configuration for a branch, providing managed authentication built on Better Auth.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Neon Auth is enabled for this branch
+        auth_url:
+          type: string
+          format: uri
+          description: The URL for the Neon Auth service
+        jwks_url:
+          type: string
+          format: uri
+          description: The JWKS URL for JWT validation
+        schema:
+          type: string
+          description: The database schema used by Neon Auth (typically neon_auth)
     OAuthProvider:
       type: object
       description: An OAuth provider configuration for Neon Auth
@@ -214,80 +288,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    OAuthProviderCreateRequest:
-      type: object
-      description: Request body for creating a new OAuth provider
-      required:
-      - provider
-      - client_id
-      - client_secret
-      properties:
-        provider:
-          type: string
-          description: The OAuth provider type
-        client_id:
-          type: string
-          description: The OAuth client ID
-        client_secret:
-          type: string
-          description: The OAuth client secret
-        enabled:
-          type: boolean
-          description: Whether to enable this provider
-          default: true
-    AuthConfigUpdate:
-      type: object
-      description: Request body for updating Auth configuration
-      properties:
-        enabled:
-          type: boolean
-          description: Whether to enable or disable Neon Auth
-    AuthConfig:
-      type: object
-      description: Neon Auth configuration for a branch, providing managed authentication built on Better Auth.
-      properties:
-        enabled:
-          type: boolean
-          description: Whether Neon Auth is enabled for this branch
-        auth_url:
-          type: string
-          format: uri
-          description: The URL for the Neon Auth service
-        jwks_url:
-          type: string
-          format: uri
-          description: The JWKS URL for JWT validation
-        schema:
-          type: string
-          description: The database schema used by Neon Auth (typically neon_auth)
-    OAuthProviderUpdateRequest:
-      type: object
-      description: Request body for updating an OAuth provider
-      properties:
-        client_id:
-          type: string
-          description: The OAuth client ID
-        client_secret:
-          type: string
-          description: The OAuth client secret
-        enabled:
-          type: boolean
-          description: Whether this provider is enabled
-  parameters:
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
