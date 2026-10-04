@@ -197,7 +197,59 @@ paths:
         '404':
           description: Resource not found
 components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
   schemas:
+    ConnectionUri:
+      type: object
+      description: A database connection URI
+      properties:
+        connection_uri:
+          type: string
+          description: The full connection URI including host, database, role, and password
+        connection_parameters:
+          type: object
+          description: Individual connection parameters
+          properties:
+            database:
+              type: string
+              description: The database name
+            host:
+              type: string
+              description: The hostname
+            password:
+              type: string
+              description: The password
+            role:
+              type: string
+              description: The role name
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -252,29 +304,6 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    ProjectUpdateRequest:
-      type: object
-      description: Request body for updating a project
-      properties:
-        project:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The project name
-              maxLength: 64
-            default_endpoint_settings:
-              type: object
-              properties:
-                autoscaling_limit_min_cu:
-                  type: number
-                  description: Minimum compute units
-                autoscaling_limit_max_cu:
-                  type: number
-                  description: Maximum compute units
-                suspend_timeout_seconds:
-                  type: integer
-                  description: Inactivity timeout in seconds
     ProjectCreateRequest:
       type: object
       description: Request body for creating a new project
@@ -315,29 +344,48 @@ components:
             org_id:
               type: string
               description: Organization ID for the project
-    ConnectionUri:
+    ProjectUpdateRequest:
       type: object
-      description: A database connection URI
+      description: Request body for updating a project
       properties:
-        connection_uri:
-          type: string
-          description: The full connection URI including host, database, role, and password
-        connection_parameters:
+        project:
           type: object
-          description: Individual connection parameters
           properties:
-            database:
+            name:
               type: string
-              description: The database name
-            host:
-              type: string
-              description: The hostname
-            password:
-              type: string
-              description: The password
-            role:
-              type: string
-              description: The role name
+              description: The project name
+              maxLength: 64
+            default_endpoint_settings:
+              type: object
+              properties:
+                autoscaling_limit_min_cu:
+                  type: number
+                  description: Minimum compute units
+                autoscaling_limit_max_cu:
+                  type: number
+                  description: Maximum compute units
+                suspend_timeout_seconds:
+                  type: integer
+                  description: Inactivity timeout in seconds
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction
     Project:
       type: object
       description: A Neon project is the top-level object in the Neon hierarchy. It contains branches, databases, roles, and compute endpoints.
@@ -408,54 +456,6 @@ components:
         org_id:
           type: string
           description: The organization ID this project belongs to
-    Pagination:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        cursor:
-          type: string
-          description: Cursor value for the next page of results
-        limit:
-          type: integer
-          description: Number of items per page
-        sort_by:
-          type: string
-          description: Field used for sorting
-        sort_order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    cursorParam:
-      name: cursor
-      in: query
-      description: Pagination cursor for retrieving the next page of results
-      schema:
-        type: string
-    orgIdParam:
-      name: org_id
-      in: query
-      description: The organization ID to scope the request to
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

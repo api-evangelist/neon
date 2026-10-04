@@ -87,26 +87,29 @@ paths:
         '403':
           description: Forbidden - plan does not support consumption metrics
 components:
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+    cursorParam:
+      name: cursor
+      in: query
+      description: Pagination cursor for retrieving the next page of results
+      schema:
+        type: string
+    orgIdParam:
+      name: org_id
+      in: query
+      description: The organization ID to scope the request to
+      schema:
+        type: string
   schemas:
-    Pagination:
-      type: object
-      description: Pagination metadata for list responses
-      properties:
-        cursor:
-          type: string
-          description: Cursor value for the next page of results
-        limit:
-          type: integer
-          description: Number of items per page
-        sort_by:
-          type: string
-          description: Field used for sorting
-        sort_order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction
     ConsumptionMetric:
       type: object
       description: A consumption metric data point
@@ -159,6 +162,25 @@ components:
                         $ref: '#/components/schemas/ConsumptionMetric'
         pagination:
           $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      description: Pagination metadata for list responses
+      properties:
+        cursor:
+          type: string
+          description: Cursor value for the next page of results
+        limit:
+          type: integer
+          description: Number of items per page
+        sort_by:
+          type: string
+          description: Field used for sorting
+        sort_order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction
     ConsumptionHistoryPerAccount:
       type: object
       description: Account-level consumption metrics
@@ -175,28 +197,6 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/ConsumptionMetric'
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of items to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 10
-    cursorParam:
-      name: cursor
-      in: query
-      description: Pagination cursor for retrieving the next page of results
-      schema:
-        type: string
-    orgIdParam:
-      name: org_id
-      in: query
-      description: The organization ID to scope the request to
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

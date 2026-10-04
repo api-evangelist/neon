@@ -273,6 +273,50 @@ paths:
           description: Branch not found
 components:
   schemas:
+    EndpointUpdateRequest:
+      type: object
+      description: Request body for updating a compute endpoint
+      properties:
+        endpoint:
+          type: object
+          properties:
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
+    EndpointCreateRequest:
+      type: object
+      description: Request body for creating a new compute endpoint
+      properties:
+        endpoint:
+          type: object
+          required:
+          - branch_id
+          - type
+          properties:
+            branch_id:
+              type: string
+              description: The branch ID to attach the endpoint to
+            type:
+              type: string
+              enum:
+              - read_write
+              - read_only
+              description: The endpoint type
+            autoscaling_limit_min_cu:
+              type: number
+              description: Minimum compute units for autoscaling
+            autoscaling_limit_max_cu:
+              type: number
+              description: Maximum compute units for autoscaling
+            suspend_timeout_seconds:
+              type: integer
+              description: Inactivity timeout in seconds
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -327,50 +371,6 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    EndpointUpdateRequest:
-      type: object
-      description: Request body for updating a compute endpoint
-      properties:
-        endpoint:
-          type: object
-          properties:
-            autoscaling_limit_min_cu:
-              type: number
-              description: Minimum compute units for autoscaling
-            autoscaling_limit_max_cu:
-              type: number
-              description: Maximum compute units for autoscaling
-            suspend_timeout_seconds:
-              type: integer
-              description: Inactivity timeout in seconds
-    EndpointCreateRequest:
-      type: object
-      description: Request body for creating a new compute endpoint
-      properties:
-        endpoint:
-          type: object
-          required:
-          - branch_id
-          - type
-          properties:
-            branch_id:
-              type: string
-              description: The branch ID to attach the endpoint to
-            type:
-              type: string
-              enum:
-              - read_write
-              - read_only
-              description: The endpoint type
-            autoscaling_limit_min_cu:
-              type: number
-              description: Minimum compute units for autoscaling
-            autoscaling_limit_max_cu:
-              type: number
-              description: Maximum compute units for autoscaling
-            suspend_timeout_seconds:
-              type: integer
-              description: Inactivity timeout in seconds
     Endpoint:
       type: object
       description: A compute endpoint provides processing resources for database queries. Each branch can have one read-write and multiple read-only endpoints.
@@ -427,11 +427,11 @@ components:
           type: boolean
           description: Whether the endpoint is disabled
   parameters:
-    projectIdParam:
-      name: project_id
+    branchIdParam:
+      name: branch_id
       in: path
       required: true
-      description: The Neon project ID
+      description: The branch ID
       schema:
         type: string
     endpointIdParam:
@@ -441,11 +441,11 @@ components:
       description: The compute endpoint ID
       schema:
         type: string
-    branchIdParam:
-      name: branch_id
+    projectIdParam:
+      name: project_id
       in: path
       required: true
-      description: The branch ID
+      description: The Neon project ID
       schema:
         type: string
   securitySchemes:

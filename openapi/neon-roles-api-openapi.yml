@@ -160,7 +160,53 @@ paths:
         '404':
           description: Role not found
 components:
+  parameters:
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    roleNameParam:
+      name: role_name
+      in: path
+      required: true
+      description: The Postgres role name
+      schema:
+        type: string
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
   schemas:
+    Role:
+      type: object
+      description: A Postgres role within a branch
+      properties:
+        branch_id:
+          type: string
+          description: The branch ID this role belongs to
+        name:
+          type: string
+          description: The role name
+        password:
+          type: string
+          description: The role password. Only returned when creating a role or resetting a password.
+        protected:
+          type: boolean
+          description: Whether this is a protected system role
+        created_at:
+          type: string
+          format: date-time
+          description: Role creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
     RoleCreateRequest:
       type: object
       description: Request body for creating a new role
@@ -229,52 +275,6 @@ components:
           type: string
           format: date-time
           description: Last status update timestamp
-    Role:
-      type: object
-      description: A Postgres role within a branch
-      properties:
-        branch_id:
-          type: string
-          description: The branch ID this role belongs to
-        name:
-          type: string
-          description: The role name
-        password:
-          type: string
-          description: The role password. Only returned when creating a role or resetting a password.
-        protected:
-          type: boolean
-          description: Whether this is a protected system role
-        created_at:
-          type: string
-          format: date-time
-          description: Role creation timestamp
-        updated_at:
-          type: string
-          format: date-time
-          description: Last update timestamp
-  parameters:
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    roleNameParam:
-      name: role_name
-      in: path
-      required: true
-      description: The Postgres role name
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

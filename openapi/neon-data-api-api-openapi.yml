@@ -72,6 +72,21 @@ paths:
         '404':
           description: Branch not found
 components:
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
   schemas:
     DataApiConfig:
       type: object
@@ -115,21 +130,6 @@ components:
         auth_provider:
           type: string
           description: Authentication provider for JWT validation
-  parameters:
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
