@@ -299,6 +299,12 @@ apis:
   - type: Documentation
     url: https://api-docs.neon.tech/reference/getting-started-with-neon-api
 common:
+- type: Plans
+  url: plans/neon-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/neon-rate-limits.yml
+- type: FinOps
+  url: finops/neon-finops.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/neon/overview
 - type: AgenticAccess
