@@ -160,3 +160,44 @@ plans:
       - name: Private networking
       - name: HIPAA/SOC 2 available
       - name: Uptime SLA
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units:
+  - active-user
+  - compute
+  - data
+  plans:
+  - name: Free
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - active-user
+    - compute
+    - data
+    periods:
+    - month
+  - name: Launch
+    access: paid
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    - data
+    periods:
+    - month
+    - per-use
+  - name: Scale
+    access: paid
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    - data
+    periods:
+    - month
+    - per-use
