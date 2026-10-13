@@ -1,0 +1,12 @@
+fetched: '2026-10-13'
+method: fetched
+source: https://neon.com/docs/reference/compatibility
+page: https://neon.com/docs/reference/compatibility
+file: neon-postgres-wire-1.md
+bytes: 21055
+sha256: 91fd1997586fb1d24421e808da8b1c157f3ef224308346d1571b6ccb75ca92f3
+anchor: postgresql
+shape: postgres-wire
+classification: declares-compatibility
+quote: Postgres compatibility - Neon Docs
+note: text extracted from the provider's own page (tags stripped), saved for evidence

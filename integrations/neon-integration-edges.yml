@@ -1,0 +1,27 @@
+edges:
+- partner_name: PostgreSQL
+  partner: postgresql
+  partner_match: shape-anchor
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  shape: postgres-wire
+  type: docs
+  degree: declared-subset
+  evidence: https://neon.com/docs/reference/compatibility
+  evidence_kind: own-docs
+  evidence_file: https://github.com/api-evangelist/neon/blob/main/evidence/compatibility/neon-postgres-wire-1.md
+  quote: Neon is Postgres . However, as a managed Postgres service, there are some differences you should be aware
+    of.
+  supported_operations:
+  - Collations
+  - Extensions
+  - Functions
+  - Tablespaces
+  - Temporary
+  unsupported_operations: []
+  supported_share: 0.185
+  detected_by: sweep-shape-compat.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
