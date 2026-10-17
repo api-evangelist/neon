@@ -85,17 +85,6 @@ paths:
           description: API key not found
 components:
   schemas:
-    ApiKeyCreateResponse:
-      type: object
-      description: Response containing the newly created API key
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: The API key ID
-        key:
-          type: string
-          description: The full API key value. This is only returned once at creation and cannot be retrieved again.
     ApiKey:
       type: object
       description: An API key used to authenticate requests to the Neon API
@@ -127,6 +116,17 @@ components:
         key_name:
           type: string
           description: The name for the new API key
+    ApiKeyCreateResponse:
+      type: object
+      description: Response containing the newly created API key
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The API key ID
+        key:
+          type: string
+          description: The full API key value. This is only returned once at creation and cannot be retrieved again.
   securitySchemes:
     bearerAuth:
       type: http

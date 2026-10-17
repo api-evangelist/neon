@@ -167,42 +167,7 @@ paths:
         '404':
           description: Database not found
 components:
-  parameters:
-    branchIdParam:
-      name: branch_id
-      in: path
-      required: true
-      description: The branch ID
-      schema:
-        type: string
-    projectIdParam:
-      name: project_id
-      in: path
-      required: true
-      description: The Neon project ID
-      schema:
-        type: string
-    databaseNameParam:
-      name: database_name
-      in: path
-      required: true
-      description: The database name
-      schema:
-        type: string
   schemas:
-    DatabaseUpdateRequest:
-      type: object
-      description: Request body for updating a database
-      properties:
-        database:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The new database name
-            owner_name:
-              type: string
-              description: The new owner role name
     Operation:
       type: object
       description: An operation tracks the progress of an action performed on a project resource such as creating a branch, starting an endpoint, or updating a database.
@@ -300,6 +265,41 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
+    DatabaseUpdateRequest:
+      type: object
+      description: Request body for updating a database
+      properties:
+        database:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The new database name
+            owner_name:
+              type: string
+              description: The new owner role name
+  parameters:
+    projectIdParam:
+      name: project_id
+      in: path
+      required: true
+      description: The Neon project ID
+      schema:
+        type: string
+    branchIdParam:
+      name: branch_id
+      in: path
+      required: true
+      description: The branch ID
+      schema:
+        type: string
+    databaseNameParam:
+      name: database_name
+      in: path
+      required: true
+      description: The database name
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
