@@ -1,4 +1,4 @@
-# Neon (neon)
+# Neon
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,136 +66,237 @@
 
 Neon is a serverless Postgres platform that provides fully managed, scalable PostgreSQL databases optimized for modern cloud and edge application development. Their developer platform offers management APIs, data APIs, authentication services, and serverless drivers for building and automating database-driven workflows.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/neon/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/neon/refs/heads/main/apis.yml)
+**Areas:** Database · Serverless · PostgreSQL · Infrastructure · Authentication · Edge
 
-## Tags
+## Neon on APIs.io
 
-- Databases
-- Serverless
-- Postgres
-- Infrastructure
-- Authentication
-- Edge
+Everything profiled for Neon is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/neon/](https://apis.io/providers/neon/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (13)
 
-- **Created:** 2025-03-07
-- **Modified:** 2026-05-19
+- [Neon Data API](https://apis.io/apis/neon/data-api/) — The Neon Data API provides a secure, stateless HTTP interface to Neon Postgres databases, allowing developers to access and manage data directly from web…
+- [Neon Serverless Driver](https://apis.io/apis/neon/serverless-driver/) — The Neon Serverless Driver is a low-latency JavaScript and TypeScript driver that enables querying Neon Postgres databases from serverless and edge…
+- [Neon Auth](https://apis.io/apis/neon/auth/) — Neon Auth is a managed authentication service built on Better Auth that connects directly to a Neon Postgres database. It stores authentication data…
+- [Neon API Keys API](https://apis.io/apis/neon/neon-api-keys-api/) — Manage API keys for authentication. API keys are used to authenticate requests to the Neon API via Bearer token.
+- [Neon Auth API](https://apis.io/apis/neon/neon-auth-api/) — Manage Neon Auth configuration for branches, including OAuth providers, webhooks, and authentication settings.
+- [Neon Branches API](https://apis.io/apis/neon/neon-branches-api/) — Manage branches within a project. Branches are copies of your data created using copy-on-write technology for development, testing, and preview environments.
+- [Neon Consumption API](https://apis.io/apis/neon/neon-consumption-api/) — Query consumption metrics for projects and accounts. Available for Scale, Business, and Enterprise plan accounts.
+- [Neon Data API](https://apis.io/apis/neon/neon-data-api-api/) — Manage Data API configuration for branches, including enabling and disabling the PostgREST-compatible HTTP interface.
+- [Neon Databases API](https://apis.io/apis/neon/neon-databases-api/) — Manage databases within a branch. A branch can contain multiple databases.
+- [Neon Endpoints API](https://apis.io/apis/neon/neon-endpoints-api/) — Manage compute endpoints for branches. Compute endpoints provide the processing resources for database queries. A branch can have one read-write and…
+- [Neon Operations API](https://apis.io/apis/neon/neon-operations-api/) — View and manage operations for a project. Operations track the progress and status of actions performed on project resources.
+- [Neon Projects API](https://apis.io/apis/neon/neon-projects-api/) — Manage Neon projects. A project is the top-level object in the Neon hierarchy containing branches, databases, roles, and compute endpoints.
+- [Neon Roles API](https://apis.io/apis/neon/neon-roles-api/) — Manage Postgres roles within a branch. Roles control database access and permissions.
 
-## APIs
+### Published properties
 
-### Neon Management API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Neon Management API is a RESTful interface for programmatically managing Neon serverless Postgres resources. It allows developers to create and manage projects, branches, databases, roles, compute endpoints, and operations. The API uses bearer token authentication and supports everything available through the Neon Console, enabling automation of database infrastructure workflows. An OpenAPI 3.0 specification is available along with TypeScript, Python, and Go SDKs.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://neon.com/docs/reference/api-reference](https://neon.com/docs/reference/api-reference)
-- **Base URL:** `https://console.neon.tech/api/v2`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Neon Auth Webhook Events](https://apis.io/asyncapis/neon/neon-auth-webhooks-asyncapi/)
 
-- Databases
-- Serverless
-- Postgres
-- Projects
-- Branches
-- Compute
-- Infrastructure
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://neon.com/docs/reference/api-reference)
-- [Documentation](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
-- [OpenAPI](openapi/neon-management-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/neon-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/neon-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [/webhook](https://apis.io/channels/neon/webhook/)
 
-### Neon Data API
+#### Agent skills (9)
 
-The Neon Data API provides a secure, stateless HTTP interface to Neon Postgres databases, allowing developers to access and manage data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. It is fully compatible with PostgREST, enabling querying via standard HTTP clients like Postman or cURL. The Data API supports JWT-based authentication and integrates with Row-Level Security policies, making it suitable for building secure client-facing applications without a traditional backend.
+Agent skills built on the API.
 
-- **Human URL:** [https://neon.com/docs/data-api/overview](https://neon.com/docs/data-api/overview)
+- [claimable-postgres](https://apis.io/agent-skills/neon/claimable-postgres/)
+- [neon](https://apis.io/agent-skills/neon/neon/)
+- [neon-ai-gateway](https://apis.io/agent-skills/neon/neon-ai-gateway/)
+- [neon-functions](https://apis.io/agent-skills/neon/neon-functions/)
+- [neon-object-storage](https://apis.io/agent-skills/neon/neon-object-storage/)
+- [neon-postgres](https://apis.io/agent-skills/neon/neon-postgres/)
+- [neon-postgres-branches](https://apis.io/agent-skills/neon/neon-postgres-branches/)
+- [neon-postgres-egress-optimizer](https://apis.io/agent-skills/neon/neon-postgres-egress-optimizer/)
+- [score-eval](https://apis.io/agent-skills/neon/score-eval/)
 
-#### Tags
+#### Agentic access (1)
 
-- Databases
-- Serverless
-- Postgres
-- REST
-- Data
-- PostgREST
-- HTTP
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Neon Agentic Access](https://apis.io/agentic-access/neon/neon-agentic-access/)
 
-- [Documentation](https://neon.com/docs/data-api/overview)
-- [Documentation](https://neon.com/docs/data-api/get-started)
-- [Postman Collection](collections/neon-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/neon-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Schema (30)
 
-### Neon Serverless Driver
+The data models the API reads and writes.
 
-The Neon Serverless Driver is a low-latency JavaScript and TypeScript driver that enables querying Neon Postgres databases from serverless and edge environments over HTTP or WebSockets in place of TCP. It supports two query modes: HTTP mode using the neon function for fast single non-interactive transactions, and WebSocket mode using Pool and Client constructors for session and transaction support with node-postgres compatibility. The driver is available as @neondatabase/serverless on npm and is optimized for deployment on platforms like Cloudflare Workers, Vercel Edge Functions, and AWS Lambda.
+- [ApiKey](https://apis.io/schemas/neon/neon-apikey/)
+- [ApiKeyCreateRequest](https://apis.io/schemas/neon/neon-apikeycreaterequest/)
+- [ApiKeyCreateResponse](https://apis.io/schemas/neon/neon-apikeycreateresponse/)
+- [AuthConfig](https://apis.io/schemas/neon/neon-authconfig/)
+- [AuthConfigUpdate](https://apis.io/schemas/neon/neon-authconfigupdate/)
+- [Neon Branch](https://apis.io/schemas/neon/neon-branch/)
+- [BranchCreateRequest](https://apis.io/schemas/neon/neon-branchcreaterequest/)
+- [BranchUpdateRequest](https://apis.io/schemas/neon/neon-branchupdaterequest/)
+- [ConnectionUri](https://apis.io/schemas/neon/neon-connectionuri/)
+- [ConsumptionHistoryPerAccount](https://apis.io/schemas/neon/neon-consumptionhistoryperaccount/)
+- [ConsumptionHistoryPerProject](https://apis.io/schemas/neon/neon-consumptionhistoryperproject/)
+- [ConsumptionMetric](https://apis.io/schemas/neon/neon-consumptionmetric/)
+- [DataApiConfig](https://apis.io/schemas/neon/neon-dataapiconfig/)
+- [DataApiConfigUpdate](https://apis.io/schemas/neon/neon-dataapiconfigupdate/)
+- [Database](https://apis.io/schemas/neon/neon-database/)
+- [DatabaseCreateRequest](https://apis.io/schemas/neon/neon-databasecreaterequest/)
+- [DatabaseUpdateRequest](https://apis.io/schemas/neon/neon-databaseupdaterequest/)
+- [Neon Compute Endpoint](https://apis.io/schemas/neon/neon-endpoint/)
+- [EndpointCreateRequest](https://apis.io/schemas/neon/neon-endpointcreaterequest/)
+- [EndpointUpdateRequest](https://apis.io/schemas/neon/neon-endpointupdaterequest/)
+- [OAuthProvider](https://apis.io/schemas/neon/neon-oauthprovider/)
+- [OAuthProviderCreateRequest](https://apis.io/schemas/neon/neon-oauthprovidercreaterequest/)
+- [OAuthProviderUpdateRequest](https://apis.io/schemas/neon/neon-oauthproviderupdaterequest/)
+- [Neon Operation](https://apis.io/schemas/neon/neon-operation/)
+- [Pagination](https://apis.io/schemas/neon/neon-pagination/)
+- …and 5 more published on APIs.io
 
-- **Human URL:** [https://neon.com/docs/serverless/serverless-driver](https://neon.com/docs/serverless/serverless-driver)
+#### JSON Structure (1)
 
-#### Tags
+Data models expressed in JSON Structure.
 
-- Databases
-- Serverless
-- Postgres
-- JavaScript
-- TypeScript
-- WebSocket
-- Edge
-- Driver
+- [Neon Structure](https://apis.io/json-structure/neon/neon-structure/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://neon.com/docs/serverless/serverless-driver)
-- [Postman Collection](collections/neon-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/neon-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Linked-data contexts for the provider's vocabulary.
 
-### Neon Auth
+- [Neon Context](https://apis.io/jsonld/neon/neon-context/)
 
-Neon Auth is a managed authentication service built on Better Auth that connects directly to a Neon Postgres database. It stores authentication data including users, sessions, and OAuth configurations in the database's neon_auth schema. Neon Auth provides client and server SDKs, supports multiple OAuth providers, and integrates with the Neon Data API for automatic JWT validation. It enables Row-Level Security policies through the auth.uid() function, allowing developers to implement fine-grained data access control based on authenticated users.
+#### Vocabulary (1)
 
-- **Human URL:** [https://neon.com/docs/auth/overview](https://neon.com/docs/auth/overview)
+The provider's domain terms, defined.
 
-#### Tags
+- [Neon Domain Vocabulary](https://apis.io/vocabularies/neon/neon-vocabulary/)
 
-- Authentication
-- Authorization
-- OAuth
-- JWT
-- Security
-- Identity
+#### Collections (21)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://neon.com/docs/auth/overview)
-- [Documentation](https://neon.com/docs/neon-auth/api)
-- [AsyncAPI](asyncapi/neon-auth-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/neon-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/neon-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Neon Management API Keys API](https://apis.io/collections/neon/open-neon-api-keys-api/)
+- [Neon Management API Keys Auth API](https://apis.io/collections/neon/open-neon-auth-api/)
+- [Neon Management API Keys Branches API](https://apis.io/collections/neon/open-neon-branches-api/)
+- [Neon Management API Keys Consumption API](https://apis.io/collections/neon/open-neon-consumption-api/)
+- [Neon Management API Keys Data API API](https://apis.io/collections/neon/open-neon-data-api-api/)
+- [Neon Management API Keys Databases API](https://apis.io/collections/neon/open-neon-databases-api/)
+- [Neon Management API Keys Endpoints API](https://apis.io/collections/neon/open-neon-endpoints-api/)
+- [Neon Management API](https://apis.io/collections/neon/open-neon-management-api/)
+- [Neon Management API Keys Operations API](https://apis.io/collections/neon/open-neon-operations-api/)
+- [Neon Management API Keys Projects API](https://apis.io/collections/neon/open-neon-projects-api/)
+- [Neon Management API Keys Roles API](https://apis.io/collections/neon/open-neon-roles-api/)
+- [Neon Management API Keys API](https://apis.io/collections/neon/postman-neon-api-keys-api/)
+- [Neon Management API Keys Auth API](https://apis.io/collections/neon/postman-neon-auth-api/)
+- [Neon Management API Keys Branches API](https://apis.io/collections/neon/postman-neon-branches-api/)
+- [Neon Management API Keys Consumption API](https://apis.io/collections/neon/postman-neon-consumption-api/)
+- [Neon Management API Keys Data API API](https://apis.io/collections/neon/postman-neon-data-api-api/)
+- [Neon Management API Keys Databases API](https://apis.io/collections/neon/postman-neon-databases-api/)
+- [Neon Management API Keys Endpoints API](https://apis.io/collections/neon/postman-neon-endpoints-api/)
+- [Neon Management API Keys Operations API](https://apis.io/collections/neon/postman-neon-operations-api/)
+- [Neon Management API Keys Projects API](https://apis.io/collections/neon/postman-neon-projects-api/)
+- [Neon Management API Keys Roles API](https://apis.io/collections/neon/postman-neon-roles-api/)
 
-## Common Properties
+#### Governance rules (2)
 
-- [GitHub Organization](https://github.com/neondatabase)
-- [LinkedIn](https://www.linkedin.com/company/neondatabase)
-- [Portal](https://neon.com/docs)
-- [Blog](https://neon.com/blog)
-- [Pricing](https://neon.com/pricing)
-- [Login](https://console.neon.tech)
-- [Sign Up](https://console.neon.tech/signup)
-- [Support](https://neon.com/docs/introduction/support)
-- [Status Page](https://neonstatus.com)
-- [Terms of Service](https://neon.com/terms-of-service)
-- [Privacy Policy](https://neon.com/privacy-policy)
+Spectral rulesets for the provider's contracts.
+
+- [Neon — asyncapi rules](https://apis.io/rules/neon/neon-asyncapi-spectral-rules/)
+- [Neon — jsonschema rules](https://apis.io/rules/neon/neon-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Neon Authentication](https://apis.io/security/neon/neon-authentication/)
+- [Neon Domain Security](https://apis.io/security/neon/neon-domain-security/)
+- [Neon Trust Center](https://apis.io/security/neon/neon-trust-center/)
+- [Neon Vulnerability Disclosure](https://apis.io/security/neon/neon-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Neon Plans Pricing](https://apis.io/plans/neon/neon-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Neon Rate Limits](https://apis.io/rate-limits/neon/neon-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Neon Finops](https://apis.io/finops/neon/neon-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://neon.com)
-- [Features](undefined)
-- [L L Ms Txt](https://api-docs.neon.tech/llms.txt)
+- [Pricing](https://neon.com/pricing)
+- [Support](https://neon.com/docs/introduction/support)
+- [Blog](https://neon.com/blog)
+- [Terms of service](https://neon.com/terms-of-service)
+- [Privacy policy](https://neon.com/privacy-policy)
+- [GitHub](https://github.com/neondatabase)
+- [Status](https://neonstatus.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** API Evangelist
-**Email:** info@apievangelist.com
+**Kin Score 50.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 62.7 |
+| Contract governance | 13.6 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 45.7 |
+| Access clarity | 53.9 |
+
+**Agent readiness 24.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | unknown |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/neon/](https://apis.io/providers/neon/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Neon: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/neon/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
